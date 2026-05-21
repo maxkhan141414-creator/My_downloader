@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; img-src * data: blob: 'unsafe-inline';">
+    <title>My Downloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ── रिसेट और बेस स्टाइल ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        /* ── मोबाइल कंटेनर ── */
+        .app-container {
+            width: 100%;
+            max-width: 420px;
+            height: 95vh;
+            max-height: 850px;
+            background: linear-gradient(180deg, #0f1626 0%, #070a12 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+
+        /* ── हेडर सेक्शन ── */
+        .app-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 25px;
+        }
+
+        .brand-title {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        /* ── प्लेटफार्म सिलेक्शन ── */
+        .platform-section {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .platform-buttons {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+
+        .platform-btn {
+            flex: 1;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 15px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .platform-btn.instagram i {
+            background: linear-gradient(45deg, #f97316, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 38px;
+        }
+
+        .platform-btn.facebook i { color: #3b82f6; font-size: 38px; }
+
+        .platform-btn span {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+        }
+
+        .platform-btn.active.instagram {
+            border-color: #ec4899;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+            background: rgba(236, 72, 153, 0.05);
+        }
+        .platform-btn.active.instagram span { color: #ffffff; }
+
+        .platform-btn.active.facebook {
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .platform-btn.active.facebook span { color: #ffffff; }
+
+        /* ── इनपुट बॉक्स ── */
+        .input-section {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .input-area {
+            position: relative;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .input-area textarea {
+            width: 100%;
+            height: 60px;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-size: 14px;
+            resize: none;
+            font-weight: 500;
+        }
+
+        .input-area textarea::placeholder { color: #64748b; }
+
+        .input-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .paste-btn {
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            border: none;
+            outline: none;
+            color: white;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        /* ── डाउनलोड बटन ── */
+        .download-btn-container { margin-bottom: 20px; }
+
+        .main-download-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 100%);
+            border: none;
+            outline: none;
+            border-radius: 50px;
+            padding: 18px;
+            color: white;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(14, 165, 233, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        /* रिजल्ट डाउनलोड बॉक्स */
+        .result-section {
+            display: none;
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid #22c55e;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .success-download-btn {
+            width: 100%;
+            background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
+            border: none;
+            color: white;
+            padding: 14px 25px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+        }
+
+        /* प्रोग्रेस बार */
+        .progress-container {
+            display: none;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 8px;
+            background: linear-gradient(90deg, #22c55e, #3b82f6);
+            transition: width 0.3s ease;
+        }
+
+        /* ── रिसेंट डाउनलोड्स ── */
+        .recent-section { flex-grow: 1; margin-bottom: 20px; }
+        .recent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .recent-header h3 { font-size: 14px; color: #94a3b8; letter-spacing: 0.5px; font-weight: 700; }
+        .clear-history-btn { font-size: 12px; color: #ef4444; cursor: pointer; font-weight: 600; background: none; border: none; }
+
+        .recent-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-height: 240px;
+            overflow-y: auto;
+        }
+
+        .recent-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #38bdf8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            overflow: hidden;
+        }
+
+        .recent-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .recent-item i { font-size: 20px; margin-bottom: 4px; color: #94a3b8; position: relative; z-index: 2; }
+
+        .recent-item span {
+            font-size: 9px;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 3px 2px;
+            z-index: 3;
+        }
+
+        /* ── एडमॉब बैनर कंटेनर स्टाइल ── */
+        .banner-ad-container {
+            width: 100%;
+            min-height: 50px;
+            background: #1e293b;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            margin-top: auto;
+            padding: 5px 0;
+            display: block;
+        }
+
+        /* लोडर */
+        .loader { display: none; margin-left: 10px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ══════════════════════════════════════════
+           ── INTERNET CHECK POPUP (NEW) ──
+        ══════════════════════════════════════════ */
+        .no-internet-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .no-internet-overlay.show {
+            display: flex;
+        }
+
+        .no-internet-box {
+            background: linear-gradient(145deg, #0f1e36, #0a1525);
+            border: 1.5px solid rgba(239, 68, 68, 0.5);
+            border-radius: 24px;
+            padding: 32px 24px;
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(239, 68, 68, 0.2), 0 20px 60px rgba(0,0,0,0.6);
+            animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+
+        .no-internet-icon {
+            font-size: 52px;
+            margin-bottom: 16px;
+            display: block;
+            animation: wifiPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes wifiPulse {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.4; }
+        }
+
+        .no-internet-title-hi {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ef4444;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .no-internet-title-en {
+            font-size: 14px;
+            font-weight: 700;
+            color: #f87171;
+            margin-bottom: 14px;
+        }
+
+        .no-internet-msg-hi {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            line-height: 1.6;
+        }
+
+        .no-internet-msg-en {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .no-internet-retry-btn {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 32px;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+        .no-internet-retry-btn:active {
+            transform: scale(0.97);
+        }
+    </style>
+
+    <script src="cordova.js"></script>
+</head>
+<body>
+
+    <!-- ══════════════════════════════════════════
+         NO INTERNET POPUP (NEW)
+    ══════════════════════════════════════════ -->
+    <div class="no-internet-overlay" id="noInternetOverlay">
+        <div class="no-internet-box">
+            <span class="no-internet-icon">📡</span>
+            <div class="no-internet-title-hi">इंटरनेट नहीं है!</div>
+            <div class="no-internet-title-en">No Internet Connection!</div>
+            <div class="no-internet-msg-hi">
+                आपका इंटरनेट कनेक्शन बंद है।<br>
+                कृपया Wi-Fi या मोबाइल डेटा चालू करें।
+            </div>
+            <div class="no-internet-msg-en">
+                Your internet connection is off.<br>
+                Please turn on Wi-Fi or Mobile Data.
+            </div>
+            <button class="no-internet-retry-btn" onclick="retryConnection()">
+                🔄 दोबारा कोशिश करें / Retry
+            </button>
+        </div>
+    </div>
+
+    <div class="app-container">
+
+        <div class="app-header">
+            <div class="brand-title">MY DOWNLOADER</div>
+        </div>
+
+        <div class="platform-section">
+            <div class="platform-buttons">
+                <div class="platform-btn instagram active" onclick="selectPlatform('instagram')">
+                    <i class="fa-brands fa-square-instagram"></i>
+                    <span>INSTAGRAM</span>
+                </div>
+                <div class="platform-btn facebook" onclick="selectPlatform('facebook')">
+                    <i class="fa-brands fa-square-facebook"></i>
+                    <span>FACEBOOK</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-area">
+                <textarea id="videoLink" placeholder="यहाँ इंस्टाग्राम रील का लिंक पेस्ट करें..."></textarea>
+                <div class="input-actions">
+                    <button class="paste-btn" onclick="pasteFromClipboard()">PASTE</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-btn-container">
+            <button class="main-download-btn" id="mainBtn" onclick="startDownload()">
+                <span id="btnText">DOWNLOAD VIDEO</span>
+                <i class="fa-solid fa-arrow-down" id="btnIcon"></i>
+                <i class="fa-solid fa-circle-notch loader" id="btnLoader"></i>
+            </button>
+        </div>
+
+        <div class="result-section" id="resultBox">
+            <p id="videoTitleDisplay" style="font-size: 13px; color: #cbd5e1; margin-bottom: 8px; font-weight: 500; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"></p>
+            <p style="font-size: 14px; color: #22c55e; font-weight: 600; margin-bottom: 5px;">वीडियो मिल गया है!</p>
+            <button onclick="handleDownloadWithAd()" class="success-download-btn" id="galleryBtn">⬇️ सीधे गैलरी में सेव करें ⬇️</button>
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="recent-section">
+            <div class="recent-header">
+                <h3>RECENT DOWNLOADS (HISTORY)</h3>
+                <button class="clear-history-btn" onclick="clearHistory()">Clear All</button>
+            </div>
+            <div class="recent-grid" id="recentGrid">
+            </div>
+        </div>
+
+        <div class="banner-ad-container" id="bannerAdSlot"></div>
+
+    </div>
+
+    <script>
+        // ══════════════════════════════════════════
+        // ── MODULAR CONFIG — sirf yahan IDs badlo ──
+        // ══════════════════════════════════════════
+        const ADMOB_CONFIG = {
+            APP_ID:          "ca-app-pub-8453226880706866~5605580857",
+            BANNER_ID:       "ca-app-pub-8453226880706866/9409094498",
+            INTERSTITIAL_ID: "ca-app-pub-8453226880706866/3793805733",
+            IS_TESTING:      false
+        };
+
+        // ── API Keys — do alag keys ──
+        const API_KEY_A = "58ada1bb8amsh6604490a2fc0596p1fbce5jsn49a52a705e3b"; // 10 purani APIs
+        const API_KEY_B = "19bda3fefdmsh91eea806446b74ap1ea3dbjsne60d3dbce9fa"; // 2 nayi APIs
+
+        // ── Timeout: 2-3 second random per API ──
+        function getRandomTimeout() {
+            return Math.floor(Math.random() * 1001) + 2000; // 2000-3000ms
+        }
+
+        let currentPlatform    = 'instagram';
+        let fetchedVideoUrl    = "";
+        let fetchedVideoImg    = "";
+        let currentVideoTitle  = "CC_Video";
+
+        // ══════════════════════════════════════════
+        // INTERNET CHECK SYSTEM (NEW)
+        // ══════════════════════════════════════════
+        function checkInternet() {
+            if (!navigator.onLine) {
+                document.getElementById('noInternetOverlay').classList.add('show');
+                return false;
+            }
+            document.getElementById('noInternetOverlay').classList.remove('show');
+            return true;
+        }
+
+        function retryConnection() {
+            if (navigator.onLine) {
+                document.getElementById('noInternetOverlay').classList.remove('show');
+            } else {
+                // Button thoda animate karo taaki user ko pata chale ki check ho raha hai
+                const btn = document.querySelector('.no-internet-retry-btn');
+                btn.textContent = "जाँच हो रही है... / Checking...";
+                setTimeout(() => {
+                    if (navigator.onLine) {
+                        document.getElementById('noInternetOverlay').classList.remove('show');
+                    } else {
+                        btn.textContent = "🔄 दोबारा कोशिश करें / Retry";
+                    }
+                }, 1500);
+            }
+        }
+
+        // Internet events automatically detect karo
+        window.addEventListener('offline', () => {
+            document.getElementById('noInternetOverlay').classList.add('show');
+        });
+
+        window.addEventListener('online', () => {
+            document.getElementById('noInternetOverlay').classList.remove('show');
+        });
+
+        // Page load par check karo
+        window.addEventListener('load', () => {
+            setTimeout(checkInternet, 500);
+        });
+
+        // ──────────────────────────────────────────
+        // DEVICE READY + INIT
+        // ──────────────────────────────────────────
+        document.addEventListener("deviceready", () => {
+            initAdMob();
+            setupAutoPaste();
+            checkInternet();
+        }, false);
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadHistory();
+            if (typeof admob === 'undefined') {
+                initAdMob();
+            }
+        });
+
+        // ──────────────────────────────────────────
+        // AUTO PASTE ON APP OPEN
+        // ──────────────────────────────────────────
+        async function setupAutoPaste() {
+            setTimeout(async () => {
+                try {
+                    let text = "";
+
+                    if (window.cordova && window.cordova.plugins && window.cordova.plugins.clipboard) {
+                        window.cordova.plugins.clipboard.paste(function(t) {
+                            if (t && isValidUrl(t)) {
+                                document.getElementById('videoLink').value = t.trim();
+                                if (t.includes("facebook.com")) selectPlatform('facebook');
+                            }
+                        });
+                        return;
+                    }
+
+                    if (navigator.clipboard && navigator.clipboard.readText) {
+                        text = await navigator.clipboard.readText();
+                    }
+
+                    if (text && isValidUrl(text)) {
+                        document.getElementById('videoLink').value = text.trim();
+                        if (text.includes("facebook.com")) selectPlatform('facebook');
+                    }
+                } catch(e) {
+                    console.log("Auto-paste error: " + e);
+                }
+            }, 800);
+        }
+
+        // ──────────────────────────────────────────
+        // PASTE BUTTON
+        // ──────────────────────────────────────────
+        async function pasteFromClipboard() {
+            const textarea = document.getElementById('videoLink');
+
+            if (window.cordova && window.cordova.plugins && window.cordova.plugins.clipboard) {
+                window.cordova.plugins.clipboard.paste(function(text) {
+                    if (text && text.trim() !== "") {
+                        textarea.value = text.trim();
+                        textarea.focus();
+                    } else {
+                        fallbackPromptPaste(textarea);
+                    }
+                });
+                return;
+            }
+
+            if (navigator.clipboard && navigator.clipboard.readText) {
+                try {
+                    let permissionGranted = true;
+                    if (navigator.permissions && navigator.permissions.query) {
+                        try {
+                            const perm = await navigator.permissions.query({ name: 'clipboard-read' });
+                            if (perm.state === 'denied') permissionGranted = false;
+                        } catch(e) {}
+                    }
+
+                    if (permissionGranted) {
+                        const text = await navigator.clipboard.readText();
+                        if (text && text.trim() !== "") {
+                            textarea.value = text.trim();
+                            textarea.focus();
+                            return;
+                        }
+                    }
+                } catch (err) {
+                    console.log("Clipboard API error: " + err);
+                }
+            }
+
+            try {
+                textarea.focus();
+                const success = document.execCommand('paste');
+                if (success && textarea.value.trim() !== "") return;
+            } catch(e) {}
+
+            fallbackPromptPaste(textarea);
+        }
+
+        function fallbackPromptPaste(textarea) {
+            const manualText = prompt("Clipboard access nahi mila. Yahan link paste karein:");
+            if (manualText && manualText.trim() !== "") {
+                textarea.value = manualText.trim();
+                textarea.focus();
+            }
+        }
+
+        // ──────────────────────────────────────────
+        // ADMOB — Modular, stable, bug-free
+        // Banner: bottom fixed | Interstitial: sirf Download par
+        // ──────────────────────────────────────────
+        function initAdMob() {
+            if (typeof admob === 'undefined') return;
+            try {
+                // ── Banner: hamesha bottom mein fixed ──
+                admob.banner.config({
+                    id:        ADMOB_CONFIG.BANNER_ID,
+                    isTesting: ADMOB_CONFIG.IS_TESTING,
+                    autoShow:  true,
+                    position:  admob.position.BOTTOM_CENTER
+                });
+                admob.banner.prepare();
+
+                // ── Interstitial: sirf download par show hogi ──
+                admob.interstitial.config({
+                    id:        ADMOB_CONFIG.INTERSTITIAL_ID,
+                    isTesting: ADMOB_CONFIG.IS_TESTING
+                });
+                admob.interstitial.prepare();
+
+            } catch(e) {
+                console.log("AdMob init error: " + e);
+            }
+        }
+
+        // Interstitial show karo, band hone par download shuru
+        function showInterstitialThenDownload() {
+            if (typeof admob !== 'undefined') {
+                try {
+                    admob.interstitial.show();
+                    // Sirf ek baar suno — { once: true }
+                    document.addEventListener('admob.interstitial.dismiss', function handler() {
+                        downloadToGallery();
+                        admob.interstitial.prepare(); // Agli baar ke liye reload
+                    }, { once: true });
+                } catch(e) {
+                    // AdMob fail hua — seedha download karo
+                    downloadToGallery();
+                }
+            } else {
+                // Browser mein test — seedha download
+                downloadToGallery();
+            }
+        }
+
+        // ──────────────────────────────────────────
+        // PLATFORM SELECTION
+        // ──────────────────────────────────────────
+        function selectPlatform(platform) {
+            currentPlatform = platform;
+            document.querySelectorAll('.platform-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.platform-btn.${platform}`).classList.add('active');
+
+            const textarea = document.getElementById('videoLink');
+            textarea.value = "";
+            textarea.placeholder = platform === 'instagram'
+                ? "यहाँ इंस्टाग्राम रील का लिंक पेस्ट करें..."
+                : "यहाँ फेसबुक वीडियो का लिंक पेस्ट करें...";
+
+            document.getElementById('resultBox').style.display = 'none';
+            fetchedVideoUrl = "";
+        }
+
+        // ──────────────────────────────────────────
+        // HELPER: URL VALID HAI?
+        // ──────────────────────────────────────────
+        function isValidUrl(text) {
+            return (
+                text.includes("instagram.com") ||
+                text.includes("facebook.com") ||
+                text.includes("fb.watch") ||
+                text.includes("tiktok.com")
+            );
+        }
+
+        // ──────────────────────────────────────────
+        // 12 API CONFIGS — saari 12, koi nahi hatayi
+        // ──────────────────────────────────────────
+        function getApiConfigs(link) {
+            return [
+
+                // ── API 1: Snap Video ──
+                {
+                    name: "Snap Video API",
+                    url: "https://snap-video3.p.rapidapi.com/download",
+                    method: "POST",
+                    headers: {
+                        "x-rapidapi-host": "snap-video3.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A,
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: 'url=' + encodeURIComponent(link),
+                    parse: (res) => {
+                        if (res && res.medias && res.medias.length > 0) {
+                            const best = res.medias.find(m => m.videoAvailable && m.audioAvailable) || res.medias[0];
+                            return { url: best.url, title: res.title || "Snap_Video", img: res.thumbnail || "" };
+                        }
+                        return null;
+                    }
+                },
+
+                // ── API 2: All In One Media Downloader ──
+                {
+                    name: "All In One Media Downloader",
+                    url: `https://all-in-one-media-downloader-api.p.rapidapi.com/download?url=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "all-in-one-media-downloader-api.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Media_Video", img: res.thumbnail || "" };
+                        if (res && res.links && res.links[0]) return { url: res.links[0].url, title: res.title || "Media_Video", img: res.thumbnail || "" };
+                        return null;
+                    }
+                },
+
+                // ── API 3: Instagram Video Image Downloader ──
+                {
+                    name: "Instagram Video Image Downloader",
+                    url: `https://instagram-video-image-downloader.p.rapidapi.com/igdl?url=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "instagram-video-image-downloader.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.data && res.data[0]) return { url: res.data[0].url || res.data[0].download_link, title: "Instagram_Media", img: res.data[0].thumbnail || "" };
+                        if (res && res.url) return { url: res.url, title: "Instagram_Media", img: "" };
+                        return null;
+                    }
+                },
+
+                // ── API 4: Social Download All In One ──
+                {
+                    name: "Social Download All In One",
+                    url: "https://social-download-all-in-one.p.rapidapi.com/v1/social/autolink",
+                    method: "POST",
+                    headers: {
+                        "x-rapidapi-host": "social-download-all-in-one.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ url: link }),
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Social_Video", img: res.thumbnail || "" };
+                        if (res && res.links && res.links[0]) return { url: res.links[0].url, title: res.title || "Social_Video", img: "" };
+                        return null;
+                    }
+                },
+
+                // ── API 5: Download All In One Ultimate ──
+                {
+                    name: "Download All In One Ultimate",
+                    url: `https://download-all-in-one-ultimate.p.rapidapi.com/autolink?url=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "download-all-in-one-ultimate.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Ultimate_Download", img: res.thumbnail || "" };
+                        if (res && res.links && res.links[0]) return { url: res.links[0].url, title: res.title || "Ultimate_Download", img: "" };
+                        return null;
+                    }
+                },
+
+                // ── API 6: Instagram Downloader 4 ──
+                {
+                    name: "Instagram Downloader 4",
+                    url: `https://instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com/convert?url=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "instagram-downloader-download-instagram-stories-videos4.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Instagram_Video", img: res.thumbnail || "" };
+                        if (res && res.data && res.data.url) return { url: res.data.url, title: res.data.title || "Instagram_Video", img: res.data.thumbnail || "" };
+                        return null;
+                    }
+                },
+
+                // ── API 7: Downwee Video Downloader ──
+                {
+                    name: "Downwee Video Downloader",
+                    url: "https://downwee-video-downloader.p.rapidapi.com/download",
+                    method: "POST",
+                    headers: {
+                        "x-rapidapi-host": "downwee-video-downloader.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ url: link }),
+                    parse: (res) => {
+                        if (res && res.video) return { url: res.video, title: res.title || "Downwee_Video", img: res.thumbnail || "" };
+                        if (res && res.url) return { url: res.url, title: res.title || "Downwee_Video", img: res.thumbnail || "" };
+                        return null;
+                    }
+                },
+
+                // ── API 8: Universal Social Media Downloader ──
+                {
+                    name: "Universal Social Media Downloader",
+                    url: `https://universal-social-media-content-downloader-api.p.rapidapi.com/platforms?url=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "universal-social-media-content-downloader-api.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Universal_Video", img: res.thumbnail || "" };
+                        if (res && res.links && res.links[0]) return { url: res.links[0].url, title: res.title || "Universal_Video", img: res.thumb || "" };
+                        return null;
+                    }
+                },
+
+                // ── API 9: Instagram Media Downloader V1 ──
+                {
+                    name: "Instagram Media Downloader V1",
+                    url: `https://instagram-api-media-downloader.p.rapidapi.com/v1/search?url=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "instagram-api-media-downloader.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.video_url) return { url: res.video_url, title: "Instagram_Video", img: res.thumbnail_url || "" };
+                        return null;
+                    }
+                },
+
+                // ── API 10: Full Downloader Social Media ──
+                {
+                    name: "Full Downloader Social Media",
+                    url: `https://full-downloader-social-media.p.rapidapi.com/?url=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "x-rapidapi-host": "full-downloader-social-media.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_A
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Social_Video", img: res.thumbnail || "" };
+                        return null;
+                    }
+                },
+
+                // ── API 11: Instagram Downloader Stories V1 (Nayi) ──
+                {
+                    name: "Instagram Downloader Stories V1",
+                    url: `https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/?Userinfo=${encodeURIComponent(link)}`,
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-rapidapi-host": "instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_B
+                    },
+                    body: null,
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Instagram_Video", img: res.thumbnail || "" };
+                        if (res && res.media && res.media[0] && res.media[0].url) return { url: res.media[0].url, title: "Instagram_Media", img: res.media[0].thumbnail || "" };
+                        if (res && res.video_url) return { url: res.video_url, title: "Instagram_Video", img: res.display_url || "" };
+                        if (res && Array.isArray(res) && res[0] && res[0].url) return { url: res[0].url, title: "Instagram_Video", img: "" };
+                        return null;
+                    }
+                },
+
+                // ── API 12: Instagram Scraper Stable (Nayi) ──
+                {
+                    name: "Instagram Scraper Stable",
+                    url: "https://instagram-scraper-stable-api.p.rapidapi.com/get_ig_user_followers_v2.php",
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                        "x-rapidapi-host": "instagram-scraper-stable-api.p.rapidapi.com",
+                        "x-rapidapi-key": API_KEY_B
+                    },
+                    body: `username_or_url=${encodeURIComponent(link)}&data=following&amount=12&pagination_token=`,
+                    parse: (res) => {
+                        if (res && res.url) return { url: res.url, title: res.title || "Instagram_Video", img: res.thumbnail || "" };
+                        if (res && res.data && res.data.url) return { url: res.data.url, title: "Instagram_Video", img: res.data.thumbnail || "" };
+                        if (res && res.video_url) return { url: res.video_url, title: "Instagram_Video", img: res.display_url || "" };
+                        return null;
+                    }
+                }
+
+            ];
+        }
+
+        // ──────────────────────────────────────────
+        // MAIN DOWNLOAD FUNCTION
+        // ──────────────────────────────────────────
+        // ──────────────────────────────────────────
+        // SINGLE API CALLER — ek baar mein sirf EK API
+        // 2-3 second timeout, fail hone par agli try hoti hai
+        // ──────────────────────────────────────────
+        async function callOneApi(config, link) {
+            const controller = new AbortController();
+            const timeout    = getRandomTimeout(); // 2000-3000ms
+            const timeoutId  = setTimeout(() => controller.abort(), timeout);
+
+            try {
+                const fetchOptions = {
+                    method:  config.method,
+                    headers: config.headers,
+                    signal:  controller.signal
+                };
+                if (config.method === "POST" && config.body) {
+                    fetchOptions.body = config.body;
+                }
+
+                const response = await fetch(config.url, fetchOptions);
+                clearTimeout(timeoutId);
+
+                // HTTP error (4xx, 5xx) — is API ne kaam nahi kiya, agle par jao
+                if (!response.ok) {
+                    console.log(`⚠️ ${config.name} → HTTP ${response.status} — skipping`);
+                    return null;
+                }
+
+                const result = await response.json();
+                const parsed = config.parse(result);
+
+                // Parse hua aur URL mila — SUCCESS
+                if (parsed && parsed.url && parsed.url.startsWith("http")) {
+                    console.log(`✅ ${config.name} → SUCCESS`);
+                    return parsed;
+                }
+
+                // Response aaya par video URL nahi mila
+                console.log(`⚠️ ${config.name} → No video URL in response — skipping`);
+                return null;
+
+            } catch (err) {
+                clearTimeout(timeoutId);
+                if (err.name === 'AbortError') {
+                    console.log(`⏱️ ${config.name} → Timeout (2-3s) — next API try ho rahi hai`);
+                } else {
+                    console.log(`❌ ${config.name} → Error: ${err.message} — skipping`);
+                }
+                return null;
+            }
+        }
+
+        async function startDownload() {
+            // Pehle internet check karo
+            if (!checkInternet()) return;
+
+            const link = document.getElementById('videoLink').value.trim();
+
+            if (!link) {
+                alert('कृपया पहले वीडियो का लिंक पेस्ट करें!');
+                return;
+            }
+
+            if (!isValidUrl(link)) {
+                alert('यह एक मान्य Instagram/Facebook लिंक नहीं है।');
+                return;
+            }
+
+            const btnText   = document.getElementById('btnText');
+            const btnIcon   = document.getElementById('btnIcon');
+            const btnLoader = document.getElementById('btnLoader');
+            const resultBox = document.getElementById('resultBox');
+            const mainBtn   = document.getElementById('mainBtn');
+
+            // UI lock karo — user dobara press na kare
+            mainBtn.disabled        = true;
+            btnIcon.style.display   = "none";
+            btnLoader.style.display = "inline-block";
+            resultBox.style.display = "none";
+            btnText.innerText       = "शुरू हो रहा है... 🚀";
+
+            const apiConfigs = getApiConfigs(link);
+            const total      = apiConfigs.length;
+            let   videoData  = null;
+
+            // ── EK KE BAAD EK — sequential chain ──
+            // Jab tak video nahi milta ya sari APIs khatam nahi ho jaati
+            for (let i = 0; i < total; i++) {
+                const config = apiConfigs[i];
+
+                // Internet beech mein band ho gaya?
+                if (!navigator.onLine) {
+                    document.getElementById('noInternetOverlay').classList.add('show');
+                    resetBtn(btnText, btnIcon, btnLoader, mainBtn);
+                    return;
+                }
+
+                // User ko dikhao konsi API try ho rahi hai
+                btnText.innerText = `API ${i + 1}/${total} try ho rahi hai...`;
+
+                // Sirf YEH ek API call karo — dusri wait karegi
+                videoData = await callOneApi(config, link);
+
+                // Mil gayi! Loop todke result dikhao
+                if (videoData) break;
+
+                // Nahi mili — loop apne aap agli API par jayega
+            }
+
+            // UI unlock karo
+            resetBtn(btnText, btnIcon, btnLoader, mainBtn);
+
+            if (videoData && videoData.url) {
+                fetchedVideoUrl   = videoData.url;
+                fetchedVideoImg   = videoData.img || "";
+                currentVideoTitle = videoData.title || "Social_Video_" + Date.now();
+
+                const titleEl     = document.getElementById('videoTitleDisplay');
+                titleEl.innerText = currentVideoTitle.substring(0, 45) + (currentVideoTitle.length > 45 ? "..." : "");
+
+                resultBox.style.display                        = "block";
+                document.getElementById('galleryBtn').innerText = "⬇️ सीधे गैलरी में सेव करें ⬇️";
+                document.getElementById('galleryBtn').disabled  = false;
+                document.getElementById('progressContainer').style.display = "none";
+            } else {
+                alert("❌ सभी 12 APIs fail हो गईं। कृपया लिंक दोबारा चेक करें।");
+            }
+        }
+
+        // Button ko wapas normal state mein laao
+        function resetBtn(btnText, btnIcon, btnLoader, mainBtn) {
+            btnText.innerText       = "DOWNLOAD VIDEO";
+            btnIcon.style.display   = "inline-block";
+            btnLoader.style.display = "none";
+            mainBtn.disabled        = false;
+        }
+
+        // ──────────────────────────────────────────
+        // DOWNLOAD WITH AD — button se yahi call hoga
+        // ──────────────────────────────────────────
+        function handleDownloadWithAd() {
+            showInterstitialThenDownload();
+        }
+
+        // ──────────────────────────────────────────
+        // ACTUAL DOWNLOAD FUNCTION
+        // ──────────────────────────────────────────
+        async function downloadToGallery() {
+            if (!fetchedVideoUrl) return;
+
+            const galleryBtn        = document.getElementById('galleryBtn');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar       = document.getElementById('progressBar');
+
+            galleryBtn.innerText    = "डाउनलोड हो रहा है...";
+            galleryBtn.disabled     = true;
+            progressContainer.style.display = "block";
+            progressBar.style.width = "10%";
+
+            const safeTitle = currentVideoTitle.replace(/[^a-zA-Z0-9]/g, "_") + ".mp4";
+
+            try {
+                progressBar.style.width = "30%";
+                const response = await fetch(fetchedVideoUrl);
+                progressBar.style.width = "70%";
+                const blob    = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                progressBar.style.width = "90%";
+                const a      = document.createElement('a');
+                a.href       = blobUrl;
+                a.download   = safeTitle;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(blobUrl), 3000);
+
+                progressBar.style.width = "100%";
+                galleryBtn.innerText    = "✅ डाउनलोड हो गया!";
+                saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
+
+            } catch (error) {
+                progressBar.style.width = "80%";
+                const a    = document.createElement('a');
+                a.href     = fetchedVideoUrl;
+                a.download = safeTitle;
+                a.target   = "_blank";
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                progressBar.style.width = "100%";
+                galleryBtn.innerText    = "✅ डाउनलोड शुरू!";
+                saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
+            }
+
+            setTimeout(() => {
+                progressContainer.style.display = "none";
+                galleryBtn.disabled             = false;
+            }, 2000);
+        }
+
+        // ──────────────────────────────────────────
+        // HISTORY SYSTEMS
+        // ──────────────────────────────────────────
+        function saveToHistory(name, url, img) {
+            try {
+                let history = JSON.parse(localStorage.getItem("downloader_history") || "[]");
+                if (history.some(h => h.url === url)) return;
+                if (history.length >= 20) history.pop();
+                history.unshift({ name, url, img, platform: currentPlatform });
+                localStorage.setItem("downloader_history", JSON.stringify(history));
+                loadHistory();
+            } catch(e) {}
+        }
+
+        function loadHistory() {
+            const grid = document.getElementById("recentGrid");
+            grid.innerHTML = "";
+
+            let history = [];
+            try {
+                history = JSON.parse(localStorage.getItem("downloader_history") || "[]");
+            } catch(e) { history = []; }
+
+            if (history.length === 0) {
+                grid.innerHTML = `<p style="grid-column: span 4; text-align: center; color: #64748b; font-size: 11px; padding: 20px;">कोई वीडियो नहीं है</p>`;
+                return;
+            }
+
+            history.forEach(item => {
+                const itemBtn   = document.createElement("a");
+                itemBtn.href    = item.url;
+                itemBtn.target  = "_blank";
+                itemBtn.className = "recent-item";
+                itemBtn.title   = item.name;
+
+                if (item.img) {
+                    itemBtn.innerHTML = `<img src="${item.img}" alt="Thumb" onerror="this.style.display='none'"><span>${item.name.substring(0, 10)}...</span>`;
+                } else {
+                    itemBtn.innerHTML = `<i class="fa-solid fa-video"></i><span>${item.name.substring(0, 10)}...</span>`;
+                }
+                grid.appendChild(itemBtn);
+            });
+        }
+
+        function clearHistory() {
+            if (confirm("क्या आप सारी हिस्ट्री डिलीट करना चाहते हैं?")) {
+                try {
+                    localStorage.removeItem("downloader_history");
+                } catch(e) {}
+                loadHistory();
+            }
+        }
+    </script>
+</body>
+</html>
