@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="com.my.downloader" version="1.0.0">
+    <name>My Downloader</name>
+    <description>Best Video Downloader</description>
+    <content src="index.html" />
+    <preference name="Orientation" value="portrait" />
+    <access origin="*" />
+    <allow-intent href="*" />
+</widget>
+
