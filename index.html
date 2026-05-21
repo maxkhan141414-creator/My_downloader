@@ -2,7 +2,7 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>My Downloader - Web Version</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -33,7 +33,6 @@
             display: flex;
             flex-direction: column;
             padding: 20px;
-            position: relative;
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             overflow-y: auto;
@@ -229,26 +228,13 @@
             overflow: hidden;
         }
 
-        .recent-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .recent-item i { font-size: 20px; color: #94a3b8; position: relative; z-index: 2; }
+        .recent-item i { font-size: 20px; color: #94a3b8; }
         .recent-item span {
             font-size: 9px;
             color: white;
-            position: absolute;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            width: 100%;
+            margin-top: 5px;
             text-align: center;
             padding: 3px;
-            z-index: 3;
         }
 
         .loader { display: none; animation: spin 1s linear infinite; }
@@ -303,6 +289,11 @@
             cursor: pointer;
             margin-top: 20px;
         }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -348,7 +339,7 @@
 
         <div class="result-section" id="resultBox">
             <p id="videoTitleDisplay" style="font-size: 13px; color: #cbd5e1;"></p>
-            <button onclick="downloadToGallery()" class="success-download-btn" id="galleryBtn">⬇️ वीडियो डाउनलोड करें ⬇️</button>
+            <button onclick="downloadVideo()" class="success-download-btn" id="galleryBtn">⬇️ वीडियो डाउनलोड करें ⬇️</button>
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
@@ -364,7 +355,9 @@
     </div>
 
     <script>
-        // ========== CONFIGURATION ==========
+        // ========== ⚠️ कोई cordova.js नहीं! Pure Web-Only ==========
+        
+        // API Keys
         const API_KEY_A = "58ada1bb8amsh6604490a2fc0596p1fbce5jsn49a52a705e3b";
         const API_KEY_B = "19bda3fefdmsh91eea806446b74ap1ea3dbjsne60d3dbce9fa";
 
@@ -372,7 +365,7 @@
         let fetchedVideoUrl = "";
         let currentVideoTitle = "";
 
-        // ========== INTERNET CHECK ==========
+        // ========== INTERNET CHECK (Browser API) ==========
         function checkInternet() {
             if (!navigator.onLine) {
                 document.getElementById('noInternetOverlay').classList.add('show');
@@ -386,21 +379,23 @@
             if (navigator.onLine) {
                 document.getElementById('noInternetOverlay').classList.remove('show');
             } else {
-                alert("अभी भी इंटरनेट कनेक्ट नहीं है। Wi-Fi या मोबाइल डेटा चालू करें।");
+                alert("अभी भी इंटरनेट कनेक्ट नहीं है।");
             }
         }
 
         window.addEventListener('online', () => document.getElementById('noInternetOverlay').classList.remove('show'));
         window.addEventListener('offline', () => document.getElementById('noInternetOverlay').classList.add('show'));
 
-        // ========== CLIPBOARD FUNCTIONS ==========
+        // ========== CLIPBOARD (Pure Web API - No Cordova) ==========
         async function pasteFromClipboard() {
             try {
+                // नया Clipboard API - सिर्फ HTTPS पर काम करता है
                 const text = await navigator.clipboard.readText();
                 document.getElementById('videoLink').value = text.trim();
                 if (text.includes("facebook.com")) selectPlatform('facebook');
                 showNotification("✅ लिंक पेस्ट हो गया!");
             } catch(e) {
+                // Fallback: manual paste
                 const manual = prompt("लिंक यहाँ डालें:");
                 if (manual) document.getElementById('videoLink').value = manual.trim();
             }
@@ -427,7 +422,7 @@
             setTimeout(() => notif.remove(), 2000);
         }
 
-        // ========== API CONFIGS ==========
+        // ========== API CONFIGS (सिर्फ 4 तेज़ APIs) ==========
         function getApiConfigs(link) {
             return [
                 {
@@ -520,6 +515,7 @@
             const apiConfigs = getApiConfigs(link);
             let videoData = null;
 
+            // Sequential API calls (ek ke baad ek)
             for (let i = 0; i < apiConfigs.length; i++) {
                 const config = apiConfigs[i];
                 btnText.innerText = `API ${i+1}/${apiConfigs.length} चल रही है...`;
@@ -571,9 +567,12 @@
             }
         }
 
-        // ========== ✅ सबसे ज़रूरी फिक्स: वेबसाइट पर डाउनलोड ==========
-        async function downloadToGallery() {
-            if (!fetchedVideoUrl) return;
+        // ========== ✅ PURE WEB DOWNLOAD - कोई native code नहीं! ==========
+        async function downloadVideo() {
+            if (!fetchedVideoUrl) {
+                alert("पहले वीडियो ढूंढें!");
+                return;
+            }
 
             const galleryBtn = document.getElementById('galleryBtn');
             const progressContainer = document.getElementById('progressContainer');
@@ -585,21 +584,27 @@
             progressBar.style.width = "20%";
 
             try {
-                // Method 1: Blob download (best quality)
+                // Method 1: Fetch + Blob (सबसे अच्छा तरीका)
                 progressBar.style.width = "50%";
                 const response = await fetch(fetchedVideoUrl);
                 const blob = await response.blob();
                 const blobUrl = URL.createObjectURL(blob);
                 
                 progressBar.style.width = "80%";
+                
+                // ✅ Pure HTML5 <a> tag with download attribute
                 const a = document.createElement('a');
                 a.href = blobUrl;
                 a.download = `${currentVideoTitle}.mp4`;
+                a.style.display = 'none';
+                document.body.appendChild(a);
                 a.click();
                 
+                // Cleanup
                 setTimeout(() => {
+                    document.body.removeChild(a);
                     URL.revokeObjectURL(blobUrl);
-                }, 1000);
+                }, 100);
                 
                 progressBar.style.width = "100%";
                 galleryBtn.innerText = "✅ डाउनलोड हो गया!";
@@ -607,9 +612,9 @@
                 saveToHistory(currentVideoTitle, fetchedVideoUrl, "");
                 
             } catch(error) {
-                console.log("Blob download failed, using direct link:", error);
+                console.log("Blob download failed, trying direct link:", error);
                 
-                // Method 2: Direct link download (fallback)
+                // Method 2: Direct link (fallback)
                 progressBar.style.width = "80%";
                 const a = document.createElement('a');
                 a.href = fetchedVideoUrl;
@@ -630,7 +635,7 @@
             }, 3000);
         }
 
-        // ========== HISTORY ==========
+        // ========== HISTORY (LocalStorage - Pure Web) ==========
         function saveToHistory(name, url, img) {
             try {
                 let history = JSON.parse(localStorage.getItem("downloader_history") || "[]");
@@ -656,7 +661,10 @@
             history.forEach(item => {
                 const div = document.createElement("div");
                 div.className = "recent-item";
-                div.onclick = () => window.open(item.url, '_blank');
+                div.onclick = () => {
+                    // सिर्फ वीडियो URL खोले, app redirect नहीं
+                    window.open(item.url, '_blank');
+                };
                 div.innerHTML = `<i class="fa-solid fa-video"></i><span>${item.name.substring(0, 12)}</span>`;
                 grid.appendChild(div);
             });
@@ -669,6 +677,7 @@
             }
         }
 
+        // Page Load par
         loadHistory();
         setTimeout(checkInternet, 500);
     </script>
