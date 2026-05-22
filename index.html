@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0b0f19">
-    <meta name="description" content="Instagram aur Facebook video downloader - Fast & Free">
+    <meta name="description" content="Instagram & Facebook Video Downloader - Fast & Free">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-192.png">
     <title>My Downloader</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ── रिसेट और बेस स्टाइल ── */
         * {
             margin: 0;
             padding: 0;
@@ -29,7 +28,6 @@
             padding: 10px;
         }
 
-        /* ── मोबाइल कंटेनर ── */
         .app-container {
             width: 100%;
             max-width: 420px;
@@ -39,55 +37,27 @@
             display: flex;
             flex-direction: column;
             padding: 20px;
-            position: relative;
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             overflow-y: auto;
         }
 
-        /* ── हेडर सेक्शन (Header + Counter + Settings) ── */
         .app-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .brand-title {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             background: linear-gradient(90deg, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-align: center;
         }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .download-counter {
-            background: rgba(56, 189, 248, 0.2);
-            border-radius: 50px;
-            padding: 5px 12px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #38bdf8;
-        }
-
-        .settings-btn {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            font-size: 22px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .settings-btn:hover { color: #38bdf8; }
-
-        /* ── प्लेटफार्म सिलेक्शन ── */
         .platform-section {
             background: rgba(30, 41, 59, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -146,7 +116,6 @@
         }
         .platform-btn.active.facebook span { color: #ffffff; }
 
-        /* ── इनपुट बॉक्स ── */
         .input-section {
             background: rgba(30, 41, 59, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -156,7 +125,6 @@
         }
 
         .input-area {
-            position: relative;
             background: rgba(15, 23, 42, 0.8);
             border: 1px solid rgba(56, 189, 248, 0.2);
             border-radius: 16px;
@@ -183,47 +151,39 @@
         .input-actions {
             display: flex;
             justify-content: flex-end;
-            align-items: center;
         }
 
         .paste-btn {
             background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
             border: none;
-            outline: none;
             color: white;
             padding: 8px 24px;
             border-radius: 30px;
             font-size: 13px;
             font-weight: 700;
-            letter-spacing: 0.5px;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
 
-        /* ── डाउनलोड बटन ── */
         .download-btn-container { margin-bottom: 20px; }
 
         .main-download-btn {
             width: 100%;
             background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 100%);
             border: none;
-            outline: none;
             border-radius: 50px;
             padding: 18px;
             color: white;
             font-size: 15px;
             font-weight: 800;
-            letter-spacing: 0.5px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
             cursor: pointer;
             box-shadow: 0 0 25px rgba(14, 165, 233, 0.4);
-            transition: all 0.3s ease;
         }
 
-        /* रिजल्ट डाउनलोड बॉक्स */
         .result-section {
             display: none;
             background: rgba(30, 41, 59, 0.8);
@@ -239,18 +199,14 @@
             background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%);
             border: none;
             color: white;
-            padding: 14px 25px;
+            padding: 14px;
             border-radius: 25px;
             font-weight: 700;
             font-size: 14px;
             cursor: pointer;
             margin-top: 10px;
-            text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
         }
 
-        /* प्रोग्रेस बार */
         .progress-container {
             display: none;
             width: 100%;
@@ -267,11 +223,9 @@
             transition: width 0.3s ease;
         }
 
-        /* ── रिसेंट डाउनलोड्स (HISTORY SECTION) ── */
         .recent-section { flex-grow: 1; margin-bottom: 20px; }
-        .recent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .recent-header { margin-bottom: 15px; }
         .recent-header h3 { font-size: 14px; color: #94a3b8; letter-spacing: 0.5px; font-weight: 700; }
-        .clear-history-btn { font-size: 12px; color: #ef4444; cursor: pointer; font-weight: 600; background: none; border: none; }
 
         .recent-grid {
             display: grid;
@@ -291,104 +245,22 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #38bdf8;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-decoration: none;
-            overflow: hidden;
         }
 
-        .recent-item i { font-size: 20px; margin-bottom: 4px; color: #94a3b8; }
+        .recent-item i { font-size: 20px; color: #94a3b8; }
         .recent-item span {
             font-size: 9px;
             color: #ffffff;
             text-align: center;
             padding: 3px 2px;
+            margin-top: 5px;
         }
 
-        /* ── SETTINGS MODAL ── */
-        .settings-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .settings-modal.show { display: flex; }
-
-        .settings-box {
-            background: linear-gradient(145deg, #0f1e36, #0a1525);
-            border-radius: 32px;
-            padding: 25px;
-            width: 90%;
-            max-width: 350px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-        }
-
-        .settings-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .settings-header h2 { font-size: 20px; color: #38bdf8; }
-        .close-settings { background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; }
-
-        .setting-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .setting-item label { font-size: 14px; color: #cbd5e1; }
-        .toggle-switch {
-            width: 44px;
-            height: 24px;
-            background: #334155;
-            border-radius: 50px;
-            cursor: pointer;
-            position: relative;
-            transition: 0.2s;
-        }
-        .toggle-switch.active { background: #22c55e; }
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 3px;
-            transition: 0.2s;
-        }
-        .toggle-switch.active::after { left: 21px; }
-
-        .stats-info {
-            background: rgba(56, 189, 248, 0.1);
-            border-radius: 16px;
-            padding: 15px;
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .stats-info p { font-size: 13px; color: #94a3b8; margin: 5px 0; }
-        .stats-info .total-downloads { font-size: 24px; font-weight: 800; color: #38bdf8; }
-
-        /* लोडर */
-        .loader { display: none; margin-left: 10px; animation: spin 1s linear infinite; }
+        .loader { display: none; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* नोटिफिकेशन */
         .notification {
             position: fixed;
             bottom: 20px;
@@ -446,42 +318,15 @@
     <div class="no-internet-overlay" id="noInternetOverlay">
         <div class="no-internet-box">
             <i class="fa-solid fa-wifi" style="font-size: 48px; color: #ef4444;"></i>
-            <h3 style="margin-top: 16px;">इंटरनेट नहीं है!</h3>
-            <button class="no-internet-retry-btn" onclick="retryConnection()">दोबारा कोशिश करें</button>
-        </div>
-    </div>
-
-    <!-- SETTINGS MODAL -->
-    <div class="settings-modal" id="settingsModal">
-        <div class="settings-box">
-            <div class="settings-header">
-                <h2><i class="fa-solid fa-gear"></i> सेटिंग्स</h2>
-                <button class="close-settings" onclick="closeSettings()">&times;</button>
-            </div>
-            <div class="setting-item">
-                <label><i class="fa-regular fa-bell"></i> नोटिफिकेशन</label>
-                <div class="toggle-switch" id="notifToggle" onclick="toggleNotification()"></div>
-            </div>
-            <div class="setting-item">
-                <label><i class="fa-regular fa-hard-drive"></i> हिस्ट्री सेव करें</label>
-                <div class="toggle-switch active" id="historyToggle" onclick="toggleHistorySave()"></div>
-            </div>
-            <div class="stats-info">
-                <p>📥 कुल डाउनलोड</p>
-                <p class="total-downloads" id="totalDownloadsCount">0</p>
-                <p>🎉 आपका सफर जारी है!</p>
-            </div>
+            <h3 style="margin-top: 16px;">No Internet Connection!</h3>
+            <button class="no-internet-retry-btn" onclick="retryConnection()">Retry</button>
         </div>
     </div>
 
     <div class="app-container">
-        <!-- HEADER WITH COUNTER & SETTINGS -->
+        <!-- HEADER (No Settings, No Counter) -->
         <div class="app-header">
             <div class="brand-title">MY DOWNLOADER</div>
-            <div class="header-right">
-                <span class="download-counter" id="downloadCounter">0</span>
-                <button class="settings-btn" onclick="openSettings()"><i class="fa-solid fa-gear"></i></button>
-            </div>
         </div>
 
         <div class="platform-section">
@@ -499,7 +344,7 @@
 
         <div class="input-section">
             <div class="input-area">
-                <textarea id="videoLink" placeholder="यहाँ इंस्टाग्राम रील का लिंक पेस्ट करें..."></textarea>
+                <textarea id="videoLink" placeholder="Paste Instagram Reel or Facebook video link here..."></textarea>
                 <div class="input-actions">
                     <button class="paste-btn" onclick="pasteFromClipboard()">PASTE</button>
                 </div>
@@ -516,8 +361,8 @@
 
         <div class="result-section" id="resultBox">
             <p id="videoTitleDisplay" style="font-size: 13px; color: #cbd5e1; margin-bottom: 8px;"></p>
-            <p style="font-size: 14px; color: #22c55e; font-weight: 600; margin-bottom: 5px;">वीडियो मिल गया है!</p>
-            <button onclick="downloadVideo()" class="success-download-btn" id="galleryBtn">⬇️ वीडियो डाउनलोड करें ⬇️</button>
+            <p style="font-size: 14px; color: #22c55e; font-weight: 600; margin-bottom: 5px;">Video found!</p>
+            <button onclick="downloadVideo()" class="success-download-btn" id="galleryBtn">⬇️ SAVE VIDEO ⬇️</button>
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar" id="progressBar"></div>
             </div>
@@ -525,17 +370,16 @@
 
         <div class="recent-section">
             <div class="recent-header">
-                <h3><i class="fa-regular fa-clock"></i> RECENT DOWNLOADS (HISTORY)</h3>
-                <button class="clear-history-btn" onclick="clearHistory()">Clear All</button>
+                <h3><i class="fa-regular fa-clock"></i> RECENT DOWNLOADS</h3>
             </div>
             <div class="recent-grid" id="recentGrid"></div>
         </div>
     </div>
 
     <script>
-        // ========== ⚠️ PURE WEB-ONLY - NO CORDOVA, NO ADMOB ==========
+        // ========== PURE WEB-ONLY - NO SETTINGS, NO COUNTER, NO CLEAR BUTTON ==========
         
-        // API Keys (सभी 14 APIs intact)
+        // API Keys (All 14 intact)
         const API_KEY_A = "58ada1bb8amsh6604490a2fc0596p1fbce5jsn49a52a705e3b";
         const API_KEY_B = "19bda3fefdmsh91eea806446b74ap1ea3dbjsne60d3dbce9fa";
 
@@ -543,79 +387,6 @@
         let fetchedVideoUrl = "";
         let fetchedVideoImg = "";
         let currentVideoTitle = "";
-        let totalDownloads = 0;
-        let notificationsEnabled = true;
-        let historyEnabled = true;
-
-        // ========== LOAD SAVED SETTINGS ==========
-        function loadSettings() {
-            try {
-                const saved = localStorage.getItem("downloader_settings");
-                if (saved) {
-                    const settings = JSON.parse(saved);
-                    notificationsEnabled = settings.notifications !== false;
-                    historyEnabled = settings.history !== false;
-                }
-                totalDownloads = parseInt(localStorage.getItem("total_downloads") || "0");
-                updateCounter();
-            } catch(e) {}
-            
-            // Update toggle UI
-            const notifToggle = document.getElementById('notifToggle');
-            const historyToggle = document.getElementById('historyToggle');
-            if (notificationsEnabled) notifToggle.classList.add('active');
-            else notifToggle.classList.remove('active');
-            if (historyEnabled) historyToggle.classList.add('active');
-            else historyToggle.classList.remove('active');
-            
-            document.getElementById('totalDownloadsCount').innerText = totalDownloads;
-        }
-
-        function saveSettings() {
-            localStorage.setItem("downloader_settings", JSON.stringify({
-                notifications: notificationsEnabled,
-                history: historyEnabled
-            }));
-        }
-
-        function toggleNotification() {
-            notificationsEnabled = !notificationsEnabled;
-            const toggle = document.getElementById('notifToggle');
-            if (notificationsEnabled) toggle.classList.add('active');
-            else toggle.classList.remove('active');
-            saveSettings();
-            showNotification(notificationsEnabled ? "नोटिफिकेशन ऑन" : "नोटिफिकेशन ऑफ");
-        }
-
-        function toggleHistorySave() {
-            historyEnabled = !historyEnabled;
-            const toggle = document.getElementById('historyToggle');
-            if (historyEnabled) toggle.classList.add('active');
-            else toggle.classList.remove('active');
-            saveSettings();
-            if (!historyEnabled) {
-                showNotification("हिस्ट्री सेव बंद कर दी गई");
-            }
-        }
-
-        function updateCounter() {
-            document.getElementById('downloadCounter').innerText = totalDownloads;
-            document.getElementById('totalDownloadsCount').innerText = totalDownloads;
-        }
-
-        function incrementDownloadCount() {
-            totalDownloads++;
-            localStorage.setItem("total_downloads", totalDownloads);
-            updateCounter();
-        }
-
-        function openSettings() {
-            document.getElementById('settingsModal').classList.add('show');
-        }
-
-        function closeSettings() {
-            document.getElementById('settingsModal').classList.remove('show');
-        }
 
         // ========== INTERNET CHECK ==========
         function checkInternet() {
@@ -631,22 +402,22 @@
             if (navigator.onLine) {
                 document.getElementById('noInternetOverlay').classList.remove('show');
             } else {
-                alert("अभी भी इंटरनेट कनेक्ट नहीं है।");
+                alert("Still no internet. Please turn on Wi-Fi or Mobile Data.");
             }
         }
 
         window.addEventListener('online', () => document.getElementById('noInternetOverlay').classList.remove('show'));
         window.addEventListener('offline', () => document.getElementById('noInternetOverlay').classList.add('show'));
 
-        // ========== CLIPBOARD (Pure Web API) ==========
+        // ========== CLIPBOARD ==========
         async function pasteFromClipboard() {
             try {
                 const text = await navigator.clipboard.readText();
                 document.getElementById('videoLink').value = text.trim();
                 if (text.includes("facebook.com")) selectPlatform('facebook');
-                showNotification("✅ लिंक पेस्ट हो गया!");
+                showNotification("✅ Link pasted!");
             } catch(e) {
-                const manual = prompt("लिंक यहाँ डालें:");
+                const manual = prompt("Paste your link here:");
                 if (manual) document.getElementById('videoLink').value = manual.trim();
             }
         }
@@ -665,7 +436,6 @@
         }
 
         function showNotification(msg) {
-            if (!notificationsEnabled) return;
             const notif = document.createElement('div');
             notif.className = 'notification';
             notif.innerHTML = msg;
@@ -673,7 +443,7 @@
             setTimeout(() => notif.remove(), 2000);
         }
 
-        // ========== 14 APIs (सभी intact) ==========
+        // ========== 14 APIs (FULL LIST) ==========
         function getApiConfigs(link) {
             return [
                 {
@@ -695,7 +465,7 @@
                     }
                 },
                 {
-                    name: "All In One Media Downloader",
+                    name: "All In One Media",
                     url: `https://all-in-one-media-downloader-api.p.rapidapi.com/download?url=${encodeURIComponent(link)}`,
                     method: "GET",
                     headers: {
@@ -710,7 +480,7 @@
                     }
                 },
                 {
-                    name: "Instagram Video Image Downloader",
+                    name: "Instagram Video Downloader",
                     url: `https://instagram-video-image-downloader.p.rapidapi.com/igdl?url=${encodeURIComponent(link)}`,
                     method: "GET",
                     headers: {
@@ -725,7 +495,7 @@
                     }
                 },
                 {
-                    name: "Social Download All In One",
+                    name: "Social Download AIO",
                     url: "https://social-download-all-in-one.p.rapidapi.com/v1/social/autolink",
                     method: "POST",
                     headers: {
@@ -741,7 +511,7 @@
                     }
                 },
                 {
-                    name: "Download All In One Ultimate",
+                    name: "Download Ultimate",
                     url: `https://download-all-in-one-ultimate.p.rapidapi.com/autolink?url=${encodeURIComponent(link)}`,
                     method: "GET",
                     headers: {
@@ -771,7 +541,7 @@
                     }
                 },
                 {
-                    name: "Downwee Video Downloader",
+                    name: "Downwee Downloader",
                     url: "https://downwee-video-downloader.p.rapidapi.com/download",
                     method: "POST",
                     headers: {
@@ -787,7 +557,7 @@
                     }
                 },
                 {
-                    name: "Universal Social Media Downloader",
+                    name: "Universal Downloader",
                     url: `https://universal-social-media-content-downloader-api.p.rapidapi.com/platforms?url=${encodeURIComponent(link)}`,
                     method: "GET",
                     headers: {
@@ -802,7 +572,7 @@
                     }
                 },
                 {
-                    name: "Instagram Media Downloader V1",
+                    name: "Instagram Media V1",
                     url: `https://instagram-api-media-downloader.p.rapidapi.com/v1/search?url=${encodeURIComponent(link)}`,
                     method: "GET",
                     headers: {
@@ -816,7 +586,7 @@
                     }
                 },
                 {
-                    name: "Full Downloader Social Media",
+                    name: "Full Downloader",
                     url: `https://full-downloader-social-media.p.rapidapi.com/?url=${encodeURIComponent(link)}`,
                     method: "GET",
                     headers: {
@@ -830,7 +600,7 @@
                     }
                 },
                 {
-                    name: "Instagram Downloader Stories V1",
+                    name: "Instagram Stories V1",
                     url: `https://instagram-downloader-download-instagram-videos-stories1.p.rapidapi.com/?Userinfo=${encodeURIComponent(link)}`,
                     method: "GET",
                     headers: {
@@ -847,7 +617,7 @@
                     }
                 },
                 {
-                    name: "Instagram Scraper Stable",
+                    name: "Instagram Scraper",
                     url: "https://instagram-scraper-stable-api.p.rapidapi.com/get_ig_user_followers_v2.php",
                     method: "POST",
                     headers: {
@@ -896,17 +666,17 @@
             ];
         }
 
-        // ========== MAIN DOWNLOAD FUNCTION ==========
+        // ========== FETCH VIDEO ==========
         async function startDownload() {
             if (!checkInternet()) return;
 
             const link = document.getElementById('videoLink').value.trim();
             if (!link) {
-                alert("कृपया लिंक डालें!");
+                alert("Please paste a video link first!");
                 return;
             }
             if (!isValidUrl(link)) {
-                alert("कृपया सही Instagram या Facebook लिंक डालें!");
+                alert("Please enter a valid Instagram or Facebook video link.");
                 return;
             }
 
@@ -918,14 +688,14 @@
             mainBtn.disabled = true;
             btnIcon.style.display = "none";
             btnLoader.style.display = "inline-block";
-            btnText.innerText = "वीडियो ढूंढ रहा है...";
+            btnText.innerText = "Searching video...";
 
             const apiConfigs = getApiConfigs(link);
             let videoData = null;
 
             for (let i = 0; i < apiConfigs.length; i++) {
                 const config = apiConfigs[i];
-                btnText.innerText = `API ${i+1}/${apiConfigs.length} चल रही है...`;
+                btnText.innerText = `Trying API ${i+1}/${apiConfigs.length}...`;
 
                 try {
                     const controller = new AbortController();
@@ -969,16 +739,16 @@
                 currentVideoTitle = `${currentPlatform.toUpperCase()}_${timestamp}`;
                 document.getElementById('videoTitleDisplay').innerText = currentVideoTitle;
                 document.getElementById('resultBox').style.display = "block";
-                showNotification("✅ वीडियो मिल गया! अब डाउनलोड करें");
+                showNotification("✅ Video found! Click Save to download.");
             } else {
-                alert("❌ वीडियो नहीं मिला। लिंक चेक करें या बाद में कोशिश करें।");
+                alert("❌ All APIs failed. Please check the link or try again later.");
             }
         }
 
-        // ========== ✅ PURE WEB DOWNLOAD - NO REDIRECT! ==========
+        // ========== PURE WEB DOWNLOAD (No Redirect) ==========
         async function downloadVideo() {
             if (!fetchedVideoUrl) {
-                alert("पहले वीडियो ढूंढें!");
+                alert("Please fetch a video first!");
                 return;
             }
 
@@ -987,7 +757,7 @@
             const progressBar = document.getElementById('progressBar');
 
             galleryBtn.disabled = true;
-            galleryBtn.innerText = "⏳ डाउनलोड हो रहा है...";
+            galleryBtn.innerText = "⏳ Downloading...";
             progressContainer.style.display = "block";
             progressBar.style.width = "20%";
 
@@ -998,7 +768,6 @@
                 const blobUrl = URL.createObjectURL(blob);
                 
                 progressBar.style.width = "80%";
-                
                 const a = document.createElement('a');
                 a.href = blobUrl;
                 a.download = `${currentVideoTitle}.mp4`;
@@ -1012,40 +781,33 @@
                 }, 100);
                 
                 progressBar.style.width = "100%";
-                galleryBtn.innerText = "✅ डाउनलोड हो गया!";
-                showNotification(`✅ ${currentVideoTitle}.mp4 डाउनलोड शुरू!`);
-                
-                incrementDownloadCount();
+                galleryBtn.innerText = "✅ Downloaded!";
+                showNotification(`✅ ${currentVideoTitle}.mp4 saved!`);
                 saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
                 
             } catch(error) {
-                console.log("Blob download failed, trying direct link:", error);
-                
+                console.log("Blob failed, using direct link:", error);
                 progressBar.style.width = "80%";
                 const a = document.createElement('a');
                 a.href = fetchedVideoUrl;
                 a.download = `${currentVideoTitle}.mp4`;
                 a.target = "_blank";
                 a.click();
-                
                 progressBar.style.width = "100%";
-                galleryBtn.innerText = "✅ डाउनलोड शुरू!";
-                showNotification(`✅ डाउनलोड शुरू हो गया है!`);
-                
-                incrementDownloadCount();
+                galleryBtn.innerText = "✅ Download started!";
+                showNotification(`✅ Download started!`);
                 saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
             }
 
             setTimeout(() => {
                 progressContainer.style.display = "none";
                 galleryBtn.disabled = false;
-                galleryBtn.innerText = "⬇️ वीडियो डाउनलोड करें ⬇️";
+                galleryBtn.innerText = "⬇️ SAVE VIDEO ⬇️";
             }, 3000);
         }
 
-        // ========== HISTORY FUNCTIONS ==========
+        // ========== HISTORY (No Clear Button) ==========
         function saveToHistory(name, url, img) {
-            if (!historyEnabled) return;
             try {
                 let history = JSON.parse(localStorage.getItem("downloader_history") || "[]");
                 if (!history.some(h => h.url === url)) {
@@ -1063,7 +825,7 @@
             let history = JSON.parse(localStorage.getItem("downloader_history") || "[]");
             
             if (history.length === 0) {
-                grid.innerHTML = `<p style="grid-column: span 4; text-align: center; color: #64748b; padding: 20px;">कोई वीडियो नहीं</p>`;
+                grid.innerHTML = `<p style="grid-column: span 4; text-align: center; color: #64748b; padding: 20px;">No videos yet</p>`;
                 return;
             }
             
@@ -1071,27 +833,19 @@
                 const div = document.createElement("div");
                 div.className = "recent-item";
                 div.onclick = () => {
-                    // ✅ REDOWNLOAD functionality - पुराना वीडियो फिर से डाउनलोड करो
+                    // Re-download old video
                     fetchedVideoUrl = item.url;
                     currentVideoTitle = item.name;
                     document.getElementById('videoTitleDisplay').innerText = currentVideoTitle;
                     document.getElementById('resultBox').style.display = "block";
-                    showNotification("✅ वीडियो लोड हो गया! डाउनलोड करें");
+                    showNotification("✅ Video loaded! Click Save to download.");
                 };
                 div.innerHTML = `<i class="fa-solid fa-video"></i><span>${item.name.substring(0, 12)}</span>`;
                 grid.appendChild(div);
             });
         }
 
-        function clearHistory() {
-            if (confirm("हिस्ट्री डिलीट करें?")) {
-                localStorage.removeItem("downloader_history");
-                loadHistory();
-                showNotification("हिस्ट्री क्लियर हो गई");
-            }
-        }
-
-        // ========== PWA REGISTRATION ==========
+        // ========== PWA SERVICE WORKER ==========
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js').then(reg => {
@@ -1103,7 +857,6 @@
         }
 
         // ========== INIT ==========
-        loadSettings();
         loadHistory();
         setTimeout(checkInternet, 500);
     </script>
