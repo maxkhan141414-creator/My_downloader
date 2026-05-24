@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0b0f19">
-    <meta name="description" content="Instagram aur Facebook video downloader - Fast & Free">
+    <meta name="description" content="Instagram & Facebook Video Downloader - Fast & Free">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon-192.png">
     <title>My Downloader</title>
@@ -86,7 +86,7 @@
         .preview-download-btn { background:linear-gradient(90deg,#22c55e,#16a34a); border:none; border-radius:50px; padding:12px; width:100%; color:white; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; margin-top:10px; transition:0.2s; }
         .preview-close-btn { background:rgba(30,41,59,0.8); border:1px solid rgba(56,189,248,0.3); border-radius:50px; padding:8px; width:100%; margin-top:8px; color:#94a3b8; font-weight:600; cursor:pointer; }
 
-        /* error / success toasts same as before */
+        /* error / success toasts */
         .error-toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7f1d1d,#991b1b); border:1px solid #ef4444; color:white; padding:14px 20px; border-radius:16px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; max-width:340px; width:90%; box-shadow:0 4px 20px rgba(239,68,68,0.4); text-align:center; line-height:1.6; }
         .error-toast .err-title { font-size:14px; font-weight:800; color:#fca5a5; margin-bottom:4px; display:block; }
         .error-toast .err-sub { font-size:11px; color:#fecaca; display:block; margin-top:3px; }
@@ -125,9 +125,9 @@
 <div class="no-internet-overlay" id="noInternetOverlay">
     <div class="no-internet-box">
         <i class="fa-solid fa-wifi" style="font-size:48px;color:#ef4444;"></i>
-        <h3>इंटरनेट नहीं है!<br><small style="font-size:14px;color:#94a3b8;">No Internet</small></h3>
-        <p>WiFi या Mobile Data चालू करें。<br><span style="color:#64748b;">Turn on WiFi or Mobile Data.</span></p>
-        <button class="no-internet-retry-btn" onclick="retryConnection()">🔄 दोबारा कोशिश करें</button>
+        <h3>No Internet Connection!</h3>
+        <p>Please turn on WiFi or Mobile Data and try again.</p>
+        <button class="no-internet-retry-btn" onclick="retryConnection()">🔄 Retry</button>
     </div>
 </div>
 
@@ -135,21 +135,21 @@
 <div class="settings-modal" id="settingsModal">
     <div class="settings-box">
         <div class="settings-header">
-            <h2><i class="fa-solid fa-gear"></i> सेटिंग्स</h2>
+            <h2><i class="fa-solid fa-gear"></i> Settings</h2>
             <button class="close-settings" onclick="closeSettings()">&times;</button>
         </div>
         <div class="setting-item">
-            <label><i class="fa-regular fa-bell"></i> नोटिफिकेशन</label>
+            <label><i class="fa-regular fa-bell"></i> Notifications</label>
             <div class="toggle-switch" id="notifToggle" onclick="toggleNotification()"></div>
         </div>
         <div class="setting-item">
-            <label><i class="fa-regular fa-hard-drive"></i> हिस्ट्री सेव करें</label>
+            <label><i class="fa-regular fa-hard-drive"></i> Save History</label>
             <div class="toggle-switch active" id="historyToggle" onclick="toggleHistorySave()"></div>
         </div>
         <div class="stats-info">
-            <p>📥 कुल डाउनलोड</p>
+            <p>📥 Total Downloads</p>
             <p class="total-downloads" id="totalDownloadsCount">0</p>
-            <p>🎉 आपका सफर जारी है!</p>
+            <p>🎉 Keep going!</p>
         </div>
     </div>
 </div>
@@ -157,7 +157,7 @@
 <!-- custom modals -->
 <div id="actionMenuModal" class="custom-modal-overlay">
     <div class="custom-modal action-modal">
-        <div class="modal-title">📌 वीडियो एक्शन</div>
+        <div class="modal-title">📌 Video Action</div>
         <div class="action-buttons">
             <div class="action-btn delete" id="actionDeleteBtn"><i class="fa-regular fa-trash-can"></i> Delete</div>
             <div class="action-btn share" id="actionShareBtn"><i class="fa-regular fa-share-from-square"></i> Share</div>
@@ -167,11 +167,11 @@
 
 <div id="confirmDeleteModal" class="custom-modal-overlay">
     <div class="custom-modal">
-        <div class="modal-title">⚠️ पुष्टि करें</div>
-        <div class="modal-message">क्या आप वाकई यह वीडियो डिलीट करना चाहते हैं?</div>
+        <div class="modal-title">⚠️ Confirm</div>
+        <div class="modal-message">Are you sure you want to delete this video?</div>
         <div class="confirm-buttons">
-            <div class="confirm-btn yes" id="confirmDeleteYes">हाँ, डिलीट करें</div>
-            <div class="confirm-btn no" id="confirmDeleteNo">रद्द करें</div>
+            <div class="confirm-btn yes" id="confirmDeleteYes">Yes, Delete</div>
+            <div class="confirm-btn no" id="confirmDeleteNo">Cancel</div>
         </div>
     </div>
 </div>
@@ -206,7 +206,7 @@
     </div>
     <div class="input-section">
         <div class="input-area">
-            <textarea id="videoLink" placeholder="यहाँ इंस्टाग्राम रील का लिंक पेस्ट करें..."></textarea>
+            <textarea id="videoLink" placeholder="Paste Instagram Reel or Facebook video link here..."></textarea>
             <div class="clear-input-btn" id="clearInputBtn">✕</div>
             <div class="input-actions">
                 <button class="paste-btn" onclick="pasteFromClipboard()">PASTE</button>
@@ -222,9 +222,9 @@
     </div>
     <div class="result-section" id="resultBox">
         <p id="videoTitleDisplay" style="font-size:13px;color:#cbd5e1;margin-bottom:8px;"></p>
-        <p style="font-size:14px;color:#22c55e;font-weight:600;margin-bottom:5px;">✅ वीडियो मिल गया है!</p>
+        <p style="font-size:14px;color:#22c55e;font-weight:600;margin-bottom:5px;">✅ Video found!</p>
         <button onclick="downloadVideo()" class="success-download-btn" id="galleryBtn">
-            ⬇️ Gallery में Save करें ⬇️
+            ⬇️ Save to Gallery ⬇️
         </button>
         <div class="progress-container" id="progressContainer">
             <div class="progress-bar" id="progressBar"></div>
@@ -244,7 +244,7 @@
 </div>
 
 <script>
-// ====================== API KEYS — सभी 14 intact ======================
+// ====================== API KEYS — all 14 intact ======================
 const API_KEY_A = "58ada1bb8amsh6604490a2fc0596p1fbce5jsn49a52a705e3b";
 const API_KEY_B = "19bda3fefdmsh91eea806446b74ap1ea3dbjsne60d3dbce9fa";
 
@@ -258,35 +258,36 @@ let historyEnabled    = true;
 
 // ---------- helper functions (toasts, internet, settings, etc) ----------
 const ERROR_MESSAGES = {
-    NO_INTERNET:    { title:"📵 इंटरनेट नहीं! / No Internet",        hi:"WiFi या Mobile Data चालू करके दोबारा कोशिश करें।",              en:"Turn on WiFi or Mobile Data and try again." },
-    INVALID_LINK:   { title:"🔗 गलत लिंक! / Invalid Link",           hi:"Instagram या Facebook का सही लिंक डालें।",                     en:"Paste a valid Instagram or Facebook link." },
-    EMPTY_LINK:     { title:"✏️ लिंक खाली! / Link Empty",            hi:"पहले वीडियो का लिंक पेस्ट करें।",                             en:"Please paste the video link first." },
-    ALL_API_FAILED: { title:"❌ वीडियो नहीं मिला / Not Found",       hi:"सभी सर्वर ने काम नहीं किया। लिंक सही है? दोबारा कोशिश करें।", en:"All servers failed. Check the link and try again." },
-    TIMEOUT:        { title:"⏱️ Timeout! / Request Timed Out",       hi:"Server ने जवाब नहीं दिया। Internet धीमा है?",                  en:"Server did not respond. Slow internet? Try again later." },
-    PRIVATE_VIDEO:  { title:"🔒 Private Video",                       hi:"यह Private वीडियो है। सिर्फ Public वीडियो Download होते हैं।", en:"This video is private. Only public videos can be downloaded." },
-    DOWNLOAD_FAIL:  { title:"⬇️ Download नहीं हुई / Download Failed",hi:"Video download नहीं हो सकी। दोबारा कोशिश करें।",               en:"Could not download video. Please try again." },
-    STORAGE_FULL:   { title:"💾 Storage भरी / Storage Full",          hi:"फोन की Storage कम है। कुछ Files Delete करें।",                 en:"Device storage is full. Free up space and try again." },
-    WRONG_FILE:     { title:"⚠️ गलत File / Wrong File",              hi:"Video की जगह गलत file आई। नए Tab से Save करें।",               en:"Wrong file received. Video opened in new tab — save it from there." },
-    UNKNOWN:        { title:"⚠️ कुछ गड़बड़! / Something Went Wrong", hi:"अज्ञात त्रुटि आई। दोबारा कोशिश करें।",                       en:"An unknown error occurred. Please try again." }
+    NO_INTERNET:    { title:"📵 No Internet Connection!",        msg:"Please turn on WiFi or Mobile Data and try again." },
+    INVALID_LINK:   { title:"🔗 Invalid Link!",                  msg:"Please paste a valid Instagram or Facebook link." },
+    EMPTY_LINK:     { title:"✏️ Link Empty!",                    msg:"Please paste the video link first." },
+    ALL_API_FAILED: { title:"❌ Video Not Found!",               msg:"All servers failed. Is the link correct? Please try again." },
+    TIMEOUT:        { title:"⏱️ Request Timed Out!",             msg:"Server did not respond. Slow internet? Try again later." },
+    PRIVATE_VIDEO:  { title:"🔒 Private Video",                  msg:"This video is private. Only public videos can be downloaded." },
+    DOWNLOAD_FAIL:  { title:"⬇️ Download Failed!",               msg:"Could not download video. Please try again." },
+    STORAGE_FULL:   { title:"💾 Storage Full",                   msg:"Device storage is full. Free up space and try again." },
+    WRONG_FILE:     { title:"⚠️ Wrong File",                     msg:"Wrong file received. Video opened in new tab — save it from there." },
+    UNKNOWN:        { title:"⚠️ Something Went Wrong",           msg:"An unknown error occurred. Please try again." }
 };
 
 function showError(type, extra) {
     const msg = ERROR_MESSAGES[type] || ERROR_MESSAGES.UNKNOWN;
     removeAllToasts();
     const t = document.createElement('div'); t.className = 'error-toast';
-    t.innerHTML = '<span class="err-title">' + msg.title + '</span>' + msg.hi + '<span class="err-sub">' + msg.en + '</span>' + (extra ? '<span class="err-sub" style="color:#fbbf24;">'+extra+'</span>' : '');
+    t.innerHTML = '<span class="err-title">' + msg.title + '</span>' + msg.msg + (extra ? '<span class="err-sub" style="color:#fbbf24;">'+extra+'</span>' : '');
     document.body.appendChild(t); setTimeout(()=>t.remove(),5000);
 }
-function showSuccess(hi, en) {
-    removeAllToasts(); const t = document.createElement('div'); t.className='success-toast'; t.innerHTML=hi+(en?'<br><span style="font-size:11px;">'+en+'</span>':'');
+function showSuccess(msg, sub) {
+    removeAllToasts(); const t = document.createElement('div'); t.className='success-toast';
+    t.innerHTML = msg + (sub ? '<br><span style="font-size:11px;">'+sub+'</span>' : '');
     document.body.appendChild(t); setTimeout(()=>t.remove(),4000);
 }
 function showNotification(msg) { if(!notificationsEnabled)return; removeAllToasts(); const t=document.createElement('div'); t.className='notification'; t.innerHTML=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2500); }
 function removeAllToasts() { document.querySelectorAll('.error-toast,.success-toast,.notification').forEach(e=>e.remove()); }
 
 function checkInternet() { var off = !navigator.onLine; document.getElementById('noInternetOverlay').classList.toggle('show',off); return !off; }
-function retryConnection() { if(navigator.onLine){ document.getElementById('noInternetOverlay').classList.remove('show'); showNotification("✅ Internet जुड़ गया!"); } else showError('NO_INTERNET'); }
-window.addEventListener('online',()=>{ document.getElementById('noInternetOverlay').classList.remove('show'); showNotification("✅ Internet आ गया!"); });
+function retryConnection() { if(navigator.onLine){ document.getElementById('noInternetOverlay').classList.remove('show'); showNotification("✅ Internet connected!"); } else showError('NO_INTERNET'); }
+window.addEventListener('online',()=>{ document.getElementById('noInternetOverlay').classList.remove('show'); showNotification("✅ Internet back online!"); });
 window.addEventListener('offline',()=>{ document.getElementById('noInternetOverlay').classList.add('show'); });
 
 function loadSettings() {
@@ -295,7 +296,7 @@ function loadSettings() {
     if(document.getElementById('totalDownloadsCount')) document.getElementById('totalDownloadsCount').innerText=totalDownloads;
 }
 function saveSettings() { localStorage.setItem("downloader_settings",JSON.stringify({notifications:notificationsEnabled, history:historyEnabled})); }
-function toggleNotification(){ notificationsEnabled=!notificationsEnabled; document.getElementById('notifToggle').classList.toggle('active',notificationsEnabled); saveSettings(); showNotification(notificationsEnabled?"🔔 Notification ON":"🔕 Notification OFF"); }
+function toggleNotification(){ notificationsEnabled=!notificationsEnabled; document.getElementById('notifToggle').classList.toggle('active',notificationsEnabled); saveSettings(); showNotification(notificationsEnabled?"🔔 Notifications ON":"🔕 Notifications OFF"); }
 function toggleHistorySave(){ historyEnabled=!historyEnabled; document.getElementById('historyToggle').classList.toggle('active',historyEnabled); saveSettings(); showNotification(historyEnabled?"✅ History Save ON":"⛔ History Save OFF"); }
 function incrementDownloadCount(){ totalDownloads++; localStorage.setItem("total_downloads",totalDownloads); if(document.getElementById('totalDownloadsCount')) document.getElementById('totalDownloadsCount').innerText=totalDownloads; }
 function openSettings(){ document.getElementById('settingsModal').classList.add('show'); }
@@ -303,7 +304,7 @@ function closeSettings(){ document.getElementById('settingsModal').classList.rem
 function updateHistoryCount(){ try{ var h=JSON.parse(localStorage.getItem("downloader_history")||"[]"); document.getElementById('historyCount').innerText=h.length; }catch(e){} }
 
 async function pasteFromClipboard() {
-    try { var text = await navigator.clipboard.readText(); if(!text.trim()){ showError('EMPTY_LINK'); return; } document.getElementById('videoLink').value=text.trim(); if(text.includes("facebook.com")) selectPlatform('facebook'); showNotification("✅ लिंक पेस्ट हो गया!"); } catch(e) { var manual=prompt("लिंक यहाँ डालें:"); if(manual&&manual.trim()){ document.getElementById('videoLink').value=manual.trim(); if(manual.includes("facebook.com")) selectPlatform('facebook'); } }
+    try { var text = await navigator.clipboard.readText(); if(!text.trim()){ showError('EMPTY_LINK'); return; } document.getElementById('videoLink').value=text.trim(); if(text.includes("facebook.com")) selectPlatform('facebook'); showNotification("✅ Link pasted!"); } catch(e) { var manual=prompt("Paste link here:"); if(manual&&manual.trim()){ document.getElementById('videoLink').value=manual.trim(); if(manual.includes("facebook.com")) selectPlatform('facebook'); } }
 }
 function selectPlatform(p){ currentPlatform=p; document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active')); document.querySelector('.platform-btn.'+p).classList.add('active'); document.getElementById('videoLink').value=""; document.getElementById('resultBox').style.display='none'; fetchedVideoUrl=""; }
 function isValidUrl(t){ return t.includes("instagram.com")||t.includes("facebook.com")||t.includes("fb.watch"); }
@@ -328,14 +329,14 @@ function getApiConfigs(link) {
     ];
 }
 
-// startDownload (same as before, only slightly adjusted for better error)
+// startDownload
 async function startDownload() {
     if (!checkInternet()) { showError('NO_INTERNET'); return; }
     var link = document.getElementById('videoLink').value.trim();
     if (!link) { showError('EMPTY_LINK'); return; }
     if (!isValidUrl(link)) { showError('INVALID_LINK'); return; }
     var btnText = document.getElementById('btnText'), btnIcon = document.getElementById('btnIcon'), btnLoad = document.getElementById('btnLoader'), mainBtn = document.getElementById('mainBtn');
-    mainBtn.disabled = true; btnIcon.style.display = "none"; btnLoad.style.display = "inline-block"; btnText.innerText = "ढूंढ रहा है...";
+    mainBtn.disabled = true; btnIcon.style.display = "none"; btnLoad.style.display = "inline-block"; btnText.innerText = "Searching...";
     var apis = getApiConfigs(link), videoData = null, allTimeout = true;
     for (var i = 0; i < apis.length; i++) {
         var cfg = apis[i]; btnText.innerText = "API " + (i+1) + "/" + apis.length + "...";
@@ -355,23 +356,23 @@ async function startDownload() {
         document.getElementById('videoTitleDisplay').innerText = currentVideoTitle;
         document.getElementById('resultBox').style.display = "block";
         document.getElementById('resultBox').scrollIntoView({behavior:'smooth', block:'center'});
-        showSuccess("✅ वीडियो मिल गया!", "अब Gallery में Save करें।");
+        showSuccess("✅ Video found!", "Now save to Gallery.");
     } else { showError(allTimeout ? 'TIMEOUT' : 'ALL_API_FAILED'); }
 }
 
-// downloadVideo (same robust function) – unchanged except we keep it as is
+// downloadVideo (robust)
 async function downloadVideo() {
-    if (!fetchedVideoUrl) { showError('EMPTY_LINK', "पहले वीडियो ढूंढें।"); return; }
+    if (!fetchedVideoUrl) { showError('EMPTY_LINK', "Find video first."); return; }
     if (!checkInternet()) { showError('NO_INTERNET'); return; }
     var btn = document.getElementById('galleryBtn'), pCon = document.getElementById('progressContainer'), pBar = document.getElementById('progressBar'), pLabel = document.getElementById('progressLabel'), fileName = currentVideoTitle + ".mp4";
-    btn.disabled = true; btn.innerText = "⏳ डाउनलोड हो रहा है..."; pCon.style.display = "block"; pBar.style.width = "10%"; pLabel.innerText = "शुरू हो रहा है...";
+    btn.disabled = true; btn.innerText = "⏳ Downloading..."; pCon.style.display = "block"; pBar.style.width = "10%"; pLabel.innerText = "Starting...";
     try {
-        pBar.style.width = "20%"; pLabel.innerText = "Video fetch हो रही है...";
+        pBar.style.width = "20%"; pLabel.innerText = "Fetching video...";
         var ctrl = new AbortController(), tid = setTimeout(()=>ctrl.abort(),60000);
         var resp = await fetch(fetchedVideoUrl, { signal:ctrl.signal, mode:'cors', headers:{'Accept':'video/mp4,video/*,*/*'} }); clearTimeout(tid);
         if(!resp.ok) throw new Error("HTTP_"+resp.status);
         var ct = resp.headers.get('Content-Type')||''; if(ct.includes('text/html')||ct.includes('text/plain')) throw new Error("HTML_RESPONSE");
-        pBar.style.width = "40%"; pLabel.innerText = "Download हो रही है...";
+        pBar.style.width = "40%"; pLabel.innerText = "Downloading...";
         var contentLength = resp.headers.get('Content-Length'), blob;
         if(contentLength) { var total = parseInt(contentLength), reader = resp.body.getReader(), chunks = [], received = 0;
             while(true) { var res = await reader.read(); if(res.done) break; chunks.push(res.value); received += res.value.length; var pct = 40 + Math.round((received / total) * 45); pBar.style.width = pct + "%"; pLabel.innerText = (received/1024/1024).toFixed(1) + " MB / " + (total/1024/1024).toFixed(1) + " MB"; }
@@ -379,26 +380,26 @@ async function downloadVideo() {
         } else { blob = await resp.blob(); }
         if(blob.size < 5000) throw new Error("BLOB_TOO_SMALL");
         if(blob.type && blob.type.includes('text/html')) throw new Error("HTML_BLOB");
-        pBar.style.width = "90%"; pLabel.innerText = "Gallery में Save हो रहा है...";
+        pBar.style.width = "90%"; pLabel.innerText = "Saving to Gallery...";
         var videoBlob = new Blob([blob], { type: 'video/mp4' }), blobUrl = URL.createObjectURL(videoBlob);
         var a = document.createElement('a'); a.href = blobUrl; a.download = fileName; a.style.display = 'none'; document.body.appendChild(a); a.click();
         setTimeout(()=>{ try{ document.body.removeChild(a); URL.revokeObjectURL(blobUrl); }catch(x){} }, 10000);
-        pBar.style.width = "100%"; pLabel.innerText = "✅ Save हो गया!"; btn.innerText = "✅ Gallery में Save हो गया!";
-        showSuccess("✅ " + fileName + " Save हो गया!", "Gallery या Downloads folder में देखें।");
+        pBar.style.width = "100%"; pLabel.innerText = "✅ Saved to Gallery!"; btn.innerText = "✅ Saved to Gallery!";
+        showSuccess("✅ " + fileName + " saved to Gallery!", "Check your Downloads / Gallery folder.");
         incrementDownloadCount(); saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
     } catch(err) {
         console.warn(err);
         if(err.message === 'STORAGE_FULL') showError('STORAGE_FULL');
         else if(err.name === 'AbortError') showError('TIMEOUT');
-        else { try { pBar.style.width = "70%"; pLabel.innerText = "Direct download कोशिश...";
+        else { try { pBar.style.width = "70%"; pLabel.innerText = "Trying direct download...";
             var a2 = document.createElement('a'); a2.href = fetchedVideoUrl; a2.download = fileName; a2.style.display = 'none'; a2.rel = 'noopener noreferrer'; document.body.appendChild(a2); a2.click();
             setTimeout(()=>{ try{ document.body.removeChild(a2); }catch(x){} }, 1000);
-            pBar.style.width = "100%"; pLabel.innerText = "✅ Download शुरू! Downloads में देखें।"; btn.innerText = "✅ Download शुरू!";
-            showSuccess("✅ Video Download शुरू!", "Files app → Downloads में देखें।");
+            pBar.style.width = "100%"; pLabel.innerText = "✅ Download started! Check Downloads."; btn.innerText = "✅ Download started!";
+            showSuccess("✅ Video download started!", "Check Files app → Downloads.");
             incrementDownloadCount(); saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
-        } catch(err2) { try { window.open(fetchedVideoUrl, '_blank'); pBar.style.width = "100%"; btn.innerText = "↗️ Tab में खुला — Save करें"; showError('WRONG_FILE'); } catch(err3) { showError('DOWNLOAD_FAIL', err3.message); } } }
+        } catch(err2) { try { window.open(fetchedVideoUrl, '_blank'); pBar.style.width = "100%"; btn.innerText = "↗️ Opened in new tab — save from there"; showError('WRONG_FILE'); } catch(err3) { showError('DOWNLOAD_FAIL', err3.message); } } }
     }
-    setTimeout(()=>{ pCon.style.display = "none"; pBar.style.width = "0%"; if(pLabel) pLabel.innerText = ""; btn.disabled = false; btn.innerText = "⬇️ Gallery में Save करें ⬇️"; }, 4000);
+    setTimeout(()=>{ pCon.style.display = "none"; pBar.style.width = "0%"; if(pLabel) pLabel.innerText = ""; btn.disabled = false; btn.innerText = "⬇️ Save to Gallery ⬇️"; }, 4000);
 }
 
 // ---------- HISTORY with new modals ----------
@@ -410,7 +411,7 @@ function saveToHistory(name, url, img) {
     if(!historyEnabled) return;
     try { let h = JSON.parse(localStorage.getItem("downloader_history")||"[]"); if(!h.some(x=>x.url===url)){ h.unshift({name,url,img,platform:currentPlatform,date:new Date().toISOString()}); if(h.length>20) h.pop(); localStorage.setItem("downloader_history",JSON.stringify(h)); loadHistory(); } } catch(e){}
 }
-function deleteHistoryItem(index) { try { let h=JSON.parse(localStorage.getItem("downloader_history")||"[]"); h.splice(index,1); localStorage.setItem("downloader_history",JSON.stringify(h)); loadHistory(); showNotification("🗑️ हटा दिया / Deleted"); } catch(e){} }
+function deleteHistoryItem(index) { try { let h=JSON.parse(localStorage.getItem("downloader_history")||"[]"); h.splice(index,1); localStorage.setItem("downloader_history",JSON.stringify(h)); loadHistory(); showNotification("🗑️ Deleted"); } catch(e){} }
 
 function showActionMenu(index, item) {
     pendingDeleteIndex = index; pendingShareItem = item;
@@ -418,7 +419,6 @@ function showActionMenu(index, item) {
     modal.classList.add('show');
     document.getElementById('actionDeleteBtn').onclick = () => {
         modal.classList.remove('show');
-        // show confirm delete modal
         let confirmModal = document.getElementById('confirmDeleteModal');
         confirmModal.classList.add('show');
         document.getElementById('confirmDeleteYes').onclick = () => {
@@ -450,7 +450,6 @@ function showVideoPreview(item) {
     document.getElementById('closePreviewModal').onclick = () => { modal.classList.remove('show'); video.pause(); };
     document.getElementById('previewCloseBtn').onclick = () => { modal.classList.remove('show'); video.pause(); };
     document.getElementById('previewDownloadBtn').onclick = () => {
-        // set current video data and trigger download
         fetchedVideoUrl = item.url;
         currentVideoTitle = item.name;
         fetchedVideoImg = item.img || "";
@@ -464,7 +463,7 @@ function loadHistory() {
     var grid = document.getElementById("recentGrid"); grid.innerHTML = "";
     var hist = []; try { hist = JSON.parse(localStorage.getItem("downloader_history")||"[]"); } catch(e){}
     updateHistoryCount();
-    if(hist.length===0) { grid.innerHTML = '<p style="grid-column:span 4;text-align:center;color:#64748b;padding:20px;">कोई वीडियो नहीं<br>No downloads yet</p>'; return; }
+    if(hist.length===0) { grid.innerHTML = '<p style="grid-column:span 4;text-align:center;color:#64748b;padding:20px;">No videos yet<br>No downloads yet</p>'; return; }
     hist.forEach((item, idx) => {
         var div = document.createElement("div"); div.className = "recent-item";
         if(item.img && item.img.startsWith("http")) { div.innerHTML = `<img class="thumb-img" src="${item.img}" onerror="this.style.display='none'" alt="thumb" loading="lazy"><div class="play-badge"><i class="fa-solid fa-play"></i></div><div class="thumb-label">${item.name.substring(0,12)}</div>`; }
@@ -478,7 +477,7 @@ function loadHistory() {
         grid.appendChild(div);
     });
 }
-function clearHistory() { if(confirm("सारी History हटाएं? / Clear all?")) { localStorage.removeItem("downloader_history"); loadHistory(); showNotification("✅ History Clear हो गई"); } }
+function clearHistory() { if(confirm("Clear all history?")) { localStorage.removeItem("downloader_history"); loadHistory(); showNotification("✅ History cleared"); } }
 
 // Clear input button
 document.getElementById('clearInputBtn').addEventListener('click', () => {
