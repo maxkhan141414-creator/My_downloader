@@ -27,15 +27,8 @@
         .platform-btn.active.facebook span { color:#fff; }
         .input-section { background:rgba(30,41,59,0.4); border:1px solid rgba(255,255,255,0.05); border-radius:24px; padding:20px; margin-bottom:20px; }
         .input-area { position:relative; background:rgba(15,23,42,0.8); border:1px solid rgba(56,189,248,0.2); border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:15px; }
-
-        /* ── TEXTAREA WRAPPER (X button ke liye) ── */
-        .textarea-wrapper { position:relative; display:flex; align-items:flex-start; }
-        .input-area textarea { width:100%; height:60px; background:transparent; border:none; outline:none; color:#fff; font-size:14px; resize:none; font-weight:500; padding-right:30px; }
+        .input-area textarea { width:100%; height:60px; background:transparent; border:none; outline:none; color:#fff; font-size:14px; resize:none; font-weight:500; }
         .input-area textarea::placeholder { color:#64748b; }
-        .clear-input-btn { position:absolute; top:2px; right:2px; background:none; border:none; color:#64748b; font-size:16px; cursor:pointer; padding:4px; border-radius:50%; display:none; transition:color 0.2s; line-height:1; }
-        .clear-input-btn:hover { color:#ef4444; }
-        .clear-input-btn.visible { display:block; }
-
         .input-actions { display:flex; justify-content:flex-end; align-items:center; }
         .paste-btn { background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 100%); border:none; outline:none; color:white; padding:8px 24px; border-radius:30px; font-size:13px; font-weight:700; letter-spacing:0.5px; cursor:pointer; box-shadow:0 4px 12px rgba(37,99,235,0.3); }
         .download-btn-container { margin-bottom:20px; }
@@ -52,31 +45,25 @@
         .clear-history-btn { font-size:12px; color:#ef4444; cursor:pointer; font-weight:600; background:none; border:none; }
         .recent-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-height:240px; overflow-y:auto; }
         .recent-item { position:relative; aspect-ratio:1/1; background:rgba(30,41,59,0.6); border-radius:12px; border:1px solid rgba(255,255,255,0.05); display:flex; flex-direction:column; justify-content:center; align-items:center; cursor:pointer; transition:all 0.2s ease; overflow:hidden; user-select:none; -webkit-user-select:none; }
-        .recent-item.long-pressed { border-color:#38bdf8; box-shadow:0 0 12px rgba(56,189,248,0.5); transform:scale(0.95); }
+        .recent-item.long-pressed { border-color:#ef4444; box-shadow:0 0 10px rgba(239,68,68,0.4); }
         .recent-item .thumb-img { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; border-radius:11px; }
         .recent-item .thumb-label { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent,rgba(0,0,0,0.85)); padding:12px 3px 4px; font-size:8px; color:#fff; text-align:center; border-radius:0 0 11px 11px; font-weight:600; }
         .recent-item .play-badge { position:absolute; top:50%; left:50%; transform:translate(-50%,-58%); background:rgba(0,0,0,0.55); border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
         .recent-item .play-badge i { font-size:11px; color:#fff; margin:0; }
         .recent-item .no-thumb-icon { font-size:20px; margin-bottom:4px; color:#94a3b8; }
         .recent-item .no-thumb-label { font-size:9px; color:#fff; text-align:center; padding:3px 2px; }
-
-        /* ── TOAST NOTIFICATIONS ── */
         .error-toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7f1d1d,#991b1b); border:1px solid #ef4444; color:white; padding:14px 20px; border-radius:16px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; max-width:340px; width:90%; box-shadow:0 4px 20px rgba(239,68,68,0.4); text-align:center; line-height:1.6; }
         .error-toast .err-title { font-size:14px; font-weight:800; color:#fca5a5; margin-bottom:4px; display:block; }
         .error-toast .err-sub { font-size:11px; color:#fecaca; display:block; margin-top:3px; }
         .success-toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#14532d,#166534); border:1px solid #22c55e; color:white; padding:14px 20px; border-radius:16px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; max-width:340px; width:90%; box-shadow:0 4px 20px rgba(34,197,94,0.4); text-align:center; line-height:1.6; }
         .notification { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#22c55e; color:white; padding:12px 20px; border-radius:50px; font-size:14px; font-weight:bold; z-index:99999; animation:slideUp 0.3s ease; white-space:nowrap; }
         @keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
-
-        /* ── INTERNET OVERLAY ── */
         .no-internet-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9999; justify-content:center; align-items:center; }
         .no-internet-overlay.show { display:flex; }
         .no-internet-box { background:linear-gradient(145deg,#0f1e36,#0a1525); border:1px solid #ef4444; border-radius:24px; padding:32px; text-align:center; max-width:300px; }
         .no-internet-box h3 { margin:16px 0 8px; font-size:18px; }
         .no-internet-box p { font-size:13px; color:#94a3b8; line-height:1.5; }
         .no-internet-retry-btn { background:#ef4444; border:none; border-radius:50px; padding:12px 32px; color:white; font-weight:700; cursor:pointer; margin-top:20px; font-size:14px; }
-
-        /* ── SETTINGS MODAL ── */
         .settings-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center; backdrop-filter:blur(5px); }
         .settings-modal.show { display:flex; }
         .settings-box { background:linear-gradient(145deg,#0f1e36,#0a1525); border-radius:32px; padding:25px; width:90%; max-width:350px; border:1px solid rgba(56,189,248,0.3); }
@@ -95,178 +82,10 @@
         .loader { display:none; margin-left:10px; animation:spin 1s linear infinite; }
         @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
         button:disabled { opacity:0.6; cursor:not-allowed; }
-
-        /* ════════════════════════════════════
-           ✅ ACTION MENU MODAL (Long Press)
-        ════════════════════════════════════ */
-        .action-overlay {
-            display:none; position:fixed; inset:0;
-            background:rgba(0,0,0,0.7);
-            z-index:20000; justify-content:center; align-items:flex-end;
-            backdrop-filter:blur(3px);
-            animation:fadeIn 0.2s ease;
-        }
-        .action-overlay.show { display:flex; }
-        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-        .action-box {
-            background:linear-gradient(145deg,#0f1e36,#0d1a2e);
-            border:1px solid rgba(56,189,248,0.2);
-            border-radius:28px 28px 0 0;
-            padding:20px 20px 30px;
-            width:100%; max-width:420px;
-            animation:slideUpSheet 0.3s ease;
-        }
-        @keyframes slideUpSheet { from{transform:translateY(100%)} to{transform:translateY(0)} }
-
-        .action-video-info {
-            display:flex; align-items:center; gap:12px;
-            padding-bottom:16px; margin-bottom:16px;
-            border-bottom:1px solid rgba(255,255,255,0.08);
-        }
-        .action-thumb {
-            width:52px; height:52px; border-radius:10px;
-            object-fit:cover; background:rgba(30,41,59,0.8);
-            flex-shrink:0;
-        }
-        .action-thumb-placeholder {
-            width:52px; height:52px; border-radius:10px;
-            background:rgba(30,41,59,0.8);
-            display:flex; align-items:center; justify-content:center;
-            flex-shrink:0;
-        }
-        .action-thumb-placeholder i { font-size:22px; color:#38bdf8; }
-        .action-title { font-size:13px; font-weight:700; color:#e2e8f0; line-height:1.4; }
-        .action-date { font-size:11px; color:#64748b; margin-top:2px; }
-
-        .action-btn-row { display:flex; gap:12px; }
-        .action-btn {
-            flex:1; padding:14px 10px; border-radius:18px;
-            border:none; font-size:13px; font-weight:700;
-            cursor:pointer; display:flex; flex-direction:column;
-            align-items:center; gap:7px; transition:all 0.2s;
-        }
-        .action-btn i { font-size:22px; }
-        .action-btn.delete-btn { background:rgba(239,68,68,0.12); color:#ef4444; border:1px solid rgba(239,68,68,0.25); }
-        .action-btn.delete-btn:hover { background:rgba(239,68,68,0.22); }
-        .action-btn.share-btn { background:rgba(56,189,248,0.12); color:#38bdf8; border:1px solid rgba(56,189,248,0.25); }
-        .action-btn.share-btn:hover { background:rgba(56,189,248,0.22); }
-        .action-cancel-btn {
-            width:100%; margin-top:12px; padding:13px;
-            background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);
-            border-radius:16px; color:#94a3b8; font-size:14px;
-            font-weight:600; cursor:pointer;
-        }
-
-        /* ════════════════════════════════════
-           ✅ DELETE CONFIRM MODAL
-        ════════════════════════════════════ */
-        .confirm-overlay {
-            display:none; position:fixed; inset:0;
-            background:rgba(0,0,0,0.8);
-            z-index:21000; justify-content:center; align-items:center;
-            backdrop-filter:blur(4px);
-        }
-        .confirm-overlay.show { display:flex; }
-        .confirm-box {
-            background:linear-gradient(145deg,#0f1e36,#0a1525);
-            border:1px solid rgba(239,68,68,0.3);
-            border-radius:24px; padding:28px 24px;
-            width:88%; max-width:320px; text-align:center;
-            animation:popIn 0.25s ease;
-        }
-        @keyframes popIn { from{opacity:0;transform:scale(0.85)} to{opacity:1;transform:scale(1)} }
-        .confirm-icon { font-size:40px; margin-bottom:14px; }
-        .confirm-title { font-size:17px; font-weight:800; color:#f1f5f9; margin-bottom:8px; }
-        .confirm-msg { font-size:13px; color:#94a3b8; line-height:1.5; margin-bottom:22px; }
-        .confirm-btns { display:flex; gap:10px; }
-        .confirm-yes { flex:1; padding:12px; background:linear-gradient(135deg,#dc2626,#ef4444); border:none; border-radius:14px; color:white; font-weight:700; font-size:14px; cursor:pointer; }
-        .confirm-no  { flex:1; padding:12px; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); border-radius:14px; color:#94a3b8; font-weight:700; font-size:14px; cursor:pointer; }
-
-        /* ════════════════════════════════════
-           ✅ VIDEO PREVIEW MODAL
-        ════════════════════════════════════ */
-        .preview-overlay {
-            display:none; position:fixed; inset:0;
-            background:rgba(0,0,0,0.92);
-            z-index:22000; justify-content:center; align-items:center;
-            backdrop-filter:blur(6px);
-            padding:16px;
-        }
-        .preview-overlay.show { display:flex; }
-        .preview-box {
-            background:linear-gradient(145deg,#0f1e36,#070a12);
-            border:1px solid rgba(56,189,248,0.2);
-            border-radius:24px; width:100%; max-width:420px;
-            overflow:hidden; animation:popIn 0.25s ease;
-            display:flex; flex-direction:column;
-            max-height:90vh;
-        }
-        .preview-header {
-            display:flex; justify-content:space-between; align-items:center;
-            padding:16px 18px 12px;
-            border-bottom:1px solid rgba(255,255,255,0.07);
-        }
-        .preview-title-text { font-size:14px; font-weight:700; color:#e2e8f0; flex:1; margin-right:10px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        .preview-close-btn { background:rgba(255,255,255,0.08); border:none; color:#94a3b8; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-
-        /* ✅ VIDEO PLAYER — Mobile Responsive */
-        .preview-video-wrap {
-            position:relative; width:100%;
-            background:#000;
-            /* Portrait reels ke liye max height */
-            max-height:55vh;
-            display:flex; align-items:center; justify-content:center;
-            overflow:hidden;
-        }
-        .preview-video-wrap video {
-            width:100%;
-            max-height:55vh;
-            object-fit:contain;
-            display:block;
-        }
-
-        /* Loading spinner inside player */
-        .video-loading-spinner {
-            position:absolute; inset:0;
-            display:flex; align-items:center; justify-content:center;
-            background:rgba(0,0,0,0.5);
-        }
-        .video-loading-spinner i { font-size:36px; color:#38bdf8; animation:spin 1s linear infinite; }
-
-        .preview-info {
-            padding:14px 18px 0;
-        }
-        .preview-info p { font-size:11px; color:#64748b; }
-
-        .preview-actions {
-            padding:14px 18px 20px;
-            display:flex; gap:10px;
-        }
-        .preview-download-btn {
-            flex:1; background:linear-gradient(90deg,#22c55e,#16a34a);
-            border:none; color:white; padding:14px;
-            border-radius:18px; font-weight:700; font-size:14px;
-            cursor:pointer; display:flex; align-items:center;
-            justify-content:center; gap:8px;
-            box-shadow:0 4px 15px rgba(34,197,94,0.3);
-        }
-        .preview-share-btn {
-            background:rgba(56,189,248,0.12);
-            border:1px solid rgba(56,189,248,0.25);
-            color:#38bdf8; padding:14px 18px;
-            border-radius:18px; font-size:18px;
-            cursor:pointer; display:flex; align-items:center; justify-content:center;
-        }
-        .preview-error-msg {
-            padding:30px; text-align:center; color:#94a3b8; font-size:13px;
-        }
-        .preview-error-msg i { font-size:32px; color:#ef4444; display:block; margin-bottom:10px; }
     </style>
 </head>
 <body>
 
-<!-- NO INTERNET OVERLAY -->
 <div class="no-internet-overlay" id="noInternetOverlay">
     <div class="no-internet-box">
         <i class="fa-solid fa-wifi" style="font-size:48px;color:#ef4444;"></i>
@@ -276,7 +95,6 @@
     </div>
 </div>
 
-<!-- SETTINGS MODAL -->
 <div class="settings-modal" id="settingsModal">
     <div class="settings-box">
         <div class="settings-header">
@@ -299,73 +117,6 @@
     </div>
 </div>
 
-<!-- ✅ ACTION MENU (Long Press Bottom Sheet) -->
-<div class="action-overlay" id="actionOverlay" onclick="closeActionMenu(event)">
-    <div class="action-box" id="actionBox">
-        <div class="action-video-info">
-            <div id="actionThumbWrap"></div>
-            <div>
-                <div class="action-title" id="actionItemName">Video</div>
-                <div class="action-date" id="actionItemDate"></div>
-            </div>
-        </div>
-        <div class="action-btn-row">
-            <button class="action-btn delete-btn" onclick="askDeleteConfirm()">
-                <i class="fa-solid fa-trash"></i>
-                <span>Delete</span>
-            </button>
-            <button class="action-btn share-btn" onclick="shareFromAction()">
-                <i class="fa-solid fa-share-nodes"></i>
-                <span>Share</span>
-            </button>
-        </div>
-        <button class="action-cancel-btn" onclick="closeActionMenu(null)">रद्द करें / Cancel</button>
-    </div>
-</div>
-
-<!-- ✅ DELETE CONFIRM MODAL -->
-<div class="confirm-overlay" id="confirmOverlay">
-    <div class="confirm-box">
-        <div class="confirm-icon">🗑️</div>
-        <div class="confirm-title">वाकई Delete करें?</div>
-        <div class="confirm-msg" id="confirmMsg">क्या आप वाकई इस वीडियो को हिस्ट्री से हटाना चाहते हैं?</div>
-        <div class="confirm-btns">
-            <button class="confirm-yes" onclick="confirmDelete()">हाँ, हटाएं</button>
-            <button class="confirm-no"  onclick="closeConfirm()">नहीं</button>
-        </div>
-    </div>
-</div>
-
-<!-- ✅ VIDEO PREVIEW MODAL -->
-<div class="preview-overlay" id="previewOverlay">
-    <div class="preview-box">
-        <div class="preview-header">
-            <span class="preview-title-text" id="previewTitle">वीडियो</span>
-            <button class="preview-close-btn" onclick="closePreview()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        <div class="preview-video-wrap" id="previewVideoWrap">
-            <div class="video-loading-spinner" id="videoSpinner">
-                <i class="fa-solid fa-circle-notch"></i>
-            </div>
-            <!-- video element JS से inject होगा -->
-        </div>
-        <div class="preview-info">
-            <p id="previewSubtitle"></p>
-        </div>
-        <div class="preview-actions">
-            <button class="preview-download-btn" id="previewDownloadBtn" onclick="downloadFromPreview()">
-                <i class="fa-solid fa-download"></i> Gallery में Save करें
-            </button>
-            <button class="preview-share-btn" id="previewShareBtn" onclick="shareFromPreview()">
-                <i class="fa-solid fa-share-nodes"></i>
-            </button>
-        </div>
-    </div>
-</div>
-
-<!-- MAIN APP -->
 <div class="app-container">
     <div class="app-header">
         <div class="brand-title">MY DOWNLOADER</div>
@@ -382,13 +133,7 @@
     </div>
     <div class="input-section">
         <div class="input-area">
-            <!-- ✅ TEXTAREA + CLEAR BUTTON -->
-            <div class="textarea-wrapper">
-                <textarea id="videoLink" placeholder="यहाँ इंस्टाग्राम रील का लिंक पेस्ट करें..." oninput="onInputChange()"></textarea>
-                <button class="clear-input-btn" id="clearInputBtn" onclick="clearInput()" title="Clear">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
+            <textarea id="videoLink" placeholder="यहाँ इंस्टाग्राम रील का लिंक पेस्ट करें..."></textarea>
             <div class="input-actions">
                 <button class="paste-btn" onclick="pasteFromClipboard()">PASTE</button>
             </div>
@@ -425,26 +170,20 @@
 </div>
 
 <script>
+
 // ═══════════════════════════════════════
 // API KEYS — सभी 14 intact
 // ═══════════════════════════════════════
 const API_KEY_A = "58ada1bb8amsh6604490a2fc0596p1fbce5jsn49a52a705e3b";
 const API_KEY_B = "19bda3fefdmsh91eea806446b74ap1ea3dbjsne60d3dbce9fa";
 
-let currentPlatform      = 'instagram';
-let fetchedVideoUrl      = "";
-let fetchedVideoImg      = "";
-let currentVideoTitle    = "";
-let totalDownloads       = 0;
+let currentPlatform   = 'instagram';
+let fetchedVideoUrl   = "";
+let fetchedVideoImg   = "";
+let currentVideoTitle = "";
+let totalDownloads    = 0;
 let notificationsEnabled = true;
-let historyEnabled       = true;
-
-// Action menu state
-let actionItemIndex   = -1;
-let actionItemData    = null;
-let previewVideoUrl   = "";
-let previewVideoTitle = "";
-let previewVideoImg   = "";
+let historyEnabled    = true;
 
 // ═══════════════════════════════════════
 // ERROR MESSAGES
@@ -463,9 +202,9 @@ const ERROR_MESSAGES = {
 };
 
 function showError(type, extra) {
-    var msg = ERROR_MESSAGES[type] || ERROR_MESSAGES.UNKNOWN;
+    const msg = ERROR_MESSAGES[type] || ERROR_MESSAGES.UNKNOWN;
     removeAllToasts();
-    var t = document.createElement('div');
+    const t = document.createElement('div');
     t.className = 'error-toast';
     t.innerHTML = '<span class="err-title">' + msg.title + '</span>' + msg.hi +
         '<span class="err-sub">' + msg.en + '</span>' +
@@ -476,7 +215,7 @@ function showError(type, extra) {
 
 function showSuccess(hi, en) {
     removeAllToasts();
-    var t = document.createElement('div');
+    const t = document.createElement('div');
     t.className = 'success-toast';
     t.innerHTML = hi + (en ? '<br><span style="font-size:11px;color:#bbf7d0;">' + en + '</span>' : '');
     document.body.appendChild(t);
@@ -486,7 +225,7 @@ function showSuccess(hi, en) {
 function showNotification(msg) {
     if (!notificationsEnabled) return;
     removeAllToasts();
-    var t = document.createElement('div');
+    const t = document.createElement('div');
     t.className = 'notification';
     t.innerHTML = msg;
     document.body.appendChild(t);
@@ -495,25 +234,6 @@ function showNotification(msg) {
 
 function removeAllToasts() {
     document.querySelectorAll('.error-toast,.success-toast,.notification').forEach(function(e){ e.remove(); });
-}
-
-// ═══════════════════════════════════════
-// ✅ INPUT CLEAR BUTTON
-// ═══════════════════════════════════════
-function onInputChange() {
-    var val = document.getElementById('videoLink').value;
-    var btn = document.getElementById('clearInputBtn');
-    if (val.length > 0) {
-        btn.classList.add('visible');
-    } else {
-        btn.classList.remove('visible');
-    }
-}
-
-function clearInput() {
-    document.getElementById('videoLink').value = '';
-    document.getElementById('clearInputBtn').classList.remove('visible');
-    document.getElementById('videoLink').focus();
 }
 
 // ═══════════════════════════════════════
@@ -605,14 +325,12 @@ async function pasteFromClipboard() {
         var text = await navigator.clipboard.readText();
         if (!text.trim()) { showError('EMPTY_LINK'); return; }
         document.getElementById('videoLink').value = text.trim();
-        onInputChange();
         if (text.includes("facebook.com")) selectPlatform('facebook');
         showNotification("✅ लिंक पेस्ट हो गया!");
     } catch(e) {
         var manual = prompt("लिंक यहाँ डालें:");
         if (manual && manual.trim()) {
             document.getElementById('videoLink').value = manual.trim();
-            onInputChange();
             if (manual.includes("facebook.com")) selectPlatform('facebook');
         }
     }
@@ -623,7 +341,6 @@ function selectPlatform(p) {
     document.querySelectorAll('.platform-btn').forEach(function(b){ b.classList.remove('active'); });
     document.querySelector('.platform-btn.' + p).classList.add('active');
     document.getElementById('videoLink').value = "";
-    onInputChange();
     document.getElementById('resultBox').style.display = 'none';
     fetchedVideoUrl = "";
 }
@@ -659,6 +376,7 @@ function getApiConfigs(link) {
 // ═══════════════════════════════════════
 async function startDownload() {
     if (!checkInternet()) { showError('NO_INTERNET'); return; }
+
     var link = document.getElementById('videoLink').value.trim();
     if (!link)             { showError('EMPTY_LINK');   return; }
     if (!isValidUrl(link)) { showError('INVALID_LINK'); return; }
@@ -685,9 +403,11 @@ async function startDownload() {
             var tid  = setTimeout(function(){ ctrl.abort(); }, 8000);
             var opts = { method: cfg.method, headers: cfg.headers, signal: ctrl.signal };
             if (cfg.method === "POST" && cfg.body) opts.body = cfg.body;
+
             var resp = await fetch(cfg.url, opts);
             clearTimeout(tid);
             allTimeout = false;
+
             if (resp.ok) {
                 var json   = await resp.json();
                 var parsed = cfg.parse(json);
@@ -731,7 +451,8 @@ async function startDownload() {
 }
 
 // ═══════════════════════════════════════
-// DOWNLOAD VIDEO (Main button)
+// ✅ DOWNLOAD VIDEO — Clean Single Function
+// Content-Type check: HTML file reject होगी
 // ═══════════════════════════════════════
 async function downloadVideo() {
     if (!fetchedVideoUrl) { showError('EMPTY_LINK', "पहले वीडियो ढूंढें।"); return; }
@@ -743,40 +464,42 @@ async function downloadVideo() {
     var pLabel   = document.getElementById('progressLabel');
     var fileName = currentVideoTitle + ".mp4";
 
-    await doDownload(fetchedVideoUrl, fileName, btn, pCon, pBar, pLabel, function(){
-        incrementDownloadCount();
-        saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
-    });
-}
-
-// ═══════════════════════════════════════
-// ✅ SHARED DOWNLOAD ENGINE
-// ═══════════════════════════════════════
-async function doDownload(videoUrl, fileName, btn, pCon, pBar, pLabel, onSuccess) {
     btn.disabled  = true;
     btn.innerText = "⏳ डाउनलोड हो रहा है...";
-    if (pCon) pCon.style.display = "block";
-    if (pBar) pBar.style.width   = "10%";
-    if (pLabel) pLabel.innerText = "शुरू हो रहा है...";
+    pCon.style.display = "block";
+    pBar.style.width   = "10%";
+    pLabel.innerText   = "शुरू हो रहा है...";
 
+    // ── Step 1: Blob Fetch ──
     try {
-        if (pBar) pBar.style.width = "20%";
-        if (pLabel) pLabel.innerText = "Video fetch हो रही है...";
+        pBar.style.width = "20%";
+        pLabel.innerText = "Video fetch हो रही है...";
 
         var ctrl = new AbortController();
         var tid  = setTimeout(function(){ ctrl.abort(); }, 60000);
-        var resp = await fetch(videoUrl, { signal:ctrl.signal, mode:'cors', headers:{'Accept':'video/mp4,video/*,*/*'} });
+
+        var resp = await fetch(fetchedVideoUrl, {
+            signal: ctrl.signal,
+            mode: 'cors',
+            headers: { 'Accept': 'video/mp4,video/*,*/*' }
+        });
         clearTimeout(tid);
 
         if (!resp.ok) throw new Error("HTTP_" + resp.status);
+
+        // ✅ Content-Type check — HTML file reject
         var ct = resp.headers.get('Content-Type') || '';
-        if (ct.includes('text/html') || ct.includes('text/plain')) throw new Error("HTML_RESPONSE");
+        if (ct.includes('text/html') || ct.includes('text/plain')) {
+            throw new Error("HTML_RESPONSE");
+        }
 
-        if (pBar) pBar.style.width = "40%";
-        if (pLabel) pLabel.innerText = "Download हो रही है...";
+        pBar.style.width = "40%";
+        pLabel.innerText = "Download हो रही है...";
 
+        // ✅ Real progress अगर Content-Length मिले
         var contentLength = resp.headers.get('Content-Length');
         var blob;
+
         if (contentLength) {
             var total   = parseInt(contentLength);
             var reader  = resp.body.getReader();
@@ -788,58 +511,85 @@ async function doDownload(videoUrl, fileName, btn, pCon, pBar, pLabel, onSuccess
                 chunks.push(res.value);
                 received += res.value.length;
                 var pct = 40 + Math.round((received / total) * 45);
-                if (pBar) pBar.style.width = pct + "%";
-                if (pLabel) pLabel.innerText = (received/1024/1024).toFixed(1) + " MB / " + (total/1024/1024).toFixed(1) + " MB";
+                pBar.style.width = pct + "%";
+                pLabel.innerText = (received/1024/1024).toFixed(1) + " MB / " + (total/1024/1024).toFixed(1) + " MB";
             }
-            blob = new Blob(chunks, { type:'video/mp4' });
+            blob = new Blob(chunks, { type: 'video/mp4' });
         } else {
             blob = await resp.blob();
         }
 
+        // ✅ Size check — बहुत छोटा blob = गलत file
         if (blob.size < 5000) throw new Error("BLOB_TOO_SMALL");
+
+        // ✅ Blob type check
         if (blob.type && blob.type.includes('text/html')) throw new Error("HTML_BLOB");
 
-        if (pBar) pBar.style.width = "90%";
-        if (pLabel) pLabel.innerText = "Gallery में Save हो रहा है...";
+        pBar.style.width = "90%";
+        pLabel.innerText = "Gallery में Save हो रहा है...";
 
-        var videoBlob = new Blob([blob], { type:'video/mp4' });
+        var videoBlob = new Blob([blob], { type: 'video/mp4' });
         var blobUrl   = URL.createObjectURL(videoBlob);
+
+        // Download trigger
         var a = document.createElement('a');
-        a.href = blobUrl; a.download = fileName; a.style.display = 'none';
-        document.body.appendChild(a); a.click();
+        a.href = blobUrl;
+        a.download = fileName;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
         setTimeout(function(){ try{ document.body.removeChild(a); URL.revokeObjectURL(blobUrl); }catch(x){} }, 10000);
 
-        if (pBar) pBar.style.width = "100%";
-        if (pLabel) pLabel.innerText = "✅ Save हो गया!";
-        btn.innerText = "✅ Gallery में Save हो गया!";
+        pBar.style.width = "100%";
+        pLabel.innerText = "✅ Save हो गया!";
+        btn.innerText    = "✅ Gallery में Save हो गया!";
         showSuccess("✅ " + fileName + " Save हो गया!", "Gallery या Downloads folder में देखें।");
-        if (onSuccess) onSuccess();
+        incrementDownloadCount();
+        saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
 
     } catch(err) {
-        console.warn("Blob failed:", err.message);
-        if (err.message === 'STORAGE_FULL') { showError('STORAGE_FULL'); resetDownloadBtn(btn,pCon,pBar,pLabel); return; }
-        if (err.name === 'AbortError') { showError('TIMEOUT'); resetDownloadBtn(btn,pCon,pBar,pLabel); return; }
+        console.warn("Blob method failed:", err.message);
 
-        // Step 2: Direct anchor
+        if (err.message === 'STORAGE_FULL') {
+            showError('STORAGE_FULL');
+            resetDownloadBtn(btn, pCon, pBar, pLabel);
+            return;
+        }
+        if (err.name === 'AbortError') {
+            showError('TIMEOUT');
+            resetDownloadBtn(btn, pCon, pBar, pLabel);
+            return;
+        }
+
+        // ── Step 2: Direct anchor (CORS bypass) ──
         try {
-            if (pBar) pBar.style.width = "70%";
-            if (pLabel) pLabel.innerText = "Direct download...";
+            pBar.style.width = "70%";
+            pLabel.innerText = "Direct download कोशिश...";
+
             var a2 = document.createElement('a');
-            a2.href = videoUrl; a2.download = fileName;
-            a2.style.display = 'none'; a2.rel = 'noopener noreferrer';
-            document.body.appendChild(a2); a2.click();
+            a2.href = fetchedVideoUrl;
+            a2.download = fileName;
+            a2.style.display = 'none';
+            a2.rel = 'noopener noreferrer';
+            document.body.appendChild(a2);
+            a2.click();
             setTimeout(function(){ try{ document.body.removeChild(a2); }catch(x){} }, 1000);
-            if (pBar) pBar.style.width = "100%";
-            if (pLabel) pLabel.innerText = "✅ Download शुरू!";
-            btn.innerText = "✅ Download शुरू!";
+
+            pBar.style.width = "100%";
+            pLabel.innerText = "✅ Download शुरू! Downloads में देखें।";
+            btn.innerText    = "✅ Download शुरू!";
             showSuccess("✅ Video Download शुरू!", "Files app → Downloads में देखें।");
-            if (onSuccess) onSuccess();
+            incrementDownloadCount();
+            saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
+
         } catch(err2) {
-            // Step 3: New tab
+            console.warn("Direct anchor failed:", err2.message);
+
+            // ── Step 3: New Tab (last resort) ──
             try {
-                window.open(videoUrl, '_blank');
-                if (pBar) pBar.style.width = "100%";
-                btn.innerText = "↗️ Tab में खुला";
+                window.open(fetchedVideoUrl, '_blank');
+                pBar.style.width = "100%";
+                btn.innerText    = "↗️ Tab में खुला — Save करें";
                 showError('WRONG_FILE');
             } catch(err3) {
                 showError('DOWNLOAD_FAIL', "Error: " + err3.message);
@@ -850,175 +600,15 @@ async function doDownload(videoUrl, fileName, btn, pCon, pBar, pLabel, onSuccess
     resetDownloadBtn(btn, pCon, pBar, pLabel);
 }
 
+// Reset button helper
 function resetDownloadBtn(btn, pCon, pBar, pLabel) {
     setTimeout(function(){
-        if (pCon) pCon.style.display = "none";
-        if (pBar) pBar.style.width   = "0%";
+        pCon.style.display = "none";
+        pBar.style.width   = "0%";
         if (pLabel) pLabel.innerText = "";
         btn.disabled  = false;
         btn.innerText = "⬇️ Gallery में Save करें ⬇️";
     }, 4000);
-}
-
-// ═══════════════════════════════════════
-// ✅ ACTION MENU (Long Press Bottom Sheet)
-// ═══════════════════════════════════════
-function openActionMenu(index, item) {
-    actionItemIndex = index;
-    actionItemData  = item;
-
-    document.getElementById('actionItemName').innerText = item.name.substring(0,30);
-    var d = new Date(item.date);
-    document.getElementById('actionItemDate').innerText = d.toLocaleDateString('hi-IN') + ' • ' + d.toLocaleTimeString('hi-IN', {hour:'2-digit',minute:'2-digit'});
-
-    var wrap = document.getElementById('actionThumbWrap');
-    if (item.img && item.img.startsWith("http")) {
-        wrap.innerHTML = '<img class="action-thumb" src="' + item.img + '" onerror="this.style.display=\'none\'" alt="thumb">';
-    } else {
-        wrap.innerHTML = '<div class="action-thumb-placeholder"><i class="fa-solid fa-video"></i></div>';
-    }
-
-    document.getElementById('actionOverlay').classList.add('show');
-}
-
-function closeActionMenu(e) {
-    if (e && e.target !== document.getElementById('actionOverlay')) return;
-    document.getElementById('actionOverlay').classList.remove('show');
-    actionItemIndex = -1;
-    actionItemData  = null;
-}
-
-function askDeleteConfirm() {
-    document.getElementById('actionOverlay').classList.remove('show');
-    if (actionItemData) {
-        document.getElementById('confirmMsg').innerText =
-            '"' + actionItemData.name.substring(0,25) + '" को हिस्ट्री से हटाना चाहते हैं?';
-    }
-    document.getElementById('confirmOverlay').classList.add('show');
-}
-
-function closeConfirm() {
-    document.getElementById('confirmOverlay').classList.remove('show');
-}
-
-function confirmDelete() {
-    document.getElementById('confirmOverlay').classList.remove('show');
-    if (actionItemIndex >= 0) {
-        deleteHistoryItem(actionItemIndex);
-    }
-    actionItemIndex = -1;
-    actionItemData  = null;
-}
-
-function shareFromAction() {
-    document.getElementById('actionOverlay').classList.remove('show');
-    if (!actionItemData) return;
-    doShare(actionItemData.url, actionItemData.name);
-}
-
-function doShare(url, name) {
-    if (navigator.share) {
-        navigator.share({
-            title: name || 'My Downloader',
-            text:  '🎬 यह वीडियो देखो!',
-            url:   url
-        }).then(function(){
-            showNotification("✅ Share हो गया!");
-        }).catch(function(e){
-            if (e.name !== 'AbortError') {
-                fallbackShare(url);
-            }
-        });
-    } else {
-        fallbackShare(url);
-    }
-}
-
-function fallbackShare(url) {
-    try {
-        var ta = document.createElement('textarea');
-        ta.value = url;
-        ta.style.position = 'fixed';
-        ta.style.opacity  = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showNotification("📋 Link Copy हो गया!");
-    } catch(e) {
-        showError('UNKNOWN', "Share नहीं हो सका।");
-    }
-}
-
-// ═══════════════════════════════════════
-// ✅ VIDEO PREVIEW MODAL
-// ═══════════════════════════════════════
-function openPreview(item) {
-    previewVideoUrl   = item.url;
-    previewVideoTitle = item.name;
-    previewVideoImg   = item.img || "";
-
-    document.getElementById('previewTitle').innerText = item.name;
-    document.getElementById('previewSubtitle').innerText = "वीडियो को देखें, फिर Download करें।";
-
-    // Spinner show
-    var wrap = document.getElementById('previewVideoWrap');
-    document.getElementById('videoSpinner').style.display = 'flex';
-
-    // पुराना video element हटाओ
-    var oldVid = wrap.querySelector('video');
-    if (oldVid) { oldVid.pause(); oldVid.remove(); }
-
-    // नया video element बनाओ
-    var vid = document.createElement('video');
-    vid.src      = item.url;
-    vid.controls = true;
-    vid.autoplay = false;
-    vid.playsInline = true;
-    vid.preload  = "metadata";
-    vid.style.cssText = "width:100%;max-height:55vh;object-fit:contain;display:block;";
-
-    vid.addEventListener('loadedmetadata', function(){
-        document.getElementById('videoSpinner').style.display = 'none';
-    });
-    vid.addEventListener('error', function(){
-        document.getElementById('videoSpinner').style.display = 'none';
-        var errDiv = document.createElement('div');
-        errDiv.className = 'preview-error-msg';
-        errDiv.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>वीडियो Preview नहीं हो सका।<br><span style="font-size:11px;color:#64748b;">CORS restriction — नीचे से Download करें।</span>';
-        wrap.appendChild(errDiv);
-    });
-
-    wrap.appendChild(vid);
-    document.getElementById('previewOverlay').classList.add('show');
-}
-
-function closePreview() {
-    var wrap = document.getElementById('previewVideoWrap');
-    var vid  = wrap.querySelector('video');
-    if (vid) { vid.pause(); vid.src = ""; vid.remove(); }
-    var errDiv = wrap.querySelector('.preview-error-msg');
-    if (errDiv) errDiv.remove();
-    document.getElementById('videoSpinner').style.display = 'flex';
-    document.getElementById('previewOverlay').classList.remove('show');
-    previewVideoUrl = "";
-}
-
-function downloadFromPreview() {
-    if (!previewVideoUrl) return;
-    closePreview();
-    // Main result box में load करो और download trigger करो
-    fetchedVideoUrl   = previewVideoUrl;
-    fetchedVideoImg   = previewVideoImg;
-    currentVideoTitle = previewVideoTitle;
-    document.getElementById('videoTitleDisplay').innerText = currentVideoTitle;
-    document.getElementById('resultBox').style.display = "block";
-    downloadVideo();
-}
-
-function shareFromPreview() {
-    if (!previewVideoUrl) return;
-    doShare(previewVideoUrl, previewVideoTitle);
 }
 
 // ═══════════════════════════════════════
@@ -1052,6 +642,7 @@ function loadHistory() {
     grid.innerHTML = "";
     var hist = [];
     try { hist = JSON.parse(localStorage.getItem("downloader_history") || "[]"); } catch(e) {}
+
     updateHistoryCount();
 
     if (hist.length === 0) {
@@ -1077,35 +668,38 @@ function loadHistory() {
         var pressTimer  = null;
         var isLongPress = false;
 
-        // ✅ LONG PRESS → Custom Action Menu (mobile)
         div.addEventListener('touchstart', function(){
             isLongPress = false;
             pressTimer = setTimeout(function(){
                 isLongPress = true;
                 div.classList.add('long-pressed');
-                openActionMenu(index, item);
+                if (confirm('हटाएं?\n"' + item.name.substring(0,25) + '"')) {
+                    deleteHistoryItem(index);
+                } else {
+                    div.classList.remove('long-pressed');
+                }
             }, 600);
-        }, { passive:true });
+        }, { passive: true });
 
-        div.addEventListener('touchend', function(){
-            clearTimeout(pressTimer);
-            setTimeout(function(){ div.classList.remove('long-pressed'); }, 200);
-        });
-        div.addEventListener('touchmove', function(){
-            clearTimeout(pressTimer);
-            div.classList.remove('long-pressed');
-        });
+        div.addEventListener('touchend',  function(){ clearTimeout(pressTimer); div.classList.remove('long-pressed'); });
+        div.addEventListener('touchmove', function(){ clearTimeout(pressTimer); div.classList.remove('long-pressed'); });
 
-        // ✅ RIGHT CLICK (desktop) → Action Menu
         div.addEventListener('contextmenu', function(e){
             e.preventDefault();
-            openActionMenu(index, item);
+            if (confirm('हटाएं?\n"' + item.name.substring(0,25) + '"')) deleteHistoryItem(index);
         });
 
-        // ✅ SINGLE TAP → Video Preview Modal
         div.addEventListener('click', function(){
             if (isLongPress) { isLongPress = false; return; }
-            openPreview(item);
+            if (confirm('दोबारा Download करें?\n"' + item.name.substring(0,25) + '"')) {
+                fetchedVideoUrl   = item.url;
+                fetchedVideoImg   = item.img || "";
+                currentVideoTitle = item.name;
+                document.getElementById('videoTitleDisplay').innerText = currentVideoTitle;
+                document.getElementById('resultBox').style.display = "block";
+                showNotification("✅ वीडियो Load हुआ — Download करें");
+                document.getElementById('resultBox').scrollIntoView({behavior:'smooth', block:'center'});
+            }
         });
 
         grid.appendChild(div);
@@ -1113,36 +707,11 @@ function loadHistory() {
 }
 
 function clearHistory() {
-    actionItemIndex = -1;
-    actionItemData  = null;
-    document.getElementById('confirmMsg').innerText = "क्या आप वाकई सारी हिस्ट्री हटाना चाहते हैं?";
-    document.getElementById('confirmOverlay').classList.add('show');
-    // Override confirmDelete temporarily
-    document.getElementById('confirmOverlay').dataset.mode = 'clearAll';
-}
-
-function confirmDelete() {
-    var mode = document.getElementById('confirmOverlay').dataset.mode;
-    document.getElementById('confirmOverlay').classList.remove('show');
-    document.getElementById('confirmOverlay').dataset.mode = '';
-
-    if (mode === 'clearAll') {
+    if (confirm("सारी History हटाएं? / Clear all?")) {
         localStorage.removeItem("downloader_history");
         loadHistory();
         showNotification("✅ History Clear हो गई");
-    } else if (actionItemIndex >= 0) {
-        deleteHistoryItem(actionItemIndex);
-        actionItemIndex = -1;
-        actionItemData  = null;
     }
-}
-
-function updateHistoryCount() {
-    try {
-        var h  = JSON.parse(localStorage.getItem("downloader_history") || "[]");
-        var el = document.getElementById('historyCount');
-        if (el) el.innerText = h.length;
-    } catch(e) {}
 }
 
 // ═══════════════════════════════════════
@@ -1160,6 +729,7 @@ if ('serviceWorker' in navigator) {
 loadSettings();
 loadHistory();
 setTimeout(checkInternet, 500);
+
 </script>
 </body>
 </html>
