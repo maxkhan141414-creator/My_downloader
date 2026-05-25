@@ -29,8 +29,9 @@
         .input-area { position:relative; background:rgba(15,23,42,0.8); border:1px solid rgba(56,189,248,0.2); border-radius:16px; padding:12px; display:flex; flex-direction:column; gap:15px; }
         .input-area textarea { width:100%; height:60px; background:transparent; border:none; outline:none; color:#fff; font-size:14px; resize:none; font-weight:500; padding-right:32px; }
         .input-area textarea::placeholder { color:#64748b; }
+        /* Clear button moved to top-right corner */
         .clear-input-btn {
-            position:absolute; bottom:12px; right:12px; background:rgba(30,41,59,0.8); border:1px solid rgba(56,189,248,0.3); border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:0.2s; z-index:2; color:#94a3b8; font-size:14px; font-weight:bold;
+            position:absolute; top:8px; right:8px; background:rgba(30,41,59,0.8); border:1px solid rgba(56,189,248,0.3); border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:0.2s; z-index:2; color:#94a3b8; font-size:13px; font-weight:bold;
         }
         .clear-input-btn:hover { background:#ef4444; color:#fff; border-color:#ef4444; }
         .input-actions { display:flex; justify-content:flex-end; align-items:center; }
@@ -57,7 +58,7 @@
         .recent-item .no-thumb-icon { font-size:20px; margin-bottom:4px; color:#94a3b8; }
         .recent-item .no-thumb-label { font-size:9px; color:#fff; text-align:center; padding:3px 2px; }
 
-        /* --- CUSTOM MODALS (Dark Theme) --- */
+        /* Custom Modals (unchanged) */
         .custom-modal-overlay {
             display: none; position:fixed; inset:0; background:rgba(0,0,0,0.85); backdrop-filter:blur(6px); z-index:20000; justify-content:center; align-items:center;
         }
@@ -86,11 +87,15 @@
         .preview-download-btn { background:linear-gradient(90deg,#22c55e,#16a34a); border:none; border-radius:50px; padding:12px; width:100%; color:white; font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; margin-top:10px; transition:0.2s; }
         .preview-close-btn { background:rgba(30,41,59,0.8); border:1px solid rgba(56,189,248,0.3); border-radius:50px; padding:8px; width:100%; margin-top:8px; color:#94a3b8; font-weight:600; cursor:pointer; }
 
-        /* error / success toasts */
+        /* Toasts */
         .error-toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7f1d1d,#991b1b); border:1px solid #ef4444; color:white; padding:14px 20px; border-radius:16px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; max-width:340px; width:90%; box-shadow:0 4px 20px rgba(239,68,68,0.4); text-align:center; line-height:1.6; }
         .error-toast .err-title { font-size:14px; font-weight:800; color:#fca5a5; margin-bottom:4px; display:block; }
         .error-toast .err-sub { font-size:11px; color:#fecaca; display:block; margin-top:3px; }
         .success-toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#14532d,#166534); border:1px solid #22c55e; color:white; padding:14px 20px; border-radius:16px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; max-width:340px; width:90%; box-shadow:0 4px 20px rgba(34,197,94,0.4); text-align:center; line-height:1.6; }
+        /* Compact success banner for "Save to video in gallery" */
+        .compact-success {
+            position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#22c55e; color:white; padding:8px 18px; border-radius:40px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; white-space:nowrap; box-shadow:0 2px 12px rgba(34,197,94,0.3);
+        }
         .notification { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#22c55e; color:white; padding:12px 20px; border-radius:50px; font-size:14px; font-weight:bold; z-index:99999; animation:slideUp 0.3s ease; white-space:nowrap; }
         @keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
         .no-internet-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:9999; justify-content:center; align-items:center; }
@@ -267,6 +272,7 @@ const ERROR_MESSAGES = {
     DOWNLOAD_FAIL:  { title:"⬇️ Download Failed!",               msg:"Could not download video. Please try again." },
     STORAGE_FULL:   { title:"💾 Storage Full",                   msg:"Device storage is full. Free up space and try again." },
     WRONG_FILE:     { title:"⚠️ Wrong File",                     msg:"Wrong file received. Video opened in new tab — save it from there." },
+    CLIPBOARD_FAIL: { title:"📋 Clipboard Error",                msg:"Could not read clipboard. Please paste the link manually." },
     UNKNOWN:        { title:"⚠️ Something Went Wrong",           msg:"An unknown error occurred. Please try again." }
 };
 
@@ -282,8 +288,16 @@ function showSuccess(msg, sub) {
     t.innerHTML = msg + (sub ? '<br><span style="font-size:11px;">'+sub+'</span>' : '');
     document.body.appendChild(t); setTimeout(()=>t.remove(),4000);
 }
+function showCompactNotification(msg) {
+    removeAllToasts();
+    const t = document.createElement('div');
+    t.className = 'compact-success';
+    t.innerHTML = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 1500);
+}
 function showNotification(msg) { if(!notificationsEnabled)return; removeAllToasts(); const t=document.createElement('div'); t.className='notification'; t.innerHTML=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2500); }
-function removeAllToasts() { document.querySelectorAll('.error-toast,.success-toast,.notification').forEach(e=>e.remove()); }
+function removeAllToasts() { document.querySelectorAll('.error-toast,.success-toast,.compact-success,.notification').forEach(e=>e.remove()); }
 
 function checkInternet() { var off = !navigator.onLine; document.getElementById('noInternetOverlay').classList.toggle('show',off); return !off; }
 function retryConnection() { if(navigator.onLine){ document.getElementById('noInternetOverlay').classList.remove('show'); showNotification("✅ Internet connected!"); } else showError('NO_INTERNET'); }
@@ -303,8 +317,17 @@ function openSettings(){ document.getElementById('settingsModal').classList.add(
 function closeSettings(){ document.getElementById('settingsModal').classList.remove('show'); }
 function updateHistoryCount(){ try{ var h=JSON.parse(localStorage.getItem("downloader_history")||"[]"); document.getElementById('historyCount').innerText=h.length; }catch(e){} }
 
+// Instant clipboard paste – no popup, just error toast if fails
 async function pasteFromClipboard() {
-    try { var text = await navigator.clipboard.readText(); if(!text.trim()){ showError('EMPTY_LINK'); return; } document.getElementById('videoLink').value=text.trim(); if(text.includes("facebook.com")) selectPlatform('facebook'); showNotification("✅ Link pasted!"); } catch(e) { var manual=prompt("Paste link here:"); if(manual&&manual.trim()){ document.getElementById('videoLink').value=manual.trim(); if(manual.includes("facebook.com")) selectPlatform('facebook'); } }
+    try {
+        var text = await navigator.clipboard.readText();
+        if(!text.trim()){ showError('EMPTY_LINK'); return; }
+        document.getElementById('videoLink').value = text.trim();
+        if(text.includes("facebook.com")) selectPlatform('facebook');
+        showNotification("✅ Link pasted!");
+    } catch(e) {
+        showError('CLIPBOARD_FAIL');
+    }
 }
 function selectPlatform(p){ currentPlatform=p; document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active')); document.querySelector('.platform-btn.'+p).classList.add('active'); document.getElementById('videoLink').value=""; document.getElementById('resultBox').style.display='none'; fetchedVideoUrl=""; }
 function isValidUrl(t){ return t.includes("instagram.com")||t.includes("facebook.com")||t.includes("fb.watch"); }
@@ -356,7 +379,8 @@ async function startDownload() {
         document.getElementById('videoTitleDisplay').innerText = currentVideoTitle;
         document.getElementById('resultBox').style.display = "block";
         document.getElementById('resultBox').scrollIntoView({behavior:'smooth', block:'center'});
-        showSuccess("✅ Video found!", "Now save to Gallery.");
+        // Replace green success toast with compact banner
+        showCompactNotification("Save to video in gallery");
     } else { showError(allTimeout ? 'TIMEOUT' : 'ALL_API_FAILED'); }
 }
 
