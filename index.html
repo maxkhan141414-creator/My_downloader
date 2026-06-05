@@ -927,6 +927,11 @@ if ('serviceWorker' in navigator) {
   }  
 // Initialize
 loadSettings();
+    // Ensure header icon is Instagram on page load
+const initIcon = document.querySelector('.btn-ig i');
+if (initIcon && initIcon.className !== 'fa-brands fa-instagram') {
+    initIcon.className = 'fa-brands fa-instagram';
+}
 setTimeout(checkInternet, 500);
 </script>
 </body>
