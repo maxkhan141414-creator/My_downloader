@@ -907,6 +907,24 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+  function selectPlatform(p){ 
+    currentPlatform = p; 
+    document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active')); 
+    document.querySelector(`.platform-btn.${p}`).classList.add('active'); 
+    videoLinkInput.value = ""; 
+    clearBtn.classList.remove('show');
+    resultContent.style.display = 'none';
+    fetchedVideoUrl = ""; 
+    // Change header icon according to selected platform
+    const headerIcon = document.querySelector('.btn-ig i');
+    if (headerIcon) {
+        if (p === 'facebook') {
+            headerIcon.className = 'fa-brands fa-facebook-f';
+        } else {
+            headerIcon.className = 'fa-brands fa-instagram';
+        }
+    }
+  }  
 // Initialize
 loadSettings();
 setTimeout(checkInternet, 500);
