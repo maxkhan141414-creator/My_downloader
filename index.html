@@ -252,11 +252,10 @@
             height: 40px;
         }
 
+        /* NEW TOGGLE LOGIC - PASTE and CLEAR buttons toggle smoothly */
         .paste-btn,
         .clear-x-btn {
-            position: absolute;
-            right: 0;
-            transition: opacity 0.25s ease, transform 0.25s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
         }
 
         .paste-btn {
@@ -270,40 +269,54 @@
             letter-spacing: 1px;
             cursor: pointer;
             box-shadow: 0 4px 14px rgba(59,130,246,0.40);
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
             min-height: 40px;
-        }
-        .paste-btn.hidden {
-            opacity: 0;
-            transform: scale(0.85);
-            pointer-events: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .clear-x-btn {
             width: 40px;
             height: 40px;
-            background: rgba(239,68,68,0.15);
-            border: 1.5px solid rgba(239,68,68,0.50);
-            border-radius: 50%;
-            display: flex;
+            background: rgba(239,68,68,0.12);
+            border: 1.5px solid rgba(239,68,68,0.5);
+            border-radius: 40px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             color: #ef4444;
-            font-size: 16px;
-            font-weight: 900;
-            line-height: 1;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .clear-x-btn:active {
+            background: rgba(239,68,68,0.35);
+            transform: scale(0.92);
+        }
+
+        /* Both buttons initially visible, but we control visibility via CSS classes */
+        .paste-btn.hide-paste {
             opacity: 0;
+            visibility: hidden;
             transform: scale(0.85);
             pointer-events: none;
         }
-        .clear-x-btn:active { background: rgba(239,68,68,0.35); }
-        .clear-x-btn.show {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
+
+        .clear-x-btn.hide-clear {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.85);
+            pointer-events: none;
+        }
+
+        /* Container to hold both buttons without absolute positioning overlap */
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            position: relative;
         }
 
         .download-section { margin-bottom:12px; }
@@ -477,8 +490,10 @@
                     <input type="text" id="videoLinkInput" placeholder="Paste Instagram Reel or Facebook video link here...">
                 </div>
                 <div class="paste-row">
-                    <button class="paste-btn" id="pasteBtn">PASTE</button>
-                    <button class="clear-x-btn" id="clearInputBtn">✕</button>
+                    <div class="button-group">
+                        <button class="paste-btn" id="pasteBtn">PASTE</button>
+                        <button class="clear-x-btn" id="clearInputBtn">✕</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -536,14 +551,10 @@
 <script>
 // ===== LOGO: Uploaded image ko base64 mein convert karke set karna =====
 (function() {
-    // Yahan aapka logo file path hai — phone mein agar same folder mein hai to sirf naam likhna hai
-    // Agar aap file input se load karna chahein to niche wala code use karein
-    // Ya fir aap directly apni image ka path yahan de sakte hain:
-    var logoSrc = "3988.png"; // <-- Agar HTML file ke saath same folder mein hai to bas yahi kaafi hai
+    var logoSrc = "3988.png";
     var img = document.getElementById('appLogoImg');
     img.src = logoSrc;
     img.onerror = function() {
-        // Fallback: agar file nahi mili to CSS se ek colored circle dikhao
         img.style.display = 'none';
         var fallback = document.createElement('div');
         fallback.style.cssText = 'width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#00b4ff,#0055ff);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px;font-weight:900;color:#fff;';
@@ -629,6 +640,18 @@ function toggleNotification(){ notificationsEnabled=!notificationsEnabled; saveS
 function toggleHistorySave(){ historyEnabled=!historyEnabled; saveSettings(); showNotification(historyEnabled?"✅ History Save ON":"⛔ History Save OFF"); }
 function incrementDownloadCount(){ totalDownloads++; localStorage.setItem("total_downloads",totalDownloads); }
 
+// Function to update visibility of paste and clear buttons based on input field
+function updateButtonsVisibility() {
+    const hasText = videoLinkInput.value.trim().length > 0;
+    if (hasText) {
+        pasteBtn.classList.add('hide-paste');
+        clearBtn.classList.remove('hide-clear');
+    } else {
+        pasteBtn.classList.remove('hide-paste');
+        clearBtn.classList.add('hide-clear');
+    }
+}
+
 async function pasteFromClipboard() {
     try {
         var text = await navigator.clipboard.readText();
@@ -636,13 +659,13 @@ async function pasteFromClipboard() {
         videoLinkInput.value = text.trim();
         if(text.includes("facebook.com")) selectPlatform('facebook');
         showNotification("✅ Link pasted!");
-        clearBtn.classList.add('show');
+        updateButtonsVisibility();
     } catch(e) {
         var manual = prompt("Clipboard access failed. Please paste the link manually:");
         if(manual && manual.trim()){
             videoLinkInput.value = manual.trim();
             if(manual.includes("facebook.com")) selectPlatform('facebook');
-            clearBtn.classList.add('show');
+            updateButtonsVisibility();
         } else {
             showError('CLIPBOARD_FAIL');
         }
@@ -653,7 +676,7 @@ function selectPlatform(p){
     document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active')); 
     document.querySelector(`.platform-btn.${p}`).classList.add('active'); 
     videoLinkInput.value = ""; 
-    clearBtn.classList.remove('show');
+    updateButtonsVisibility();
     resultContent.style.display = 'none';
     fetchedVideoUrl = ""; 
 }
@@ -863,21 +886,20 @@ function saveToHistory(name, url, img) {
     } catch(e){}
 }
 
+// Clear button click handler
 clearBtn.addEventListener('click', () => {
     videoLinkInput.value = '';
     videoLinkInput.focus();
-    clearBtn.classList.remove('show');
+    updateButtonsVisibility();
     showNotification("✏️ Text cleared");
 });
 
+// Input event to toggle paste/clear buttons when user types manually
 videoLinkInput.addEventListener('input', function() {
-    if (this.value.trim().length > 0) {
-        clearBtn.classList.add('show');
-    } else {
-        clearBtn.classList.remove('show');
-    }
+    updateButtonsVisibility();
 });
 
+// Platform selection event listeners
 document.querySelectorAll('.platform-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         const platform = btn.getAttribute('data-platform');
@@ -889,7 +911,8 @@ pasteBtn.addEventListener('click', pasteFromClipboard);
 fetchBtn.addEventListener('click', startDownload);
 saveBtn.addEventListener('click', downloadVideo);
 
-if (videoLinkInput.value.trim().length > 0) clearBtn.classList.add('show');
+// Initial visibility sync on page load
+updateButtonsVisibility();
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
