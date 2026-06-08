@@ -760,11 +760,22 @@ async function startDownload() {
     
     if (videoData && videoData.url) {
         fetchedVideoUrl = videoData.url;
-        fetchedVideoImg = videoData.img || "";
-        var ts = new Date().toISOString().slice(0,19).replace(/:/g,'-');
-        currentVideoTitle = currentPlatform.toUpperCase() + "_" + ts;
-        videoTitleDisplay.innerText = currentVideoTitle;
-        resultContent.style.display = "block";
+fetchedVideoImg = videoData.img || "";
+var ts = new Date().toISOString().slice(0,19).replace(/:/g,'-');
+currentVideoTitle = currentPlatform.toUpperCase() + "_" + ts;
+videoTitleDisplay.innerText = currentVideoTitle;
+
+// Show thumbnail if available
+var thumbEl = document.getElementById('thumbPreviewImg');
+if (fetchedVideoImg) {
+    thumbEl.src = fetchedVideoImg;
+    thumbEl.classList.remove('hidden');
+} else {
+    thumbEl.src = '';
+    thumbEl.classList.add('hidden');
+}
+
+resultContent.style.display = "block";
         resultContent.scrollIntoView({behavior:'smooth', block:'center'});
         showCompactNotification("Save to video in gallery");
     } else {
