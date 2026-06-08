@@ -681,7 +681,9 @@ function selectPlatform(p){
     videoLinkInput.value = ""; 
     updateButtonsVisibility();
     resultContent.style.display = 'none';
-    fetchedVideoUrl = ""; 
+fetchedVideoUrl = "";
+var thumbEl = document.getElementById('thumbPreviewImg');
+if (thumbEl) { thumbEl.src = ''; thumbEl.classList.add('hidden'); }
 }
 function isValidUrl(t){ return t.includes("instagram.com")||t.includes("facebook.com")||t.includes("fb.watch"); }
 
