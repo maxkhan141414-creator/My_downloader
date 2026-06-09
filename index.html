@@ -220,6 +220,7 @@
         .platform-btn span { font-size:11px; font-weight:800; letter-spacing:0.8px; color:#94a3b8; }
         .platform-btn.active span { color:#fff; }
 
+        /* ===== INPUT SECTION ===== */
         .input-section { margin-bottom:12px; }
         .input-box {
             background:#0d1b2e;
@@ -244,40 +245,43 @@
         }
         .input-row input::placeholder { color:#3d5070; }
         .input-row input:focus { color:#fff; }
+
+        /* PASTE ROW - button pushed to right corner */
         .paste-row {
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            position: relative;
             height: 40px;
         }
 
-        /* NEW TOGGLE LOGIC - PASTE and CLEAR buttons toggle smoothly */
         .paste-btn,
         .clear-x-btn {
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
         }
 
+        /* PASTE button - right aligned, smaller and corner-style */
         .paste-btn {
             background: linear-gradient(135deg, #1d4ed8, #3b82f6);
             border: none;
             color: #fff;
-            padding: 10px 30px;
+            padding: 9px 22px;
             border-radius: 30px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 4px 14px rgba(59,130,246,0.40);
-            min-height: 40px;
+            box-shadow: 0 3px 10px rgba(59,130,246,0.40);
+            min-height: 36px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            /* Ensures it stays in the right corner */
+            margin-left: auto;
         }
 
         .clear-x-btn {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: rgba(239,68,68,0.12);
             border: 1.5px solid rgba(239,68,68,0.5);
             border-radius: 40px;
@@ -286,39 +290,32 @@
             justify-content: center;
             cursor: pointer;
             color: #ef4444;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
             transition: all 0.2s ease;
+            margin-left: auto;
         }
         .clear-x-btn:active {
             background: rgba(239,68,68,0.35);
             transform: scale(0.92);
         }
 
-        /* Both buttons initially visible, but we control visibility via CSS classes */
         .paste-btn.hide-paste {
             opacity: 0;
             visibility: hidden;
             transform: scale(0.85);
             pointer-events: none;
+            position: absolute;
         }
-
         .clear-x-btn.hide-clear {
             opacity: 0;
             visibility: hidden;
             transform: scale(0.85);
             pointer-events: none;
+            position: absolute;
         }
 
-        /* Container to hold both buttons without absolute positioning overlap */
-        .button-group {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-        }
-
+        /* ===== DOWNLOAD BUTTON ===== */
         .download-section { margin-bottom:12px; }
         .download-btn {
             width:100%; padding:17px;
@@ -340,17 +337,29 @@
         .loader { display:none; animation:spin 1s linear infinite; }
         @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
 
+        /* ===== PREVIEW BOX - FIXED ===== */
         .preview-section { margin-bottom:12px; }
         .preview-box {
-            background:#0d1b2e; border-radius:16px; overflow:hidden;
-            min-height:170px; display:flex; flex-direction:column;
-            align-items:center; justify-content:center;
+            background:#0d1b2e;
+            border-radius:16px;
+            overflow:hidden;
             border:1px solid rgba(255,255,255,0.05);
+            /* No min-height here — let content define height */
+            position: relative;
         }
+
+        /* Placeholder: shown when no result */
         .preview-placeholder {
-            display:flex; flex-direction:column;
-            align-items:center; justify-content:center; padding:36px; gap:10px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            padding:36px;
+            gap:10px;
+            min-height: 170px;
         }
+        .preview-placeholder.hidden { display:none; }
+
         .film-icon-wrap {
             width:72px; height:72px;
             background:rgba(56,189,248,0.08); border-radius:14px;
@@ -358,11 +367,47 @@
         }
         .film-icon-wrap i { font-size:34px; color:rgba(56,189,248,0.4); }
         .loading-text { font-size:13px; color:#3d5070; font-weight:500; text-align:center; }
-        .result-content { display:none; width:100%; padding:14px; text-align:center; }
-.thumb-preview { width:100%; max-height:180px; object-fit:cover; border-radius:10px; margin-bottom:10px; display:block; background:#0a1525; }
-.thumb-preview.hidden { display:none; }
-        .result-title { font-size:12px; color:#94a3b8; margin-bottom:5px; }
-        .result-status { font-size:13px; color:#22c55e; font-weight:700; margin-bottom:10px; }
+
+        /* Result content: shown when video found */
+        .result-content {
+            display:none;
+            width:100%;
+            flex-direction:column;
+            align-items:stretch;
+        }
+
+        /* Thumbnail fills the top of the box */
+        .thumb-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-radius: 0;
+            background: #0a1525;
+        }
+        .thumb-preview.hidden { display:none; }
+
+        /* When no thumbnail, show a placeholder gradient bar */
+        .thumb-placeholder-bar {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(135deg, #0a1525, #0d2040);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .thumb-placeholder-bar i {
+            font-size: 48px;
+            color: rgba(56,189,248,0.25);
+        }
+        .thumb-placeholder-bar.hidden { display:none; }
+
+        /* Info section below thumbnail */
+        .result-info {
+            padding: 12px 14px 14px;
+        }
+        .result-title { font-size:11px; color:#64748b; margin-bottom:3px; word-break:break-all; }
+        .result-status { font-size:13px; color:#22c55e; font-weight:700; margin-bottom:12px; }
         .save-btn {
             width:100%; background:linear-gradient(90deg,#22c55e,#16a34a);
             border:none; color:#fff; padding:13px; border-radius:22px;
@@ -380,6 +425,7 @@
         }
         .progress-label { font-size:11px; color:#64748b; margin-top:5px; text-align:center; }
 
+        /* ===== VIP BANNER ===== */
         .vip-banner {
             background:linear-gradient(135deg,#0d1b2e,#0a1525);
             border:1px solid rgba(56,189,248,0.15); border-radius:16px;
@@ -409,6 +455,7 @@
             border-radius:7px; padding:2px 7px; font-size:9px; font-weight:800; color:#fff;
         }
 
+        /* ===== AD SPACE ===== */
         .ad-space {
             background:rgba(0,0,0,0.35);
             border:1.5px dashed rgba(56,189,248,0.25); border-radius:18px;
@@ -420,6 +467,7 @@
         .ad-space p { font-size:12px; color:#7e8ca3; font-weight:500; }
         .ad-space .ad-hint { font-size:10px; color:#3d5070; }
 
+        /* ===== TOASTS ===== */
         .error-toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7f1d1d,#991b1b); border:1px solid #ef4444; color:white; padding:12px 18px; border-radius:14px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; max-width:340px; width:90%; box-shadow:0 4px 20px rgba(239,68,68,0.4); text-align:center; line-height:1.5; }
         .err-title { font-size:13px; font-weight:800; color:#fca5a5; margin-bottom:3px; display:block; }
         .err-sub { font-size:11px; color:#fecaca; display:block; margin-top:2px; }
@@ -427,6 +475,7 @@
         .notification { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#22c55e; color:#fff; padding:10px 20px; border-radius:40px; font-size:13px; font-weight:700; z-index:99999; animation:slideUp 0.3s ease; white-space:nowrap; }
         @keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
 
+        /* ===== NO INTERNET ===== */
         .no-internet-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.94); z-index:30000; justify-content:center; align-items:center; }
         .no-internet-overlay.show { display:flex; }
         .no-internet-box { background:#0d1b2e; border:1px solid #ef4444; border-radius:24px; padding:32px; text-align:center; max-width:280px; }
@@ -452,15 +501,11 @@
 
     <!-- TOP HEADER -->
     <div class="top-header">
-
-        <!-- NEW LOGO - aapka uploaded logo -->
         <img class="app-logo-img" id="appLogoImg" src="" alt="Logo">
-
         <div class="app-name-block">
             <span class="app-name-main">Video Downloader</span>
             <span class="app-name-sub">&amp; My Story Saver</span>
         </div>
-
         <div class="header-icons">
             <button class="btn-gift"><i class="fa-regular fa-gift"></i></button>
             <div class="btn-vip"><div class="vip-shape"><span class="vip-ad-pill">AD</span><span class="vip-text">VIP</span></div></div>
@@ -491,11 +536,10 @@
                 <div class="input-row">
                     <input type="text" id="videoLinkInput" placeholder="Paste Instagram Reel or Facebook video link here...">
                 </div>
+                <!-- PASTE ROW: button strictly right-corner aligned -->
                 <div class="paste-row">
-                    <div class="button-group">
-                        <button class="paste-btn" id="pasteBtn">PASTE</button>
-                        <button class="clear-x-btn" id="clearInputBtn">✕</button>
-                    </div>
+                    <button class="paste-btn" id="pasteBtn">PASTE</button>
+                    <button class="clear-x-btn hide-clear" id="clearInputBtn">✕</button>
                 </div>
             </div>
         </div>
@@ -509,23 +553,36 @@
             </button>
         </div>
 
-        <!-- Preview Box -->
+        <!-- Preview Box: thumbnail fills the top area, result info below -->
         <div class="preview-section">
             <div class="preview-box" id="previewBox">
+
+                <!-- Placeholder (shown when idle) -->
                 <div class="preview-placeholder" id="previewPlaceholder">
                     <div class="film-icon-wrap"><i class="fa-solid fa-film"></i></div>
                     <div class="loading-text">Video preview will appear here</div>
                 </div>
+
+                <!-- Result content (shown when video found) -->
                 <div class="result-content" id="resultContent">
-    <img id="thumbPreviewImg" class="thumb-preview hidden" src="" alt="Video Thumbnail">
-    <div class="result-title" id="videoTitleDisplay"></div>
-    <div class="result-status">✅ Video found!</div>
-                    <button class="save-btn" id="saveBtn">⬇️ Save to Gallery ⬇️</button>
-                    <div class="progress-container" id="progressContainer">
-                        <div class="progress-bar" id="progressBar"></div>
-                        <div class="progress-label" id="progressLabel"></div>
+                    <!-- Thumbnail image fills top of box -->
+                    <img id="thumbPreviewImg" class="thumb-preview hidden" src="" alt="Video Thumbnail">
+                    <!-- Fallback bar when no thumbnail URL -->
+                    <div class="thumb-placeholder-bar hidden" id="thumbPlaceholderBar">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <!-- Info below thumbnail -->
+                    <div class="result-info">
+                        <div class="result-title" id="videoTitleDisplay"></div>
+                        <div class="result-status">✅ Video found!</div>
+                        <button class="save-btn" id="saveBtn">⬇️ Save to Gallery ⬇️</button>
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar" id="progressBar"></div>
+                            <div class="progress-label" id="progressLabel"></div>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -552,7 +609,7 @@
 </div>
 
 <script>
-// ===== LOGO: Uploaded image ko base64 mein convert karke set karna =====
+// ===== LOGO =====
 (function() {
     var logoSrc = "3988.png";
     var img = document.getElementById('appLogoImg');
@@ -572,18 +629,21 @@ const API_KEY_B = "19bda3fefdmsh91eea806446b74ap1ea3dbjsne60d3dbce9fa";
 
 // DOM elements
 const videoLinkInput = document.getElementById('videoLinkInput');
-const pasteBtn = document.getElementById('pasteBtn');
-const clearBtn = document.getElementById('clearInputBtn');
-const fetchBtn = document.getElementById('fetchBtn');
-const saveBtn = document.getElementById('saveBtn');
-const resultContent = document.getElementById('resultContent');
+const pasteBtn       = document.getElementById('pasteBtn');
+const clearBtn       = document.getElementById('clearInputBtn');
+const fetchBtn       = document.getElementById('fetchBtn');
+const saveBtn        = document.getElementById('saveBtn');
+const resultContent  = document.getElementById('resultContent');
 const videoTitleDisplay = document.getElementById('videoTitleDisplay');
 const progressContainer = document.getElementById('progressContainer');
-const progressBar = document.getElementById('progressBar');
-const progressLabel = document.getElementById('progressLabel');
-const btnText = document.getElementById('btnText');
-const btnIcon = document.getElementById('btnIcon');
-const btnLoader = document.getElementById('btnLoader');
+const progressBar    = document.getElementById('progressBar');
+const progressLabel  = document.getElementById('progressLabel');
+const btnText        = document.getElementById('btnText');
+const btnIcon        = document.getElementById('btnIcon');
+const btnLoader      = document.getElementById('btnLoader');
+const previewPlaceholder = document.getElementById('previewPlaceholder');
+const thumbImg       = document.getElementById('thumbPreviewImg');
+const thumbBarEl     = document.getElementById('thumbPlaceholderBar');
 
 let currentPlatform = 'instagram';
 let fetchedVideoUrl = "";
@@ -621,13 +681,15 @@ function showSuccess(msg, sub) {
 }
 function showCompactNotification(msg) {
     removeAllToasts();
-    const t = document.createElement('div');
-    t.className = 'notification';
-    t.innerHTML = msg;
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 1500);
+    const t = document.createElement('div'); t.className = 'notification'; t.innerHTML = msg;
+    document.body.appendChild(t); setTimeout(() => t.remove(), 1500);
 }
-function showNotification(msg) { if(!notificationsEnabled) return; removeAllToasts(); const t=document.createElement('div'); t.className='notification'; t.innerHTML=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2500); }
+function showNotification(msg) {
+    if(!notificationsEnabled) return;
+    removeAllToasts();
+    const t=document.createElement('div'); t.className='notification'; t.innerHTML=msg;
+    document.body.appendChild(t); setTimeout(()=>t.remove(),2500);
+}
 function removeAllToasts() { document.querySelectorAll('.error-toast,.success-toast,.notification').forEach(e=>e.remove()); }
 
 function checkInternet() { var off = !navigator.onLine; document.getElementById('noInternetOverlay').classList.toggle('show',off); return !off; }
@@ -636,14 +698,19 @@ window.addEventListener('online',()=>{ document.getElementById('noInternetOverla
 window.addEventListener('offline',()=>{ document.getElementById('noInternetOverlay').classList.add('show'); });
 
 function loadSettings() {
-    try { var s=JSON.parse(localStorage.getItem("downloader_settings")||"{}"); notificationsEnabled=s.notifications!==false; historyEnabled=s.history!==false; totalDownloads=parseInt(localStorage.getItem("total_downloads")||"0"); } catch(e){}
+    try {
+        var s=JSON.parse(localStorage.getItem("downloader_settings")||"{}");
+        notificationsEnabled=s.notifications!==false;
+        historyEnabled=s.history!==false;
+        totalDownloads=parseInt(localStorage.getItem("total_downloads")||"0");
+    } catch(e){}
 }
 function saveSettings() { localStorage.setItem("downloader_settings",JSON.stringify({notifications:notificationsEnabled, history:historyEnabled})); }
 function toggleNotification(){ notificationsEnabled=!notificationsEnabled; saveSettings(); showNotification(notificationsEnabled?"🔔 Notifications ON":"🔕 Notifications OFF"); }
 function toggleHistorySave(){ historyEnabled=!historyEnabled; saveSettings(); showNotification(historyEnabled?"✅ History Save ON":"⛔ History Save OFF"); }
 function incrementDownloadCount(){ totalDownloads++; localStorage.setItem("total_downloads",totalDownloads); }
 
-// Function to update visibility of paste and clear buttons based on input field
+// ===== PASTE / CLEAR BUTTON TOGGLE =====
 function updateButtonsVisibility() {
     const hasText = videoLinkInput.value.trim().length > 0;
     if (hasText) {
@@ -655,6 +722,35 @@ function updateButtonsVisibility() {
     }
 }
 
+// ===== SHOW / HIDE PREVIEW BOX SECTIONS =====
+function showPlaceholder() {
+    previewPlaceholder.classList.remove('hidden');
+    resultContent.style.display = 'none';
+}
+
+function showResult(imgUrl) {
+    previewPlaceholder.classList.add('hidden');
+    resultContent.style.display = 'flex';
+
+    if (imgUrl) {
+        thumbImg.src = imgUrl;
+        thumbImg.classList.remove('hidden');
+        thumbBarEl.classList.add('hidden');
+    } else {
+        thumbImg.src = '';
+        thumbImg.classList.add('hidden');
+        thumbBarEl.classList.remove('hidden');
+    }
+}
+
+function resetPreview() {
+    showPlaceholder();
+    thumbImg.src = '';
+    thumbImg.classList.add('hidden');
+    thumbBarEl.classList.add('hidden');
+}
+
+// ===== CLIPBOARD =====
 async function pasteFromClipboard() {
     try {
         var text = await navigator.clipboard.readText();
@@ -674,19 +770,21 @@ async function pasteFromClipboard() {
         }
     }
 }
-function selectPlatform(p){ 
-    currentPlatform = p; 
-    document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active')); 
-    document.querySelector(`.platform-btn.${p}`).classList.add('active'); 
-    videoLinkInput.value = ""; 
+
+// ===== PLATFORM SELECTION =====
+function selectPlatform(p){
+    currentPlatform = p;
+    document.querySelectorAll('.platform-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelector(`.platform-btn.${p}`).classList.add('active');
+    videoLinkInput.value = "";
+    fetchedVideoUrl = "";
     updateButtonsVisibility();
-    resultContent.style.display = 'none';
-fetchedVideoUrl = "";
-var thumbEl = document.getElementById('thumbPreviewImg');
-if (thumbEl) { thumbEl.src = ''; thumbEl.classList.add('hidden'); }
+    resetPreview();
 }
+
 function isValidUrl(t){ return t.includes("instagram.com")||t.includes("facebook.com")||t.includes("fb.watch"); }
 
+// ===== API CONFIGS =====
 function getApiConfigs(link) {
     return [
         { name:"Snap Video API", url:"https://snap-video3.p.rapidapi.com/download", method:"POST", headers:{"x-rapidapi-host":"snap-video3.p.rapidapi.com","x-rapidapi-key":API_KEY_A,"Content-Type":"application/x-www-form-urlencoded"}, body:'url='+encodeURIComponent(link), parse:function(r){ if(r&&r.medias&&r.medias.length>0){var b=r.medias.find(m=>m.videoAvailable&&m.audioAvailable)||r.medias[0];return{url:b.url,title:r.title||"Snap_Video",img:r.thumbnail||""};}return null; } },
@@ -706,21 +804,22 @@ function getApiConfigs(link) {
     ];
 }
 
+// ===== MAIN DOWNLOAD FUNCTION =====
 async function startDownload() {
     if (!checkInternet()) { showError('NO_INTERNET'); return; }
     var link = videoLinkInput.value.trim();
     if (!link) { showError('EMPTY_LINK'); return; }
     if (!isValidUrl(link)) { showError('INVALID_LINK'); return; }
-    
+
     fetchBtn.disabled = true;
     btnIcon.style.display = "none";
     btnLoader.style.display = "inline-block";
     btnText.innerText = "Searching...";
-    
+
     var apis = getApiConfigs(link);
     var videoData = null;
     var allTimeout = true;
-    
+
     for (var i = 0; i < apis.length; i++) {
         var cfg = apis[i];
         btnText.innerText = "API " + (i+1) + "/" + apis.length + "...";
@@ -754,47 +853,40 @@ async function startDownload() {
             console.log("❌ " + cfg.name + ": " + e.message);
         }
     }
-    
+
     fetchBtn.disabled = false;
     btnIcon.style.display = "inline-block";
     btnLoader.style.display = "none";
     btnText.innerText = "DOWNLOAD VIDEO";
-    
+
     if (videoData && videoData.url) {
         fetchedVideoUrl = videoData.url;
-fetchedVideoImg = videoData.img || "";
-var ts = new Date().toISOString().slice(0,19).replace(/:/g,'-');
-currentVideoTitle = currentPlatform.toUpperCase() + "_" + ts;
-videoTitleDisplay.innerText = currentVideoTitle;
+        fetchedVideoImg = videoData.img || "";
+        var ts = new Date().toISOString().slice(0,19).replace(/:/g,'-');
+        currentVideoTitle = currentPlatform.toUpperCase() + "_" + ts;
+        videoTitleDisplay.innerText = currentVideoTitle;
 
-// Show thumbnail if available
-var thumbEl = document.getElementById('thumbPreviewImg');
-if (fetchedVideoImg) {
-    thumbEl.src = fetchedVideoImg;
-    thumbEl.classList.remove('hidden');
-} else {
-    thumbEl.src = '';
-    thumbEl.classList.add('hidden');
-}
+        // Show result with thumbnail inside the preview box
+        showResult(fetchedVideoImg);
 
-resultContent.style.display = "block";
         resultContent.scrollIntoView({behavior:'smooth', block:'center'});
-        showCompactNotification("Save to video in gallery");
+        showCompactNotification("Save video in gallery");
     } else {
         showError(allTimeout ? 'TIMEOUT' : 'ALL_API_FAILED');
     }
 }
 
+// ===== SAVE / DOWNLOAD VIDEO =====
 async function downloadVideo() {
     if (!fetchedVideoUrl) { showError('EMPTY_LINK', "Find video first."); return; }
     if (!checkInternet()) { showError('NO_INTERNET'); return; }
-    
+
     saveBtn.disabled = true;
     saveBtn.innerText = "⏳ Downloading...";
     progressContainer.style.display = "block";
     progressBar.style.width = "10%";
     progressLabel.innerText = "Starting...";
-    
+
     var fileName = currentVideoTitle + ".mp4";
     try {
         progressBar.style.width = "20%";
@@ -813,8 +905,7 @@ async function downloadVideo() {
         if (contentLength) {
             var total = parseInt(contentLength);
             var reader = resp.body.getReader();
-            var chunks = [];
-            var received = 0;
+            var chunks = []; var received = 0;
             while (true) {
                 var res = await reader.read();
                 if (res.done) break;
@@ -835,11 +926,8 @@ async function downloadVideo() {
         var videoBlob = new Blob([blob], { type: 'video/mp4' });
         var blobUrl = URL.createObjectURL(videoBlob);
         var a = document.createElement('a');
-        a.href = blobUrl;
-        a.download = fileName;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
+        a.href = blobUrl; a.download = fileName; a.style.display = 'none';
+        document.body.appendChild(a); a.click();
         setTimeout(()=>{ try{ document.body.removeChild(a); URL.revokeObjectURL(blobUrl); } catch(x){} }, 10000);
         progressBar.style.width = "100%";
         progressLabel.innerText = "✅ Saved to Gallery!";
@@ -856,12 +944,9 @@ async function downloadVideo() {
                 progressBar.style.width = "70%";
                 progressLabel.innerText = "Trying direct download...";
                 var a2 = document.createElement('a');
-                a2.href = fetchedVideoUrl;
-                a2.download = fileName;
-                a2.style.display = 'none';
-                a2.rel = 'noopener noreferrer';
-                document.body.appendChild(a2);
-                a2.click();
+                a2.href = fetchedVideoUrl; a2.download = fileName;
+                a2.style.display = 'none'; a2.rel = 'noopener noreferrer';
+                document.body.appendChild(a2); a2.click();
                 setTimeout(()=>{ try{ document.body.removeChild(a2); } catch(x){} }, 1000);
                 progressBar.style.width = "100%";
                 progressLabel.innerText = "✅ Download started! Check Downloads.";
@@ -902,7 +987,7 @@ function saveToHistory(name, url, img) {
     } catch(e){}
 }
 
-// Clear button click handler
+// ===== EVENT LISTENERS =====
 clearBtn.addEventListener('click', () => {
     videoLinkInput.value = '';
     videoLinkInput.focus();
@@ -910,16 +995,13 @@ clearBtn.addEventListener('click', () => {
     showNotification("✏️ Text cleared");
 });
 
-// Input event to toggle paste/clear buttons when user types manually
 videoLinkInput.addEventListener('input', function() {
     updateButtonsVisibility();
 });
 
-// Platform selection event listeners
 document.querySelectorAll('.platform-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        const platform = btn.getAttribute('data-platform');
-        selectPlatform(platform);
+        selectPlatform(btn.getAttribute('data-platform'));
     });
 });
 
@@ -927,7 +1009,7 @@ pasteBtn.addEventListener('click', pasteFromClipboard);
 fetchBtn.addEventListener('click', startDownload);
 saveBtn.addEventListener('click', downloadVideo);
 
-// Initial visibility sync on page load
+// ===== INIT =====
 updateButtonsVisibility();
 
 if ('serviceWorker' in navigator) {
