@@ -315,21 +315,53 @@
                 </div>
 
                 <!-- STATE B: Video found -->
-                <div id="resultContent">
-                    <div id="thumbWrapper">
-                        <img id="thumbPreviewImg" src="" alt="Video Thumbnail">
-                        <i class="fa-solid fa-film" id="thumbFallbackIcon"></i>
-                    </div>
-                    <div class="result-info">
-                        <div class="result-title" id="videoTitleDisplay"></div>
-                        <div class="result-status">✅ Video found!</div>
-                        <button class="save-btn" id="saveBtn">⬇️ Save to Gallery ⬇️</button>
-                        <div class="progress-container" id="progressContainer">
-                            <div class="progress-bar" id="progressBar"></div>
-                            <div class="progress-label" id="progressLabel"></div>
-                        </div>
-                    </div>
-                </div>
+<div id="resultContent">
+    <div id="thumbWrapper">
+        <img id="thumbPreviewImg" src="" alt="Video Thumbnail">
+        <i class="fa-solid fa-film" id="thumbFallbackIcon"></i>
+
+        <!-- TOP-LEFT: platform icon + file size -->
+        <div class="thumb-overlay-tl" id="thumbOverlayTL">
+            <i id="thumbPlatformIcon" class="fa-brands fa-instagram" style="color:#e91e8c;"></i>
+            <span class="size-text" id="thumbSizeText">-- MB</span>
+        </div>
+
+        <!-- TOP-RIGHT: reel icon -->
+        <div class="thumb-overlay-tr" id="thumbOverlayTR">
+            <i class="fa-solid fa-clapperboard"></i>
+        </div>
+    </div>
+
+    <div class="result-info">
+        <div class="result-title" id="videoTitleDisplay"></div>
+        <div class="result-status">✅ Video found!</div>
+        <button class="save-btn" id="saveBtn">⬇️ Save to Gallery ⬇️</button>
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="progress-label" id="progressLabel"></div>
+        </div>
+    </div>
+
+    <!-- BOTTOM ACTION BAR: shown only after successful download -->
+    <div class="thumb-action-bar" id="thumbActionBar" style="display:none;">
+        <button class="action-btn">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>AI Enhance</span>
+        </button>
+        <button class="action-btn">
+            <i class="fa-solid fa-image"></i>
+            <span>Set Wallpaper</span>
+        </button>
+        <button class="action-btn" id="batchDownloadBtn">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Batch Download</span>
+        </button>
+        <button class="action-btn" id="shareBtn">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Share</span>
+        </button>
+    </div>
+</div>
 
             </div>
         </div>
