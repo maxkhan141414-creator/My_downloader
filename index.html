@@ -136,6 +136,51 @@
         }
 
         /* Info strip below thumbnail */
+        /* ── THUMBNAIL OVERLAY (top-left icon+size, top-right reel icon) ── */
+        #thumbWrapper { position:relative; } /* already set, just confirming */
+
+        .thumb-overlay-tl {
+         position:absolute; top:10px; left:10px;
+         display:flex; align-items:center; gap:6px;
+         background:rgba(0,0,0,0.55);
+         border-radius:20px; padding:4px 10px 4px 6px;
+         backdrop-filter:blur(4px);
+         z-index:10;
+      }
+        .thumb-overlay-tl i { font-size:15px; }
+        .thumb-overlay-tl .size-text {
+         font-size:11px; font-weight:700; color:#fff;
+         letter-spacing:0.3px;
+      }
+
+        .thumb-overlay-tr {
+         position:absolute; top:10px; right:10px;
+         background:rgba(0,0,0,0.55);
+         border-radius:8px; padding:5px 7px;
+         backdrop-filter:blur(4px);
+         z-index:10;
+      }
+        .thumb-overlay-tr i { font-size:16px; color:#fff; }
+
+       /* ── BOTTOM ACTION BAR ── */
+        .thumb-action-bar {
+         display:flex;
+         justify-content:space-around;
+         align-items:center;
+         background:#0d1b2e;
+         border-top:1px solid rgba(56,189,248,0.08);
+         padding:10px 8px;
+     }
+        .action-btn {
+         display:flex; flex-direction:column;
+         align-items:center; gap:5px;
+         cursor:pointer; background:none; border:none;
+         color:#94a3b8; flex:1;
+         transition:color 0.2s;
+      }
+        .action-btn i { font-size:22px; }
+        .action-btn span { font-size:10px; font-weight:600; letter-spacing:0.3px; }
+        .action-btn:active { color:#fff; }
         .result-info { padding:12px 14px 14px; }
         .result-title { font-size:11px; color:#64748b; margin-bottom:3px; word-break:break-all; }
         .result-status { font-size:13px; color:#22c55e; font-weight:700; margin-bottom:12px; }
