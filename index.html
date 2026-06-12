@@ -978,23 +978,56 @@ function saveToHistory(name, url, img) {
 /* ══════════════════════════════════════════
    SHARE HELPER (Web Share API with clipboard fallback)
 ══════════════════════════════════════════ */
-async function triggerShare() {
-    if (!fetchedVideoUrl) return;
-    if (navigator.share) {
-        try { await navigator.share({ title: currentVideoTitle, url: fetchedVideoUrl }); }
-        catch (e) { /* cancelled by user */ }
+// Share handler — called synchronously inside click to preserve user-gesture trust
+function handleShare() {
+    if (!fetchedVideoUrl) {
+        showNotification('⚠️ No video found yet. Fetch first.');
+        return;
+    }
+    // navigator.share must be called directly (no await gap before it)
+    if (typeof navigator.share === 'function') {
+        navigator.share({
+            title: currentVideoTitle || 'Video',
+            url:   fetchedVideoUrl
+        }).catch(function (e) {
+            // User cancelled or share failed — silent
+            if (e.name !== 'AbortError') {
+                copyFallback();
+            }
+        });
     } else {
-        await navigator.clipboard.writeText(fetchedVideoUrl).catch(() => {});
-        showNotification('🔗 Video link copied!');
+        copyFallback();
     }
 }
 
-// Share FAB (above Save button)
-shareFab.addEventListener('click', triggerShare);
+function copyFallback() {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(fetchedVideoUrl)
+            .then(function () { showNotification('🔗 Link copied to clipboard!'); })
+            .catch(function () { showNotification('📋 Could not copy. Try manually.'); });
+    } else {
+        // Last resort for very old browsers
+        const ta = document.createElement('textarea');
+        ta.value = fetchedVideoUrl;
+        ta.style.position = 'fixed';
+        ta.style.opacity  = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            showNotification('🔗 Link copied!');
+        } catch (e) {
+            showNotification('📋 Could not copy link.');
+        }
+        document.body.removeChild(ta);
+    }
+}
 
-// Share inside action bar
-document.getElementById('shareActionBtn').addEventListener('click', triggerShare);
+// Attach to share FAB (above Save button)
+document.getElementById('shareFab').addEventListener('click', handleShare);
 
+// Attach to share button inside action bar
+document.getElementById('shareActionBtn').addEventListener('click', handleShare);
 /* ══════════════════════════════════════════
    BOTTOM NAVIGATION TABS
 ══════════════════════════════════════════ */
