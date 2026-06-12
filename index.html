@@ -934,6 +934,10 @@ async function downloadVideo() {
                 saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
                 thumbActionBar.style.display = 'flex';
                 updatePlatformOverlayIcon();
+                // Fallback: no blob available, so show estimated size from Content-Length header
+                // or just clear the loading text gracefully
+                thumbSizeText.textContent   = 'Saved ✓';
+                thumbSizeText.style.display = 'inline';
             } catch (err2) {
                 try {
                     window.open(fetchedVideoUrl, '_blank');
