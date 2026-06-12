@@ -641,10 +641,10 @@ function showResultState(imgUrl) {
     thumbOverlayTR.style.display = 'block';
     shareFab.style.display       = 'flex'; // share button visible after fetch
 
-    // FIX: size text starts hidden — no "-- MB" shown
-    thumbSizeText.style.display  = 'none';
-    thumbSizeText.textContent    = '';
-
+    // Show a loading indicator until actual size is known after download
+    thumbSizeText.textContent   = 'Loading...';
+    thumbSizeText.style.display = 'inline';
+    
     updatePlatformOverlayIcon(); // correct icon for current platform
 
     if (imgUrl && imgUrl.startsWith('http')) {
