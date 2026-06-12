@@ -905,8 +905,9 @@ async function downloadVideo() {
         // ── POST-DOWNLOAD UI UPDATES ──
         // FIX: Show actual file size (no minus sign, no placeholder text)
         const sizeMB = (blob.size / 1024 / 1024).toFixed(2);
-        thumbSizeText.textContent   = `${sizeMB} MB`;
-        thumbSizeText.style.display = 'inline'; // reveal size text now
+        thumbSizeText.textContent   = sizeMB + ' MB';
+        thumbSizeText.style.display = 'inline';
+        thumbSizeText.style.fontWeight = '700';
 
         // FIX: Ensure correct platform icon (guards against any stale state)
         updatePlatformOverlayIcon();
