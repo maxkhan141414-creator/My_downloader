@@ -1243,26 +1243,242 @@ document.getElementById('shareActionBtn').addEventListener('click', handleShare)
 /* ══════════════════════════════════════════
    BOTTOM NAVIGATION TABS
 ══════════════════════════════════════════ */
-document.querySelectorAll('.nav-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const tabName = tab.dataset.tab;
-        if (tabName === 'premium') {
-            showNotification('👑 Local Ad-Free plan coming soon!');
-        } else if (tabName === 'downloads') {
-            const h = JSON.parse(localStorage.getItem('downloader_history') || '[]');
-            showNotification(h.length > 0 ? `📁 ${h.length} video(s) in history` : '📁 No downloads yet');
-        } else if (tabName === 'settings') {
-            showNotification('⚙️ Settings coming soon!');
-        }
-        if (tabName !== 'home') {
-            setTimeout(() => {
-                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-                document.querySelector('.nav-tab[data-tab="home"]').classList.add('active');
-            }, 1600);
-        }
+/* ══════════════════════════════════════════
+   DOWNLOADS PAGE — state & rendering
+══════════════════════════════════════════ */
+const scrollContent   = document.querySelector('.scroll-content');
+const downloadsPage   = document.getElementById('downloadsPage');
+const dlContent       = document.getElementById('dlContent');
+let   dlActiveFilter  = 'all';  // currently selected filter tab
+let   openContextCard = null;   // reference to currently open context menu
+
+/** Switch between Home view and Downloads view */
+function showTab(tabName) {
+    // Update nav tab active states
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.querySelector(`.nav-tab[data-tab="${tabName}"]`).classList.add('active');
+
+    if (tabName === 'home') {
+        scrollContent.style.display  = 'block';
+        downloadsPage.style.display  = 'none';
+    } else if (tabName === 'downloads') {
+        scrollContent.style.display  = 'none';
+        downloadsPage.style.display  = 'flex';
+        renderDownloadsPage(dlActiveFilter);
+    } else if (tabName === 'premium') {
+        scrollContent.style.display  = 'block';
+        downloadsPage.style.display  = 'none';
+        showNotification('👑 Local Ad-Free plan coming soon!');
+    } else if (tabName === 'settings') {
+        scrollContent.style.display  = 'block';
+        downloadsPage.style.display  = 'none';
+        showNotification('⚙️ Settings coming soon!');
+    }
+}
+
+/** Render the downloads grid or empty state into #dlContent */
+function renderDownloadsPage(filter) {
+    dlActiveFilter = filter;
+
+    // Update filter button states
+    document.querySelectorAll('.dl-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
     });
+
+    const history = JSON.parse(localStorage.getItem('downloader_history') || '[]');
+
+    // Filter items — currently "video" matches all since we only download videos;
+    // photo/music reserved for future expansion
+    const filtered = history.filter(item => {
+        if (filter === 'all')   return true;
+        if (filter === 'video') return true; // all history items are video for now
+        return false; // photo / music: none yet
+    });
+
+    if (filtered.length === 0) {
+        dlContent.innerHTML = '';
+        dlContent.appendChild(buildEmptyState());
+        return;
+    }
+
+    // Build grid
+    const grid = document.createElement('div');
+    grid.className = 'dl-grid';
+
+    filtered.forEach((item, index) => {
+        grid.appendChild(buildDlCard(item, index));
+    });
+
+    dlContent.innerHTML = '';
+    dlContent.appendChild(grid);
+}
+
+/** Build the empty state element */
+function buildEmptyState() {
+    const wrap = document.createElement('div');
+    wrap.className = 'dl-empty';
+    wrap.innerHTML = `
+        <div class="dl-empty-icon">
+            <i class="fa-solid fa-folder-open"></i>
+        </div>
+        <div class="dl-empty-label">No history</div>
+        <button class="dl-how-btn" onclick="showHowToDownload()">
+            <i class="fa-solid fa-circle-play"></i>&nbsp; How to Download
+        </button>
+    `;
+    return wrap;
+}
+
+/** Show a brief how-to notification (expand into a modal later if needed) */
+function showHowToDownload() {
+    showNotification('💡 Copy a Reel/FB video link → Paste → Tap Download Video!', 3500);
+}
+
+/** Build a single download history card */
+function buildDlCard(item, index) {
+    const card = document.createElement('div');
+    card.className = 'dl-card';
+
+    // Platform icon config
+    const isIG = item.platform === 'instagram';
+    const platIconClass  = isIG ? 'fa-brands fa-instagram' : 'fa-brands fa-facebook-f';
+    const platIconColor  = isIG ? '#e91e8c' : '#1877f2';
+
+    // Thumbnail
+    if (item.img && item.img.startsWith('http')) {
+        const img = document.createElement('img');
+        img.className = 'dl-card-thumb';
+        img.alt = item.name || 'Thumbnail';
+        img.onerror = function () {
+            img.style.display = 'none';
+            fallbackEl.style.display = 'flex';
+        };
+        // Use wsrv.nl proxy (same as main player — bypasses CDN block)
+        img.src = `https://wsrv.nl/?url=${encodeURIComponent(item.img)}&n=-1&w=300&output=jpg`;
+        card.appendChild(img);
+    }
+
+    // Fallback icon (shown if no img or img errors)
+    const fallbackEl = document.createElement('div');
+    fallbackEl.className = 'dl-card-thumb-fallback';
+    fallbackEl.innerHTML = '<i class="fa-solid fa-film"></i>';
+    if (item.img && item.img.startsWith('http')) fallbackEl.style.display = 'none';
+    card.appendChild(fallbackEl);
+
+    // Platform badge
+    const platBadge = document.createElement('div');
+    platBadge.className = 'dl-card-platform';
+    platBadge.innerHTML = `<i class="${platIconClass}" style="color:${platIconColor};"></i>`;
+    card.appendChild(platBadge);
+
+    // Three-dots menu button
+    const menuBtn = document.createElement('button');
+    menuBtn.className = 'dl-card-menu';
+    menuBtn.innerHTML = '<i class="fa-solid fa-ellipsis-vertical"></i>';
+    menuBtn.setAttribute('aria-label', 'Options');
+    card.appendChild(menuBtn);
+
+    // Context menu popup
+    const ctxMenu = document.createElement('div');
+    ctxMenu.className = 'dl-context-menu';
+    ctxMenu.innerHTML = `
+        <button class="dl-ctx-item" data-action="share">
+            <i class="fa-solid fa-share-nodes"></i> Share Link
+        </button>
+        <button class="dl-ctx-item danger" data-action="delete">
+            <i class="fa-solid fa-trash"></i> Delete
+        </button>
+    `;
+    card.appendChild(ctxMenu);
+
+    // Bottom title bar
+    const bottom = document.createElement('div');
+    bottom.className = 'dl-card-bottom';
+    bottom.innerHTML = `<div class="dl-card-title">${item.name || 'Video'}</div>`;
+    card.appendChild(bottom);
+
+    // ── Event: three-dots toggle
+    menuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        // Close any other open menu first
+        if (openContextCard && openContextCard !== ctxMenu) {
+            openContextCard.classList.remove('open');
+        }
+        ctxMenu.classList.toggle('open');
+        openContextCard = ctxMenu.classList.contains('open') ? ctxMenu : null;
+    });
+
+    // ── Event: context menu actions
+    ctxMenu.querySelectorAll('.dl-ctx-item').forEach(btn => {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            ctxMenu.classList.remove('open');
+            openContextCard = null;
+            const action = btn.dataset.action;
+
+            if (action === 'share') {
+                // Share the video URL from history
+                const urlToShare = item.url;
+                if (typeof navigator.share === 'function') {
+                    navigator.share({ title: item.name || 'Video', url: urlToShare })
+                        .catch(() => copyToClipboard(urlToShare));
+                } else {
+                    copyToClipboard(urlToShare);
+                }
+            } else if (action === 'delete') {
+                deleteHistoryItem(item.url);
+                renderDownloadsPage(dlActiveFilter); // re-render
+                showNotification('🗑️ Removed from history');
+            }
+        });
+    });
+
+    return card;
+}
+
+/** Copy text to clipboard with toast */
+function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+            .then(() => showNotification('🔗 Link copied to clipboard!'))
+            .catch(() => showNotification('📋 Could not copy link.'));
+    } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); showNotification('🔗 Link copied!'); }
+        catch (e) { showNotification('📋 Could not copy link.'); }
+        document.body.removeChild(ta);
+    }
+}
+
+/** Remove a single item from localStorage history by URL */
+function deleteHistoryItem(url) {
+    try {
+        let h = JSON.parse(localStorage.getItem('downloader_history') || '[]');
+        h = h.filter(x => x.url !== url);
+        localStorage.setItem('downloader_history', JSON.stringify(h));
+    } catch (e) {}
+}
+
+/* Close any open context menu on outside tap */
+document.addEventListener('click', function () {
+    if (openContextCard) {
+        openContextCard.classList.remove('open');
+        openContextCard = null;
+    }
+});
+
+/* ── Nav tab click listener (replaces old one) ── */
+document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => showTab(tab.dataset.tab));
+});
+
+/* ── Filter bar click listener ── */
+document.querySelectorAll('.dl-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => renderDownloadsPage(btn.dataset.filter));
 });
 
 /* ══════════════════════════════════════════
