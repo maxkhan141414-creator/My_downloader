@@ -615,6 +615,21 @@
         </div>
 
     </div><!-- /scroll-content -->
+     <!-- ── DOWNLOADS PAGE (hidden by default, shown when Downloads tab active) ── -->
+    <div id="downloadsPage">
+
+        <!-- Filter categories -->
+        <div class="dl-filter-bar">
+            <button class="dl-filter-btn active" data-filter="all">All</button>
+            <button class="dl-filter-btn" data-filter="video">Video</button>
+            <button class="dl-filter-btn" data-filter="photo">Photo</button>
+            <button class="dl-filter-btn" data-filter="music">Music</button>
+        </div>
+
+        <!-- Content area: empty state OR grid — rendered by JS -->
+        <div id="dlContent"></div>
+
+    </div>
 
     <!-- ── GLOBAL BOTTOM NAV (4 tabs) ── -->
     <nav class="bottom-nav" id="bottomNav">
