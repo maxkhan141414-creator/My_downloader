@@ -1266,22 +1266,26 @@ function showTab(tabName) {
     document.querySelector(`.nav-tab[data-tab="${tabName}"]`).classList.add('active');
 
     if (tabName === 'home') {
-        scrollContent.style.display  = 'block';
-        downloadsPage.style.display  = 'none';
+        scrollContent.style.display = 'block';
+        downloadsPage.style.display = 'none';
+        document.querySelector('.top-header').style.display = 'flex';
     } else if (tabName === 'downloads') {
-        scrollContent.style.display  = 'none';
-        downloadsPage.style.display  = 'flex';
+        scrollContent.style.display = 'none';
+        downloadsPage.style.display = 'flex';
         renderDownloadsPage(dlActiveFilter);
+        document.querySelector('.top-header').style.display = 'none';
     } else if (tabName === 'premium') {
-        scrollContent.style.display  = 'block';
-        downloadsPage.style.display  = 'none';
+        scrollContent.style.display = 'block';
+        downloadsPage.style.display = 'none';
+        document.querySelector('.top-header').style.display = 'flex';
         showNotification('👑 Local Ad-Free plan coming soon!');
     } else if (tabName === 'settings') {
-        scrollContent.style.display  = 'block';
-        downloadsPage.style.display  = 'none';
+        scrollContent.style.display = 'block';
+        downloadsPage.style.display = 'none';
+        document.querySelector('.top-header').style.display = 'flex';
         showNotification('⚙️ Settings coming soon!');
     }
-}
+
 
 /** Render the downloads grid or empty state into #dlContent */
 function renderDownloadsPage(filter) {
