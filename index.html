@@ -1324,13 +1324,11 @@ function renderDownloadsPage(filter) {
 
     const history = JSON.parse(localStorage.getItem('downloader_history') || '[]');
 
-    // Filter items — currently "video" matches all since we only download videos;
-    // photo/music reserved for future expansion
     const filtered = history.filter(item => {
-        if (filter === 'all')   return true;
-        if (filter === 'video') return true; // all history items are video for now
-        return false; // photo / music: none yet
-    });
+    const type = getMediaType(item);
+    if (filter === 'all') return true;
+    return type === filter;
+});
 
     if (filtered.length === 0) {
         dlContent.innerHTML = '';
