@@ -1556,6 +1556,17 @@ if ('serviceWorker' in navigator) {
             .catch(e => console.warn('SW failed:', e));
     });
 }
+
+/** URL/name se media type detect karta hai: video, photo, ya music */
+function getMediaType(item) {
+    const url = (item.url || '').toLowerCase();
+    const name = (item.name || '').toLowerCase();
+    const combined = url + name;
+
+    if (/\.(mp3|m4a|wav|aac|ogg)(\?|$)/.test(combined)) return 'music';
+    if (/\.(jpg|jpeg|png|webp|gif)(\?|$)/.test(combined)) return 'photo';
+    return 'video'; // default — most reel/fb downloads are video
+}
 </script>
 </body>
 </html>
