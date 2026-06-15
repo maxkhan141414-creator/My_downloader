@@ -1078,15 +1078,39 @@ function renameHistoryItem(url, newName) {
     } catch (e) {}
 }
 
-/** URL/name se media type detect karta hai: video, photo, ya music */
+/**
+ * History item ka media type return karta hai.
+ * Priority: 1) saved 'type' field (sabse reliable, download ke time set hota hai)
+ *           2) URL/name extension guess (purane items ke liye fallback)
+ */
 function getMediaType(item) {
-    const url  = (item.url  || '').toLowerCase();
-    const name = (item.name || '').toLowerCase();
-    const combined = url + name;
+    // Naye items mein already 'type' field save hota hai — usi ko use karo
+    if (item.type === 'photo' || item.type === 'music' || item.type === 'video') {
+        return item.type;
+    }
+    // Purane items (jinme 'type' nahi hai) ke liye URL/name se guess karo
+    return guessTypeFromUrl(item.url, item.name);
+}
 
-    if (/\.(mp3|m4a|wav|aac|ogg)(\?|$)/.test(combined))   return 'music';
-    if (/\.(jpg|jpeg|png|webp|gif)(\?|$)/.test(combined)) return 'photo';
-    return 'video';
+/** Content-Type (MIME) header se media type detect karta hai */
+function detectTypeFromMime(mimeType) {
+    if (!mimeType) return 'video';
+    const mime = mimeType.toLowerCase();
+    if (mime.startsWith('image/')) return 'photo';
+    if (mime.startsWith('audio/')) return 'music';
+    if (mime.startsWith('video/')) return 'video';
+    return 'video'; // default — Instagram/Facebook reels almost always video
+}
+
+/** URL ya filename extension se media type guess karta hai (fallback) */
+function guessTypeFromUrl(url, name) {
+    const combined = ((url || '') + (name || '')).toLowerCase();
+
+    if (/\.(mp3|m4a|wav|aac|ogg|opus)(\?|$)/.test(combined))        return 'music';
+    if (/\.(jpg|jpeg|png|webp|gif|bmp)(\?|$)/.test(combined))       return 'photo';
+    if (/\.(mp4|mov|webm|mkv|3gp|avi)(\?|$)/.test(combined))        return 'video';
+
+    return 'video'; // Instagram/Facebook ka default media reel/video hota hai
 }
 
 /* ══════════════════════════════════════════
