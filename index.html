@@ -994,8 +994,8 @@ async function downloadVideo() {
 
         showSuccess(`✅ ${fileName} saved to Gallery!`, 'Check your Downloads / Gallery folder.');
         incrementDownloadCount();
-        saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
-
+        // 👇 NAYA 4th argument: detected media type pass karo
+        saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg, detectedType);
         const sizeMB = (blob.size / 1024 / 1024).toFixed(2);
         thumbSizeText.textContent      = sizeMB + ' MB';
         thumbSizeText.style.display    = 'inline';
