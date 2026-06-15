@@ -1020,7 +1020,8 @@ async function downloadVideo() {
                 saveBtn.textContent       = '✅ Download started!';
                 showSuccess('✅ Video download started!', 'Check Files app → Downloads.');
                 incrementDownloadCount();
-                saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg);
+                // 👇 Fallback case mein URL extension se guess karo (blob nahi mila)
+                saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg, guessTypeFromUrl(fetchedVideoUrl));
                 thumbActionBar.style.display = 'flex';
                 updatePlatformOverlayIcon();
                 thumbSizeText.textContent   = 'Saved ✓';
