@@ -978,9 +978,11 @@ async function downloadVideo() {
         if (blob.size < 5000) throw new Error('BLOB_TOO_SMALL');
         if (blob.type?.includes('text/html')) throw new Error('HTML_BLOB');
 
+        // 👇 NAYA: blob ke Content-Type se actual media type detect karo
+        const detectedType = detectTypeFromMime(blob.type);
+
         progressBar.style.width   = '90%';
         progressLabel.textContent = 'Saving to Gallery...';
-
         const blobUrl = URL.createObjectURL(new Blob([blob], { type:'video/mp4' }));
         const a = Object.assign(document.createElement('a'), { href:blobUrl, download:fileName, style:'display:none' });
         document.body.appendChild(a); a.click();
