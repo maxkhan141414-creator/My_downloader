@@ -1047,12 +1047,12 @@ async function downloadVideo() {
 /* ══════════════════════════════════════════
    HISTORY (saved downloads)
 ══════════════════════════════════════════ */
-function saveToHistory(name, url, img) {
+function saveToHistory(name, url, img, mediaType) {
     if (!historyEnabled) return;
     try {
         const h = JSON.parse(localStorage.getItem('downloader_history') || '[]');
         if (!h.some(x => x.url === url)) {
-            h.unshift({ name, url, img, platform: currentPlatform, date: new Date().toISOString() });
+            h.unshift({ name, url, img, platform: currentPlatform, date: new Date().toISOString(), type: mediaType || 'video' });
             if (h.length > 30) h.pop();
             localStorage.setItem('downloader_history', JSON.stringify(h));
         }
