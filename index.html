@@ -1039,11 +1039,12 @@ async function downloadVideo() {
         progressLabel.textContent = 'Fetching video...';
 
         const ctrl = new AbortController();
-        const tid  = setTimeout(() => ctrl.abort(), 60000);
-        const resp = await fetch(fetchedVideoUrl, {
-            signal: ctrl.signal, mode: 'cors',
-            headers: { 'Accept': 'video/mp4,video/*,*/*' }
-        });
+const tid  = setTimeout(() => ctrl.abort(), 90000);
+const resp = await fetch(fetchedVideoUrl, {
+    signal: ctrl.signal,
+    headers: { 'Accept': 'video/mp4,video/*,*/*,image/*,audio/*' },
+    cache: 'no-store'   // cache se bypass karke fresh download
+});
         clearTimeout(tid);
 
         if (!resp.ok) throw new Error('HTTP_' + resp.status);
