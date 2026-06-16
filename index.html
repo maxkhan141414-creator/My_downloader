@@ -1058,22 +1058,25 @@ const resp = await fetch(fetchedVideoUrl, {
         let blob;
 
         if (contentLength) {
-            const total  = parseInt(contentLength);
-            const reader = resp.body.getReader();
-            const chunks = [];
-            let received = 0;
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                chunks.push(value);
-                received += value.length;
-                const pct = 40 + Math.round((received / total) * 45);
-                progressBar.style.width   = pct + '%';
-                progressLabel.textContent = `${(received/1024/1024).toFixed(1)} MB / ${(total/1024/1024).toFixed(1)} MB`;
-            }
-            blob = new Blob(chunks, { type:'video/mp4' });
-        } else {
-            blob = await resp.blob();
+    const total  = parseInt(contentLength);
+    const reader = resp.body.getReader();
+    // Pre-allocate buffer ek hi baar mein — faster than pushing chunks
+    const buffer = new Uint8Array(total);
+    let received = 0;
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer.set(value, received);
+        received += value.length;
+        const pct = 40 + Math.round((received / total) * 45);
+        progressBar.style.width   = pct + '%';
+        // Speed bhi dikhao
+        progressLabel.textContent = `${(received/1024/1024).toFixed(1)} / ${(total/1024/1024).toFixed(1)} MB`;
+    }
+    blob = new Blob([buffer], { type: resp.headers.get('Content-Type') || 'video/mp4' });
+} else {
+    // Content-Length nahi mila — stream directly
+    blob = await resp.blob();
         }
 
         if (blob.size < 5000) throw new Error('BLOB_TOO_SMALL');
