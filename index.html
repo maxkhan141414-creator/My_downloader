@@ -968,7 +968,7 @@ async function startDownload() {
         btnText.textContent = 'Downloading...';
         try {
             const ctrl = new AbortController();
-            const tid  = setTimeout(() => ctrl.abort(), 8000);
+            const tid  = setTimeout(() => ctrl.abort(), 12000);
             const opts = { method: cfg.method, headers: cfg.headers, signal: ctrl.signal };
             if (cfg.method === 'POST' && cfg.body) opts.body = cfg.body;
             const resp = await fetch(cfg.url, opts);
