@@ -16,7 +16,7 @@
             padding-bottom:62px;
         }
 
-        /* TOP HEADER */
+        /* ── TOP HEADER ── */
         .top-header {
             display:flex; align-items:center;
             padding:11px 14px 10px; background:#070f1e; gap:10px;
@@ -28,20 +28,19 @@
         .app-name-main { font-size:13px; font-weight:800; color:#fff; line-height:1.3; word-break:break-word; display:block; }
         .app-name-sub  { font-size:10px; font-weight:500; color:#7dd3fc; display:block; margin-top:1px; }
         .header-icons  { display:flex; align-items:center; gap:8px; flex-shrink:0; margin-left:auto; }
-
         .btn-gift { width:36px; height:36px; border-radius:10px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:20px; background:transparent; padding:0; }
         .btn-vip  { display:flex; align-items:center; cursor:pointer; border:none; background:none; padding:0; }
         .vip-shape { background:linear-gradient(145deg,#1a6fd4,#2389f5,#1557b0); border-radius:20px; padding:6px 12px 6px 8px; display:flex; align-items:center; gap:5px; box-shadow:0 2px 8px rgba(33,137,245,0.5),inset 0 1px 0 rgba(255,255,255,0.25),inset 0 -1px 0 rgba(0,0,0,0.2); }
         .vip-ad-pill { background:linear-gradient(135deg,#ff3333,#cc0000); border-radius:5px; padding:2px 5px; font-size:9px; font-weight:900; color:#fff; letter-spacing:0.3px; }
-        .vip-text    { font-size:13px; font-weight:900; color:#fff; letter-spacing:0.5px; text-shadow:0 1px 2px rgba(0,0,0,0.3); }
+        .vip-text { font-size:13px; font-weight:900; color:#fff; letter-spacing:0.5px; text-shadow:0 1px 2px rgba(0,0,0,0.3); }
         .btn-ig { width:36px; height:36px; border-radius:10px; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; background:linear-gradient(135deg,#feda77 0%,#f58529 25%,#dd2a7b 50%,#8134af 75%,#515bd4 100%); box-shadow:0 2px 8px rgba(221,42,123,0.45); position:relative; overflow:hidden; }
         .btn-ig::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent); border-radius:10px; }
         .btn-ig i { font-size:20px; color:#fff; filter:drop-shadow(0 1px 2px rgba(0,0,0,0.3)); position:relative; z-index:1; }
 
-        /* SCROLLABLE CONTENT */
+        /* ── SCROLLABLE CONTENT ── */
         .scroll-content { flex:1; overflow-y:auto; padding:12px 14px 0; }
 
-        /* PLATFORM BUTTONS */
+        /* ── PLATFORM BUTTONS ── */
         .platform-section { margin-bottom:12px; }
         .platform-row { display:flex; gap:10px; }
         .platform-btn { flex:1; padding:10px 8px; border-radius:14px; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; transition:all 0.2s; background:#0d1b2e; border:2px solid transparent; }
@@ -53,7 +52,7 @@
         .platform-btn span { font-size:11px; font-weight:800; letter-spacing:0.8px; color:#94a3b8; }
         .platform-btn.active span { color:#fff; }
 
-        /* INPUT BOX */
+        /* ── INPUT BOX ── */
         .input-section { margin-bottom:12px; }
         .input-box { background:#0d1b2e; border:1.5px solid rgba(56,189,248,0.2); border-radius:16px; padding:13px 13px 10px; }
         .input-row { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
@@ -61,14 +60,14 @@
         .input-row input::placeholder { color:#3d5070; }
         .input-row input:focus { color:#fff; }
         .paste-row { display:flex; justify-content:flex-end; align-items:center; height:36px; position:relative; }
-        .paste-btn, .clear-x-btn { transition:opacity 0.2s ease, transform 0.2s ease, visibility 0.2s; }
+        .paste-btn,.clear-x-btn { transition:opacity 0.2s ease,transform 0.2s ease,visibility 0.2s; }
         .paste-btn { background:linear-gradient(135deg,#1d4ed8,#3b82f6); border:none; color:#fff; padding:8px 22px; border-radius:30px; font-size:12px; font-weight:700; letter-spacing:1px; cursor:pointer; box-shadow:0 3px 10px rgba(59,130,246,0.40); min-height:34px; display:inline-flex; align-items:center; justify-content:center; }
         .clear-x-btn { width:34px; height:34px; background:rgba(239,68,68,0.12); border:1.5px solid rgba(239,68,68,0.5); border-radius:40px; display:inline-flex; align-items:center; justify-content:center; cursor:pointer; color:#ef4444; font-size:16px; font-weight:600; transition:all 0.2s ease; }
         .clear-x-btn:active { background:rgba(239,68,68,0.35); transform:scale(0.92); }
         .paste-btn.hide-paste   { opacity:0; visibility:hidden; transform:scale(0.85); pointer-events:none; position:absolute; right:0; }
         .clear-x-btn.hide-clear { opacity:0; visibility:hidden; transform:scale(0.85); pointer-events:none; position:absolute; right:0; }
 
-        /* DOWNLOAD BUTTON */
+        /* ── DOWNLOAD BUTTON ── */
         .download-section { margin-bottom:12px; }
         .download-btn { width:100%; padding:17px; background:linear-gradient(90deg,#00b4ff,#0088ff,#0055ff); border:none; border-radius:50px; color:#fff; font-size:16px; font-weight:800; letter-spacing:0.8px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 0 28px rgba(0,136,255,0.45); transition:all 0.2s; position:relative; overflow:hidden; }
         .download-btn::before { content:''; position:absolute; top:0; left:0; right:0; height:50%; background:rgba(255,255,255,0.1); border-radius:50px 50px 0 0; }
@@ -77,65 +76,38 @@
         .loader { display:none; animation:spin 1s linear infinite; }
         @keyframes spin { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }
 
-        /* PREVIEW BOX */
+        /* ── PREVIEW BOX ── */
         .preview-section { margin-bottom:12px; }
         .preview-box { background:#0d1b2e; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,0.05); }
-
         #previewPlaceholder { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:36px; gap:10px; min-height:180px; }
         .film-icon-wrap { width:72px; height:72px; background:rgba(56,189,248,0.08); border-radius:14px; display:flex; align-items:center; justify-content:center; }
         .film-icon-wrap i { font-size:34px; color:rgba(56,189,248,0.4); }
         .loading-text { font-size:13px; color:#3d5070; font-weight:500; text-align:center; }
-
         #resultContent { display:none; flex-direction:column; width:100%; }
-
         #thumbWrapper { width:100%; height:215px; background:linear-gradient(135deg,#0a1828,#0d2245); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; }
         #thumbPreviewImg { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; display:none; }
         #thumbFallbackIcon { font-size:54px; color:rgba(56,189,248,0.18); display:none; }
-
-        .thumb-overlay-tl {
-            position:absolute; top:10px; left:10px; display:none;
-            align-items:center; gap:6px;
-            background:rgba(0,0,0,0.62); border-radius:20px;
-            padding:4px 10px 4px 7px; backdrop-filter:blur(4px); z-index:10;
-        }
+        .thumb-overlay-tl { position:absolute; top:10px; left:10px; display:none; align-items:center; gap:6px; background:rgba(0,0,0,0.62); border-radius:20px; padding:4px 10px 4px 7px; backdrop-filter:blur(4px); z-index:10; }
         .thumb-overlay-tl i { font-size:15px; }
         .size-text { font-size:11px; font-weight:700; color:#fff; letter-spacing:0.3px; display:none; }
-
         .thumb-overlay-tr { position:absolute; top:10px; right:10px; display:none; background:rgba(0,0,0,0.62); border-radius:8px; padding:5px 7px; backdrop-filter:blur(4px); z-index:10; }
         .thumb-overlay-tr i { font-size:16px; color:#fff; }
-
         .result-info { padding:12px 14px 14px; position:relative; }
         .result-title  { font-size:11px; color:#64748b; margin-bottom:3px; word-break:break-all; }
         .result-status { font-size:13px; color:#22c55e; font-weight:700; margin-bottom:12px; }
-
-        .share-fab {
-            position:absolute;
-            top:10px; right:14px;
-            width:38px; height:38px;
-            background:linear-gradient(135deg,#1d4ed8,#3b82f6);
-            border:none; border-radius:50%;
-            display:none;
-            align-items:center; justify-content:center;
-            cursor:pointer;
-            box-shadow:0 4px 14px rgba(59,130,246,0.45);
-            color:#fff; font-size:16px;
-            transition:transform 0.15s, box-shadow 0.15s;
-            z-index:5;
-        }
+        .share-fab { position:absolute; top:10px; right:14px; width:38px; height:38px; background:linear-gradient(135deg,#1d4ed8,#3b82f6); border:none; border-radius:50%; display:none; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 14px rgba(59,130,246,0.45); color:#fff; font-size:16px; transition:transform 0.15s,box-shadow 0.15s; z-index:5; }
         .share-fab:active { transform:scale(0.9); box-shadow:0 2px 8px rgba(59,130,246,0.3); }
-
         .save-btn { width:100%; background:linear-gradient(90deg,#22c55e,#16a34a); border:none; color:#fff; padding:13px; border-radius:22px; font-weight:700; font-size:14px; cursor:pointer; box-shadow:0 4px 14px rgba(34,197,94,0.28); }
         .progress-container { display:none; width:100%; background:rgba(255,255,255,0.08); border-radius:10px; margin-top:10px; overflow:hidden; }
         .progress-bar  { width:0%; height:6px; background:linear-gradient(90deg,#22c55e,#3b82f6); transition:width 0.4s ease; }
-        .progress-label{ font-size:11px; color:#64748b; margin-top:5px; text-align:center; }
-
+        .progress-label { font-size:11px; color:#64748b; margin-top:5px; text-align:center; }
         .thumb-action-bar { display:none; justify-content:space-around; align-items:center; background:#0a1628; border-top:1px solid rgba(56,189,248,0.08); padding:10px 8px; }
         .action-btn { display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer; background:none; border:none; color:#94a3b8; flex:1; transition:color 0.2s; }
         .action-btn i    { font-size:21px; }
         .action-btn span { font-size:10px; font-weight:600; letter-spacing:0.3px; }
         .action-btn:active { color:#fff; }
 
-        /* VIP BANNER */
+        /* ── VIP BANNER ── */
         .vip-banner { background:linear-gradient(135deg,#0d1b2e,#0a1525); border:1px solid rgba(56,189,248,0.15); border-radius:16px; padding:14px; margin-bottom:12px; display:flex; align-items:center; gap:10px; cursor:pointer; position:relative; }
         .vip-ad-icon { width:46px; height:46px; background:linear-gradient(135deg,#1e3a6e,#0d2550); border-radius:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
         .vip-ad-icon i { font-size:22px; color:#3b82f6; }
@@ -146,51 +118,28 @@
         .get-btn { background:rgba(59,130,246,0.15); border:1px solid rgba(59,130,246,0.4); color:#60a5fa; padding:8px 14px; border-radius:18px; font-weight:700; font-size:12px; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:3px; }
         .vip-tag { position:absolute; top:12px; right:12px; background:linear-gradient(135deg,#1d4ed8,#3b82f6); border-radius:7px; padding:2px 7px; font-size:9px; font-weight:800; color:#fff; }
 
-        /* AD SPACE */
+        /* ── AD SPACE ── */
         .ad-space { background:rgba(0,0,0,0.35); border:1.5px dashed rgba(56,189,248,0.25); border-radius:18px; padding:36px 16px; margin:0 0 16px 0; text-align:center; min-height:120px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; }
         .ad-space i { font-size:28px; color:#3b82f6; opacity:0.6; }
         .ad-space p { font-size:12px; color:#7e8ca3; font-weight:500; }
         .ad-space .ad-hint { font-size:10px; color:#3d5070; }
 
-        /* BOTTOM NAVIGATION BAR */
-        .bottom-nav {
-            position:fixed; bottom:0; left:50%; transform:translateX(-50%);
-            width:100%; max-width:430px;
-            background:#070f1e;
-            border-top:1px solid rgba(56,189,248,0.10);
-            display:flex; z-index:200;
-            padding-bottom:env(safe-area-inset-bottom, 0px);
-        }
-        .nav-tab {
-            flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
-            padding:8px 4px 7px; cursor:pointer; background:none; border:none;
-            color:#4a5f7a; transition:color 0.2s; gap:3px;
-        }
+        /* ── BOTTOM NAV ── */
+        .bottom-nav { position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:430px; background:#070f1e; border-top:1px solid rgba(56,189,248,0.10); display:flex; z-index:200; padding-bottom:env(safe-area-inset-bottom,0px); }
+        .nav-tab { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px 4px 7px; cursor:pointer; background:none; border:none; color:#4a5f7a; transition:color 0.2s; gap:3px; }
         .nav-tab i    { font-size:20px; line-height:1; }
         .nav-tab span { font-size:8.5px; font-weight:700; letter-spacing:0.3px; text-align:center; line-height:1.2; }
         .nav-tab.active { color:#38bdf8; }
         .nav-tab:active { color:#fff; }
         .nav-tab.active::after { content:''; display:block; width:4px; height:4px; background:#38bdf8; border-radius:50%; margin-top:3px; }
-
         .nav-tab.premium-tab { position:relative; }
-        .premium-icon-wrap {
-            position:relative;
-            width:26px; height:26px;
-            display:flex; align-items:center; justify-content:center;
-        }
+        .premium-icon-wrap { position:relative; width:26px; height:26px; display:flex; align-items:center; justify-content:center; }
         .premium-icon-wrap .icon-person { font-size:20px; line-height:1; }
-        .premium-icon-wrap .icon-crown {
-            position:absolute;
-            top:-7px; left:50%;
-            transform:translateX(-50%);
-            font-size:11px;
-            color:#f59e0b;
-            filter:drop-shadow(0 0 3px rgba(245,158,11,0.7));
-        }
+        .premium-icon-wrap .icon-crown { position:absolute; top:-7px; left:50%; transform:translateX(-50%); font-size:11px; color:#f59e0b; filter:drop-shadow(0 0 3px rgba(245,158,11,0.7)); }
         .nav-tab.active .premium-icon-wrap .icon-person { color:#38bdf8; }
         .nav-tab.active .premium-icon-wrap .icon-crown  { color:#f59e0b; }
 
-        /* TOASTS */
+        /* ── TOASTS ── */
         .error-toast   { position:fixed; bottom:72px; left:50%; transform:translateX(-50%); background:linear-gradient(135deg,#7f1d1d,#991b1b); border:1px solid #ef4444; color:white; padding:12px 18px; border-radius:14px; font-size:13px; font-weight:600; z-index:99999; animation:slideUp 0.3s ease; max-width:340px; width:90%; box-shadow:0 4px 20px rgba(239,68,68,0.4); text-align:center; line-height:1.5; }
         .err-title { font-size:13px; font-weight:800; color:#fca5a5; margin-bottom:3px; display:block; }
         .err-sub   { font-size:11px; color:#fecaca; display:block; margin-top:2px; }
@@ -198,7 +147,7 @@
         .notification  { position:fixed; bottom:72px; left:50%; transform:translateX(-50%); background:#22c55e; color:#fff; padding:10px 20px; border-radius:40px; font-size:13px; font-weight:700; z-index:99999; animation:slideUp 0.3s ease; white-space:nowrap; }
         @keyframes slideUp { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
 
-        /* NO INTERNET OVERLAY */
+        /* ── NO INTERNET ── */
         .no-internet-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.94); z-index:30000; justify-content:center; align-items:center; }
         .no-internet-overlay.show { display:flex; }
         .no-internet-box { background:#0d1b2e; border:1px solid #ef4444; border-radius:24px; padding:32px; text-align:center; max-width:280px; }
@@ -208,161 +157,187 @@
 
         button:disabled { opacity:0.6; cursor:not-allowed; }
 
-        /* ══════ DOWNLOADS PAGE ══════ */
-        #downloadsPage {
-            display:none;
-            flex-direction:column;
-            flex:1;
-            overflow-y:auto;
-            padding:12px 14px 0;
-        }
+        /* ══════════════════════════════════════════
+           DOWNLOADS PAGE
+        ══════════════════════════════════════════ */
+        #downloadsPage { display:none; flex-direction:column; flex:1; overflow-y:auto; padding:12px 14px 0; }
 
-        .dl-search-bar {
-            display:flex; align-items:center; gap:10px;
-            background:#0d1b2e;
-            border:1.5px solid rgba(56,189,248,0.2);
-            border-radius:16px;
-            padding:12px 14px;
-            margin-bottom:12px;
-        }
+        .dl-search-bar { display:flex; align-items:center; gap:10px; background:#0d1b2e; border:1.5px solid rgba(56,189,248,0.2); border-radius:16px; padding:12px 14px; margin-bottom:12px; }
         .dl-search-bar i { color:#3d5070; font-size:15px; }
         .dl-search-bar input { flex:1; background:transparent; border:none; outline:none; color:#fff; font-size:14px; }
         .dl-search-bar input::placeholder { color:#3d5070; }
 
-        .dl-filter-bar {
-            display:flex; gap:8px; overflow-x:auto; padding-bottom:10px;
-            scrollbar-width:none; margin-bottom:12px;
-        }
+        .dl-filter-bar { display:flex; gap:8px; overflow-x:auto; padding-bottom:10px; scrollbar-width:none; margin-bottom:12px; }
         .dl-filter-bar::-webkit-scrollbar { display:none; }
-        .dl-filter-btn {
-            flex-shrink:0; padding:7px 18px; border-radius:20px;
-            border:1.5px solid rgba(56,189,248,0.2);
-            background:#0d1b2e; color:#64748b; font-size:12px; font-weight:700;
-            cursor:pointer; transition:all 0.2s; letter-spacing:0.5px;
-        }
-        .dl-filter-btn.active {
-            background:linear-gradient(135deg,#1d4ed8,#3b82f6);
-            border-color:#3b82f6; color:#fff;
-            box-shadow:0 3px 10px rgba(59,130,246,0.35);
-        }
+        .dl-filter-btn { flex-shrink:0; padding:7px 18px; border-radius:20px; border:1.5px solid rgba(56,189,248,0.2); background:#0d1b2e; color:#64748b; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; letter-spacing:0.5px; }
+        .dl-filter-btn.active { background:linear-gradient(135deg,#1d4ed8,#3b82f6); border-color:#3b82f6; color:#fff; box-shadow:0 3px 10px rgba(59,130,246,0.35); }
 
-        .dl-empty {
-            display:flex; flex-direction:column; align-items:center; justify-content:center;
-            padding:60px 20px; gap:14px; text-align:center;
-        }
-        .dl-empty-icon {
-            width:80px; height:80px; background:rgba(56,189,248,0.07);
-            border-radius:20px; display:flex; align-items:center; justify-content:center;
-        }
+        .dl-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; gap:14px; text-align:center; }
+        .dl-empty-icon { width:80px; height:80px; background:rgba(56,189,248,0.07); border-radius:20px; display:flex; align-items:center; justify-content:center; }
         .dl-empty-icon i { font-size:38px; color:rgba(56,189,248,0.35); }
         .dl-empty-label { font-size:15px; font-weight:700; color:#4a5f7a; }
-        .dl-how-btn {
-            padding:11px 28px; background:linear-gradient(135deg,#1d4ed8,#3b82f6);
-            border:none; border-radius:25px; color:#fff; font-size:13px; font-weight:700;
-            cursor:pointer; box-shadow:0 4px 14px rgba(59,130,246,0.35); letter-spacing:0.4px;
-        }
+        .dl-how-btn { padding:11px 28px; background:linear-gradient(135deg,#1d4ed8,#3b82f6); border:none; border-radius:25px; color:#fff; font-size:13px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(59,130,246,0.35); letter-spacing:0.4px; }
 
         .dl-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding-bottom:16px; }
-        .dl-card {
-            position:relative; border-radius:12px; overflow:hidden;
-            background:#0d1b2e; aspect-ratio:9/16; cursor:pointer;
-            border:1px solid rgba(255,255,255,0.04);
-        }
+        .dl-card { position:relative; border-radius:12px; overflow:hidden; background:#0d1b2e; aspect-ratio:9/16; cursor:pointer; border:1px solid rgba(255,255,255,0.04); }
 
-        .dl-card-thumb {
-            position:absolute; inset:0; width:100%; height:100%;
-            object-fit:cover; background:linear-gradient(135deg,#0a1828,#0d2245);
-        }
+        .dl-card-thumb { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:linear-gradient(135deg,#0a1828,#0d2245); }
         .dl-card-thumb-fallback { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
         .dl-card-thumb-fallback i { font-size:36px; color:rgba(56,189,248,0.18); }
 
-        .dl-card-bottom {
-            position:absolute; bottom:0; left:0; right:0;
-            background:linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-            padding:28px 8px 8px;
-        }
-        .dl-card-title {
-            font-size:10px; font-weight:700; color:#fff; line-height:1.3;
-            word-break:break-all; display:-webkit-box; -webkit-line-clamp:2;
-            -webkit-box-orient:vertical; overflow:hidden;
-        }
+        .dl-card-bottom { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 100%); padding:28px 8px 8px; }
+        .dl-card-title { font-size:10px; font-weight:700; color:#fff; line-height:1.3; word-break:break-all; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
 
-        .dl-card-platform {
-            position:absolute; top:7px; left:7px; width:22px; height:22px;
-            background:rgba(0,0,0,0.55); border-radius:6px;
-            display:flex; align-items:center; justify-content:center;
-            backdrop-filter:blur(3px); z-index:5;
-        }
+        .dl-card-platform { position:absolute; top:7px; left:7px; width:22px; height:22px; background:rgba(0,0,0,0.55); border-radius:6px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px); z-index:5; }
         .dl-card-platform i { font-size:12px; }
 
-        .dl-card-type {
-            position:absolute; top:7px; right:42px; width:24px; height:24px;
-            background:rgba(0,0,0,0.55); border-radius:6px;
-            display:flex; align-items:center; justify-content:center;
-            backdrop-filter:blur(3px); z-index:5;
-        }
+        .dl-card-type { position:absolute; top:7px; right:42px; width:24px; height:24px; background:rgba(0,0,0,0.55); border-radius:6px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(3px); z-index:5; }
         .dl-card-type i { font-size:12px; color:#fff; }
 
-        .dl-card-menu {
-            position:absolute; top:7px; right:7px; width:28px; height:28px;
-            background:rgba(0,0,0,0.55); border-radius:7px;
-            display:flex; align-items:center; justify-content:center;
-            cursor:pointer; backdrop-filter:blur(3px); border:none;
-            color:#fff; font-size:13px; z-index:5;
-        }
+        .dl-card-menu { position:absolute; top:7px; right:7px; width:28px; height:28px; background:rgba(0,0,0,0.55); border-radius:7px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter:blur(3px); border:none; color:#fff; font-size:13px; z-index:5; }
         .dl-card-menu:active { background:rgba(0,0,0,0.8); }
 
-        .dl-context-menu {
-            position:absolute; top:38px; right:7px;
-            background:#0d1b2e; border:1px solid rgba(56,189,248,0.18);
-            border-radius:10px; padding:4px 0; z-index:20; min-width:150px;
-            box-shadow:0 8px 24px rgba(0,0,0,0.5); display:none;
-        }
+        .dl-context-menu { position:absolute; top:38px; right:7px; background:#0d1b2e; border:1px solid rgba(56,189,248,0.18); border-radius:10px; padding:4px 0; z-index:20; min-width:155px; box-shadow:0 8px 24px rgba(0,0,0,0.5); display:none; }
         .dl-context-menu.open { display:block; }
-        .dl-ctx-item {
-            display:flex; align-items:center; gap:8px; padding:9px 14px;
-            font-size:12px; font-weight:600; color:#94a3b8; cursor:pointer;
-            transition:background 0.15s, color 0.15s; border:none;
-            background:none; width:100%; text-align:left;
-        }
+        .dl-ctx-item { display:flex; align-items:center; gap:8px; padding:9px 14px; font-size:12px; font-weight:600; color:#94a3b8; cursor:pointer; transition:background 0.15s,color 0.15s; border:none; background:none; width:100%; text-align:left; }
         .dl-ctx-item:hover  { background:rgba(56,189,248,0.07); color:#fff; }
         .dl-ctx-item.danger { color:#ef4444; }
         .dl-ctx-item.danger:hover { background:rgba(239,68,68,0.1); color:#ef4444; }
         .dl-ctx-item i { font-size:13px; width:14px; text-align:center; }
 
-        /* MEDIA VIEWER (full-screen click-to-play) */
+        /* ══════════════════════════════════════════
+           MEDIA VIEWER — Instagram Reels style
+           Vertical scroll-snap, autoplay, swipeable
+        ══════════════════════════════════════════ */
         .media-viewer-overlay {
             display:none; position:fixed; inset:0; background:#000;
-            z-index:5000; flex-direction:column;
+            z-index:5000; touch-action:pan-y;
         }
-        .media-viewer-overlay.open { display:flex; }
-        .mv-close {
-            position:absolute; top:14px; left:14px; width:38px; height:38px;
-            background:rgba(0,0,0,0.5); border:none; border-radius:50%;
-            color:#fff; font-size:16px; display:flex; align-items:center;
-            justify-content:center; z-index:10; cursor:pointer;
-        }
-        .mv-content { flex:1; display:flex; align-items:center; justify-content:center; }
-        .mv-content video, .mv-content img { max-width:100%; max-height:100%; }
-        .mv-audio-box { display:flex; flex-direction:column; align-items:center; gap:20px; color:#fff; padding:20px; }
-        .mv-audio-box i { font-size:60px; color:#3b82f6; }
-        .mv-audio-box audio { width:90%; }
+        .media-viewer-overlay.open { display:block; }
 
-        /* CONFIRM / RENAME DIALOGS */
-        .confirm-overlay {
-            position:fixed; inset:0; background:rgba(0,0,0,0.65);
-            z-index:6000; display:flex; align-items:center; justify-content:center; padding:20px;
+        /* Back button */
+        .mv-close {
+            position:fixed; top:14px; left:14px; width:40px; height:40px;
+            background:rgba(0,0,0,0.6); border:none; border-radius:50%;
+            color:#fff; font-size:18px;
+            display:flex; align-items:center; justify-content:center;
+            z-index:5010; cursor:pointer; backdrop-filter:blur(4px);
         }
-        .confirm-box {
-            background:#0d1b2e; border:1px solid rgba(56,189,248,0.18);
-            border-radius:16px; padding:22px; width:100%; max-width:320px; text-align:center;
+
+        /* Counter badge */
+        .mv-counter {
+            position:fixed; top:14px; right:14px;
+            background:rgba(0,0,0,0.6); border-radius:20px;
+            padding:5px 12px; font-size:12px; font-weight:700; color:#fff;
+            z-index:5010; backdrop-filter:blur(4px);
+            pointer-events:none;
         }
+
+        /* Vertical scroll strip */
+        .mv-reel-strip {
+            width:100%; height:100vh;
+            overflow-y:scroll; overflow-x:hidden;
+            scroll-snap-type:y mandatory;
+            -webkit-overflow-scrolling:touch;
+            scrollbar-width:none;
+        }
+        .mv-reel-strip::-webkit-scrollbar { display:none; }
+
+        /* Each slide = one full screen */
+        .mv-slide {
+            width:100%; height:100vh;
+            scroll-snap-align:start;
+            scroll-snap-stop:always;
+            position:relative;
+            display:flex; align-items:center; justify-content:center;
+            background:#000; overflow:hidden;
+        }
+
+        /* Video: fill the slide */
+        .mv-slide video {
+            width:100%; height:100%;
+            object-fit:contain;
+        }
+
+        /* Photo: contain in slide */
+        .mv-slide img.mv-photo {
+            max-width:100%; max-height:100%;
+            object-fit:contain;
+        }
+
+        /* Music slide */
+        .mv-audio-box {
+            display:flex; flex-direction:column; align-items:center; gap:24px;
+            color:#fff; padding:40px 20px; width:100%;
+        }
+        .mv-music-icon {
+            width:110px; height:110px;
+            background:linear-gradient(135deg,#1d4ed8,#3b82f6);
+            border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-size:48px;
+            box-shadow:0 0 50px rgba(59,130,246,0.5);
+            animation:musicPulse 2s ease infinite;
+        }
+        @keyframes musicPulse {
+            0%,100%{box-shadow:0 0 30px rgba(59,130,246,0.4)}
+            50%{box-shadow:0 0 60px rgba(59,130,246,0.8)}
+        }
+        .mv-music-name { font-size:15px; font-weight:700; text-align:center; color:#fff; padding:0 20px; }
+        .mv-audio-box audio { width:85%; max-width:320px; }
+
+        /* Bottom info strip per slide */
+        .mv-slide-info {
+            position:absolute; bottom:0; left:0; right:0;
+            background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%);
+            padding:32px 16px 20px;
+            pointer-events:none;
+        }
+        .mv-slide-name { font-size:12px; font-weight:700; color:#fff; opacity:0.85; }
+
+        /* Swipe hint — fades out */
+        .mv-swipe-hint {
+            position:fixed; bottom:36px; left:50%; transform:translateX(-50%);
+            display:flex; flex-direction:column; align-items:center; gap:6px;
+            color:rgba(255,255,255,0.75); font-size:12px; font-weight:600;
+            pointer-events:none; z-index:5010;
+            animation:hintFade 2.8s ease forwards;
+        }
+        .mv-swipe-hint i { font-size:22px; animation:bounceUp 0.9s ease infinite; }
+        @keyframes bounceUp { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes hintFade { 0%,60%{opacity:1} 100%{opacity:0} }
+
+        /* ══════════════════════════════════════════
+           SETTINGS PAGE
+        ══════════════════════════════════════════ */
+        #settingsPage { display:none; flex-direction:column; flex:1; overflow-y:auto; padding:12px 14px 0; }
+        .settings-header { font-size:18px; font-weight:800; color:#fff; margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+        .settings-section { margin-bottom:20px; }
+        .settings-section-title { font-size:10px; font-weight:800; letter-spacing:1.2px; color:#4a5f7a; text-transform:uppercase; margin-bottom:10px; padding-left:4px; }
+        .settings-card { background:#0d1b2e; border:1px solid rgba(56,189,248,0.1); border-radius:14px; overflow:hidden; }
+        .settings-row { display:flex; align-items:center; gap:12px; padding:14px; border-bottom:1px solid rgba(56,189,248,0.06); cursor:pointer; transition:background 0.15s; }
+        .settings-row:last-child { border-bottom:none; }
+        .settings-row:active { background:rgba(56,189,248,0.05); }
+        .settings-row-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; }
+        .settings-row-text { flex:1; }
+        .settings-row-label { font-size:13px; font-weight:700; color:#fff; }
+        .settings-row-desc  { font-size:11px; color:#4a5f7a; margin-top:2px; }
+        .settings-row-arrow { color:#3d5070; font-size:13px; }
+        .settings-toggle { width:42px; height:24px; border-radius:12px; background:#1e3a5f; border:none; cursor:pointer; position:relative; transition:background 0.2s; flex-shrink:0; }
+        .settings-toggle.on { background:#3b82f6; }
+        .settings-toggle::after { content:''; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; transition:transform 0.2s; }
+        .settings-toggle.on::after { transform:translateX(18px); }
+
+        /* Language chooser inside settings */
+        .lang-chips { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+        .lang-chip { padding:6px 16px; border-radius:20px; border:1.5px solid rgba(56,189,248,0.25); background:#0a1525; color:#64748b; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; }
+        .lang-chip.active { background:linear-gradient(135deg,#1d4ed8,#3b82f6); border-color:#3b82f6; color:#fff; }
+
+        /* ── CONFIRM / RENAME DIALOGS ── */
+        .confirm-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:6000; display:flex; align-items:center; justify-content:center; padding:20px; }
+        .confirm-box { background:#0d1b2e; border:1px solid rgba(56,189,248,0.18); border-radius:16px; padding:22px; width:100%; max-width:320px; text-align:center; }
         .confirm-text { font-size:14px; color:#fff; margin-bottom:16px; line-height:1.5; }
-        .rename-input {
-            width:100%; background:#070f1e; border:1.5px solid rgba(56,189,248,0.25);
-            border-radius:10px; padding:10px 12px; color:#fff; font-size:13px;
-            margin-bottom:16px; outline:none;
-        }
+        .rename-input { width:100%; background:#070f1e; border:1.5px solid rgba(56,189,248,0.25); border-radius:10px; padding:10px 12px; color:#fff; font-size:13px; margin-bottom:16px; outline:none; }
         .confirm-actions { display:flex; gap:10px; }
         .confirm-btn { flex:1; padding:11px; border-radius:10px; border:none; font-size:13px; font-weight:700; cursor:pointer; }
         .confirm-btn.cancel { background:rgba(255,255,255,0.08); color:#94a3b8; }
@@ -383,6 +358,7 @@
 
 <div class="app-wrapper">
 
+    <!-- TOP HEADER -->
     <div class="top-header">
         <img class="app-logo-img" id="appLogoImg" src="" alt="Logo">
         <div class="app-name-block">
@@ -401,6 +377,7 @@
         </div>
     </div>
 
+    <!-- HOME PAGE -->
     <div class="scroll-content">
 
         <div class="platform-section">
@@ -419,8 +396,7 @@
         <div class="input-section">
             <div class="input-box">
                 <div class="input-row">
-                    <input type="url" id="videoLinkInput"
-                           placeholder="Paste Instagram Reel or Facebook video link here...">
+                    <input type="url" id="videoLinkInput" placeholder="Paste Instagram Reel or Facebook video link here...">
                 </div>
                 <div class="paste-row">
                     <button class="paste-btn" id="pasteBtn">PASTE</button>
@@ -439,50 +415,40 @@
 
         <div class="preview-section">
             <div class="preview-box" id="previewBox">
-
                 <div id="previewPlaceholder">
                     <div class="film-icon-wrap"><i class="fa-solid fa-film"></i></div>
                     <div class="loading-text">Video preview will appear here</div>
                 </div>
-
                 <div id="resultContent">
-
                     <div id="thumbWrapper">
                         <img id="thumbPreviewImg" src="" alt="Video Thumbnail">
                         <i class="fa-solid fa-film" id="thumbFallbackIcon"></i>
-
                         <div class="thumb-overlay-tl" id="thumbOverlayTL">
                             <i id="thumbPlatformIcon" class="fa-brands fa-instagram" style="color:#e91e8c;"></i>
                             <span class="size-text" id="thumbSizeText"></span>
                         </div>
-
                         <div class="thumb-overlay-tr" id="thumbOverlayTR">
                             <i class="fa-solid fa-clapperboard"></i>
                         </div>
                     </div>
-
                     <div class="result-info">
                         <div class="result-title" id="videoTitleDisplay"></div>
                         <div class="result-status">✅ Video found!</div>
-
                         <button class="share-fab" id="shareFab" title="Share video link">
                             <i class="fa-solid fa-share-nodes"></i>
                         </button>
-
                         <button class="save-btn" id="saveBtn">⬇️ Save to Gallery ⬇️</button>
                         <div class="progress-container" id="progressContainer">
                             <div class="progress-bar"   id="progressBar"></div>
                             <div class="progress-label" id="progressLabel"></div>
                         </div>
                     </div>
-
                     <div class="thumb-action-bar" id="thumbActionBar">
                         <button class="action-btn"><i class="fa-solid fa-wand-magic-sparkles"></i><span>AI Enhance</span></button>
                         <button class="action-btn"><i class="fa-solid fa-image"></i><span>Set Wallpaper</span></button>
                         <button class="action-btn"><i class="fa-solid fa-layer-group"></i><span>Batch Download</span></button>
                         <button class="action-btn" id="shareActionBtn"><i class="fa-solid fa-share-nodes"></i><span>Share</span></button>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -506,36 +472,122 @@
 
     </div><!-- /scroll-content -->
 
+    <!-- DOWNLOADS PAGE -->
     <div id="downloadsPage">
-
         <div class="dl-search-bar">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" id="dlSearchInput" placeholder="Search downloads...">
         </div>
-
         <div class="dl-filter-bar">
             <button class="dl-filter-btn active" data-filter="all">All</button>
             <button class="dl-filter-btn" data-filter="video">Video</button>
             <button class="dl-filter-btn" data-filter="photo">Photo</button>
             <button class="dl-filter-btn" data-filter="music">Music</button>
         </div>
-
         <div id="dlContent"></div>
-
     </div><!-- /downloadsPage -->
 
+    <!-- SETTINGS PAGE -->
+    <div id="settingsPage">
+        <div class="settings-header">
+            <i class="fa-solid fa-gear" style="color:#38bdf8;font-size:20px;"></i>
+            Settings
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">Language / भाषा</div>
+            <div class="settings-card" style="padding:14px;">
+                <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;">Choose app language / ऐप की भाषा चुनें</div>
+                <div class="lang-chips">
+                    <div class="lang-chip active" data-lang="en">English</div>
+                    <div class="lang-chip" data-lang="hi">हिंदी</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">History</div>
+            <div class="settings-card">
+                <div class="settings-row" onclick="showTab('downloads')">
+                    <div class="settings-row-icon" style="background:rgba(56,189,248,0.12);color:#38bdf8;">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <div class="settings-row-text">
+                        <div class="settings-row-label">Download History</div>
+                        <div class="settings-row-desc">View all your downloaded files</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right settings-row-arrow"></i>
+                </div>
+                <div class="settings-row" id="clearHistoryRow">
+                    <div class="settings-row-icon" style="background:rgba(239,68,68,0.12);color:#ef4444;">
+                        <i class="fa-solid fa-trash"></i>
+                    </div>
+                    <div class="settings-row-text">
+                        <div class="settings-row-label" style="color:#ef4444;">Clear All History</div>
+                        <div class="settings-row-desc">Delete all download records</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right settings-row-arrow"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">Notifications</div>
+            <div class="settings-card">
+                <div class="settings-row">
+                    <div class="settings-row-icon" style="background:rgba(34,197,94,0.12);color:#22c55e;">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <div class="settings-row-text">
+                        <div class="settings-row-label">Download Alerts</div>
+                        <div class="settings-row-desc">Show success/error toasts</div>
+                    </div>
+                    <button class="settings-toggle on" id="notifToggle"></button>
+                </div>
+                <div class="settings-row">
+                    <div class="settings-row-icon" style="background:rgba(139,92,246,0.12);color:#8b5cf6;">
+                        <i class="fa-solid fa-history"></i>
+                    </div>
+                    <div class="settings-row-text">
+                        <div class="settings-row-label">Save to History</div>
+                        <div class="settings-row-desc">Remember downloaded files</div>
+                    </div>
+                    <button class="settings-toggle on" id="historyToggle"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-section">
+            <div class="settings-section-title">About</div>
+            <div class="settings-card">
+                <div class="settings-row">
+                    <div class="settings-row-icon" style="background:rgba(56,189,248,0.12);color:#38bdf8;">
+                        <i class="fa-solid fa-info-circle"></i>
+                    </div>
+                    <div class="settings-row-text">
+                        <div class="settings-row-label">Version</div>
+                        <div class="settings-row-desc">v2.0.0 — Video Downloader</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="height:16px;"></div>
+    </div><!-- /settingsPage -->
+
+    <!-- REELS-STYLE MEDIA VIEWER -->
     <div id="mediaViewerOverlay" class="media-viewer-overlay">
         <button class="mv-close" id="mvCloseBtn"><i class="fa-solid fa-arrow-left"></i></button>
-        <div class="mv-content" id="mvContent"></div>
+        <div class="mv-counter" id="mvCounter">1 / 1</div>
+        <div class="mv-reel-strip" id="mvReelStrip"></div>
     </div>
 
+    <!-- BOTTOM NAV -->
     <nav class="bottom-nav" id="bottomNav">
-
         <button class="nav-tab active" data-tab="home">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </button>
-
         <button class="nav-tab premium-tab" data-tab="premium">
             <div class="premium-icon-wrap">
                 <i class="fa-solid fa-crown icon-crown"></i>
@@ -543,24 +595,21 @@
             </div>
             <span>Local Ad Free<br>Subscription</span>
         </button>
-
         <button class="nav-tab" data-tab="downloads">
             <i class="fa-solid fa-folder-open"></i>
             <span>Downloads</span>
         </button>
-
         <button class="nav-tab" data-tab="settings">
             <i class="fa-solid fa-gear"></i>
             <span>Settings</span>
         </button>
-
     </nav>
 
 </div><!-- /app-wrapper -->
 
 <script>
 /* ══════════════════════════════════════════
-   LOGO — fallback gradient "M" if image missing
+   LOGO
 ══════════════════════════════════════════ */
 (function () {
     const img = document.getElementById('appLogoImg');
@@ -606,41 +655,42 @@ const thumbPlatformIcon = document.getElementById('thumbPlatformIcon');
 const thumbSizeText     = document.getElementById('thumbSizeText');
 const shareFab          = document.getElementById('shareFab');
 
-const scrollContent     = document.querySelector('.scroll-content');
-const downloadsPage     = document.getElementById('downloadsPage');
-const dlContent         = document.getElementById('dlContent');
-const dlSearchInput     = document.getElementById('dlSearchInput');
-const topHeader         = document.querySelector('.top-header');
+const scrollContent  = document.querySelector('.scroll-content');
+const downloadsPage  = document.getElementById('downloadsPage');
+const settingsPage   = document.getElementById('settingsPage');
+const dlContent      = document.getElementById('dlContent');
+const dlSearchInput  = document.getElementById('dlSearchInput');
+const topHeader      = document.querySelector('.top-header');
 
 /* ══════════════════════════════════════════
    APP STATE
 ══════════════════════════════════════════ */
-let currentPlatform   = 'instagram';
-let fetchedVideoUrl   = '';
-let fetchedVideoImg   = '';
-let currentVideoTitle = '';
-let totalDownloads    = 0;
+let currentPlatform      = 'instagram';
+let fetchedVideoUrl      = '';
+let fetchedVideoImg      = '';
+let currentVideoTitle    = '';
+let totalDownloads       = 0;
 let notificationsEnabled = true;
 let historyEnabled       = true;
-let dlActiveFilter    = 'all';
-let dlSearchQuery     = '';
-let openContextCard   = null;
+let dlActiveFilter       = 'all';
+let dlSearchQuery        = '';
+let openContextCard      = null;
 
 /* ══════════════════════════════════════════
-   ERROR MESSAGES
+   ERROR MESSAGES (Hindi + English)
 ══════════════════════════════════════════ */
 const ERR = {
-    NO_INTERNET:    { title:'📵 No Internet!',        msg:'Please turn on WiFi or Mobile Data and try again.' },
-    INVALID_LINK:   { title:'🔗 Invalid Link!',        msg:'Please paste a valid Instagram or Facebook link.' },
-    EMPTY_LINK:     { title:'✏️ Link Empty!',          msg:'Please paste the video link first.' },
-    ALL_API_FAILED: { title:'❌ Video Not Found!',     msg:'All servers failed. Is the link correct? Please try again.' },
-    TIMEOUT:        { title:'⏱️ Request Timed Out!',   msg:'Server did not respond. Slow internet? Try again later.' },
-    PRIVATE_VIDEO:  { title:'🔒 Private Video',        msg:'This video is private. Only public videos can be downloaded.' },
-    DOWNLOAD_FAIL:  { title:'⬇️ Download Failed!',     msg:'Could not download video. Please try again.' },
-    STORAGE_FULL:   { title:'💾 Storage Full',         msg:'Device storage is full. Free up space and try again.' },
-    WRONG_FILE:     { title:'⚠️ Wrong File',           msg:'Wrong file received. Video opened in new tab — save from there.' },
-    CLIPBOARD_FAIL: { title:'📋 Clipboard Error',      msg:'Could not read clipboard. Please paste the link manually.' },
-    UNKNOWN:        { title:'⚠️ Something Went Wrong', msg:'An unknown error occurred. Please try again.' }
+    NO_INTERNET:    { title:'📵 No Internet!',              msg:'WiFi या Mobile Data चालू करें / Turn on WiFi or Mobile Data.' },
+    INVALID_LINK:   { title:'🔗 Invalid Link!',              msg:'Valid Instagram or Facebook link paste करें।' },
+    EMPTY_LINK:     { title:'✏️ Link Empty!',               msg:'पहले video link paste करें / Paste the video link first.' },
+    ALL_API_FAILED: { title:'❌ Video Not Found!',           msg:'सभी servers fail हुए। Link सही है? / All servers failed. Is the link correct?' },
+    TIMEOUT:        { title:'⏱️ Timeout!',                  msg:'Server ने respond नहीं किया। Slow internet? Try again.' },
+    PRIVATE_VIDEO:  { title:'🔒 Private Video',              msg:'यह video private है। सिर्फ public videos download होती हैं।' },
+    DOWNLOAD_FAIL:  { title:'⬇️ Download Failed!',          msg:'Video download नहीं हो सका। दोबारा कोशिश करें।' },
+    STORAGE_FULL:   { title:'💾 Memory Full — मेमोरी भर गई!', msg:'Device की storage full है। कुछ files delete करें और दोबारा try करें।' },
+    WRONG_FILE:     { title:'⚠️ Wrong File',                msg:'Incorrect file मिला। Video new tab में खुली है — वहाँ से save करें।' },
+    CLIPBOARD_FAIL: { title:'📋 Clipboard Error',            msg:'Clipboard read नहीं हो सका। Link manually paste करें।' },
+    UNKNOWN:        { title:'⚠️ Something Went Wrong',      msg:'एक unknown error आई। दोबारा try करें / An unknown error occurred.' }
 };
 
 /* ══════════════════════════════════════════
@@ -703,12 +753,62 @@ function loadSettings() {
         notificationsEnabled = s.notifications !== false;
         historyEnabled       = s.history !== false;
         totalDownloads       = parseInt(localStorage.getItem('total_downloads') || '0');
+
+        const notifToggle   = document.getElementById('notifToggle');
+        const historyToggle = document.getElementById('historyToggle');
+        if (notificationsEnabled) notifToggle.classList.add('on'); else notifToggle.classList.remove('on');
+        if (historyEnabled)       historyToggle.classList.add('on'); else historyToggle.classList.remove('on');
     } catch (e) {}
+}
+function saveSettings() {
+    localStorage.setItem('downloader_settings', JSON.stringify({ notifications: notificationsEnabled, history: historyEnabled }));
 }
 function incrementDownloadCount() {
     totalDownloads++;
     localStorage.setItem('total_downloads', String(totalDownloads));
 }
+
+/* Settings toggles */
+document.getElementById('notifToggle').addEventListener('click', function () {
+    notificationsEnabled = !notificationsEnabled;
+    this.classList.toggle('on', notificationsEnabled);
+    saveSettings();
+    showNotification(notificationsEnabled ? '🔔 Notifications ON' : '🔕 Notifications OFF');
+});
+document.getElementById('historyToggle').addEventListener('click', function () {
+    historyEnabled = !historyEnabled;
+    this.classList.toggle('on', historyEnabled);
+    saveSettings();
+    showNotification(historyEnabled ? '📂 History saving ON' : '📂 History saving OFF');
+});
+document.getElementById('clearHistoryRow').addEventListener('click', function () {
+    const overlay = document.createElement('div');
+    overlay.className = 'confirm-overlay';
+    overlay.innerHTML = `
+        <div class="confirm-box">
+            <p class="confirm-text">क्या आप सारी history delete करना चाहते हैं?<br><span style="font-size:12px;color:#94a3b8;">Delete all download history?</span></p>
+            <div class="confirm-actions">
+                <button class="confirm-btn cancel">Cancel</button>
+                <button class="confirm-btn delete">Delete All</button>
+            </div>
+        </div>`;
+    document.body.appendChild(overlay);
+    overlay.querySelector('.cancel').addEventListener('click', () => overlay.remove());
+    overlay.querySelector('.delete').addEventListener('click', () => {
+        localStorage.removeItem('downloader_history');
+        overlay.remove();
+        showNotification('🗑️ All history cleared');
+    });
+});
+
+/* Language chips */
+document.querySelectorAll('.lang-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+        document.querySelectorAll('.lang-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        showNotification(chip.dataset.lang === 'hi' ? '🌐 भाषा बदली: हिंदी' : '🌐 Language: English');
+    });
+});
 
 /* ══════════════════════════════════════════
    PASTE / CLEAR VISIBILITY
@@ -743,9 +843,8 @@ function showResultState(imgUrl) {
     thumbOverlayTL.style.display = 'flex';
     thumbOverlayTR.style.display = 'block';
     shareFab.style.display       = 'flex';
-
-    thumbSizeText.textContent   = 'Loading...';
-    thumbSizeText.style.display = 'inline';
+    thumbSizeText.textContent    = 'Loading...';
+    thumbSizeText.style.display  = 'inline';
 
     updatePlatformOverlayIcon();
 
@@ -857,7 +956,7 @@ async function startDownload() {
     fetchBtn.disabled       = true;
     btnIcon.style.display   = 'none';
     btnLoader.style.display = 'inline-block';
-    btnText.textContent     = 'Searching...';
+    btnText.textContent     = 'Downloading...';   /* FIX: was showing "API x/14..." */
 
     const apis = getApiConfigs(link);
     let videoData  = null;
@@ -865,7 +964,8 @@ async function startDownload() {
 
     for (let i = 0; i < apis.length; i++) {
         const cfg = apis[i];
-        btnText.textContent = `API ${i + 1}/${apis.length}...`;
+        /* Show simple "Downloading..." — no API numbers exposed to user */
+        btnText.textContent = 'Downloading...';
         try {
             const ctrl = new AbortController();
             const tid  = setTimeout(() => ctrl.abort(), 8000);
@@ -970,7 +1070,7 @@ async function downloadVideo() {
                 progressBar.style.width   = pct + '%';
                 progressLabel.textContent = `${(received/1024/1024).toFixed(1)} MB / ${(total/1024/1024).toFixed(1)} MB`;
             }
-            blob = new Blob(chunks, { type: 'video/mp4' });
+            blob = new Blob(chunks, { type:'video/mp4' });
         } else {
             blob = await resp.blob();
         }
@@ -978,11 +1078,11 @@ async function downloadVideo() {
         if (blob.size < 5000) throw new Error('BLOB_TOO_SMALL');
         if (blob.type?.includes('text/html')) throw new Error('HTML_BLOB');
 
-        // 👇 NAYA: blob ke Content-Type se actual media type detect karo
         const detectedType = detectTypeFromMime(blob.type);
 
         progressBar.style.width   = '90%';
         progressLabel.textContent = 'Saving to Gallery...';
+
         const blobUrl = URL.createObjectURL(new Blob([blob], { type:'video/mp4' }));
         const a = Object.assign(document.createElement('a'), { href:blobUrl, download:fileName, style:'display:none' });
         document.body.appendChild(a); a.click();
@@ -992,10 +1092,10 @@ async function downloadVideo() {
         progressLabel.textContent = '✅ Saved to Gallery!';
         saveBtn.textContent       = '✅ Saved to Gallery!';
 
-        showSuccess(`✅ ${fileName} saved to Gallery!`, 'Check your Downloads / Gallery folder.');
+        showSuccess(`✅ ${fileName} saved!`, 'Check your Downloads / Gallery folder.');
         incrementDownloadCount();
-        // 👇 NAYA 4th argument: detected media type pass karo
         saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg, detectedType);
+
         const sizeMB = (blob.size / 1024 / 1024).toFixed(2);
         thumbSizeText.textContent      = sizeMB + ' MB';
         thumbSizeText.style.display    = 'inline';
@@ -1008,7 +1108,7 @@ async function downloadVideo() {
         console.warn(err);
         if (err.name === 'AbortError') {
             showError('TIMEOUT');
-        } else if (err.message === 'STORAGE_FULL') {
+        } else if (err.message === 'STORAGE_FULL' || err.name === 'QuotaExceededError') {
             showError('STORAGE_FULL');
         } else {
             try {
@@ -1020,7 +1120,6 @@ async function downloadVideo() {
                 saveBtn.textContent       = '✅ Download started!';
                 showSuccess('✅ Video download started!', 'Check Files app → Downloads.');
                 incrementDownloadCount();
-                // 👇 Fallback case mein URL extension se guess karo (blob nahi mila)
                 saveToHistory(currentVideoTitle, fetchedVideoUrl, fetchedVideoImg, guessTypeFromUrl(fetchedVideoUrl));
                 thumbActionBar.style.display = 'flex';
                 updatePlatformOverlayIcon();
@@ -1029,7 +1128,7 @@ async function downloadVideo() {
             } catch (err2) {
                 try {
                     window.open(fetchedVideoUrl, '_blank');
-                    saveBtn.textContent = '↗️ Opened in new tab — save from there';
+                    saveBtn.textContent = '↗️ Opened in new tab';
                     showError('WRONG_FILE');
                 } catch (err3) {
                     showError('DOWNLOAD_FAIL', err3.message);
@@ -1048,7 +1147,7 @@ async function downloadVideo() {
 }
 
 /* ══════════════════════════════════════════
-   HISTORY (saved downloads)
+   HISTORY
 ══════════════════════════════════════════ */
 function saveToHistory(name, url, img, mediaType) {
     if (!historyEnabled) return;
@@ -1056,7 +1155,7 @@ function saveToHistory(name, url, img, mediaType) {
         const h = JSON.parse(localStorage.getItem('downloader_history') || '[]');
         if (!h.some(x => x.url === url)) {
             h.unshift({ name, url, img, platform: currentPlatform, date: new Date().toISOString(), type: mediaType || 'video' });
-            if (h.length > 30) h.pop();
+            if (h.length > 50) h.pop();
             localStorage.setItem('downloader_history', JSON.stringify(h));
         }
     } catch (e) {}
@@ -1078,75 +1177,53 @@ function renameHistoryItem(url, newName) {
     } catch (e) {}
 }
 
-/**
- * History item ka media type return karta hai.
- * Priority: 1) saved 'type' field (sabse reliable, download ke time set hota hai)
- *           2) URL/name extension guess (purane items ke liye fallback)
- */
+/* ══════════════════════════════════════════
+   MEDIA TYPE DETECTION
+══════════════════════════════════════════ */
 function getMediaType(item) {
-    // Naye items mein already 'type' field save hota hai — usi ko use karo
-    if (item.type === 'photo' || item.type === 'music' || item.type === 'video') {
-        return item.type;
-    }
-    // Purane items (jinme 'type' nahi hai) ke liye URL/name se guess karo
+    if (item.type === 'photo' || item.type === 'music' || item.type === 'video') return item.type;
     return guessTypeFromUrl(item.url, item.name);
 }
 
-/** Content-Type (MIME) header se media type detect karta hai */
 function detectTypeFromMime(mimeType) {
     if (!mimeType) return 'video';
-    const mime = mimeType.toLowerCase();
-    if (mime.startsWith('image/')) return 'photo';
-    if (mime.startsWith('audio/')) return 'music';
-    if (mime.startsWith('video/')) return 'video';
-    return 'video'; // default — Instagram/Facebook reels almost always video
+    const m = mimeType.toLowerCase();
+    if (m.startsWith('image/')) return 'photo';
+    if (m.startsWith('audio/')) return 'music';
+    return 'video';
 }
 
-/** URL ya filename extension se media type guess karta hai (fallback) */
 function guessTypeFromUrl(url, name) {
     const combined = ((url || '') + (name || '')).toLowerCase();
-
-    if (/\.(mp3|m4a|wav|aac|ogg|opus)(\?|$)/.test(combined))        return 'music';
-    if (/\.(jpg|jpeg|png|webp|gif|bmp)(\?|$)/.test(combined))       return 'photo';
-    if (/\.(mp4|mov|webm|mkv|3gp|avi)(\?|$)/.test(combined))        return 'video';
-
-    return 'video'; // Instagram/Facebook ka default media reel/video hota hai
+    if (/\.(mp3|m4a|wav|aac|ogg|opus)(\?|$)/.test(combined)) return 'music';
+    if (/\.(jpg|jpeg|png|webp|gif|bmp)(\?|$)/.test(combined)) return 'photo';
+    return 'video';
 }
 
 /* ══════════════════════════════════════════
-   SHARE HELPER (main player Share FAB / action bar)
+   SHARE HELPER
 ══════════════════════════════════════════ */
 function handleShare() {
-    if (!fetchedVideoUrl) {
-        showNotification('⚠️ No video found yet. Fetch first.');
-        return;
-    }
+    if (!fetchedVideoUrl) { showNotification('⚠️ No video found yet. Fetch first.'); return; }
     if (typeof navigator.share === 'function') {
-        navigator.share({
-            title: currentVideoTitle || 'Video',
-            url:   fetchedVideoUrl
-        }).catch(function (e) {
-            if (e.name !== 'AbortError') copyToClipboard(fetchedVideoUrl);
-        });
+        navigator.share({ title: currentVideoTitle || 'Video', url: fetchedVideoUrl })
+            .catch(e => { if (e.name !== 'AbortError') copyToClipboard(fetchedVideoUrl); });
     } else {
         copyToClipboard(fetchedVideoUrl);
     }
 }
 
-/** Generic clipboard copy with toast + textarea fallback */
 function copyToClipboard(text) {
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text)
-            .then(() => showNotification('🔗 Link copied to clipboard!'))
-            .catch(() => showNotification('📋 Could not copy link.'));
+            .then(() => showNotification('🔗 Link copied!'))
+            .catch(() => showNotification('📋 Could not copy.'));
     } else {
         const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.cssText = 'position:fixed;opacity:0;';
-        document.body.appendChild(ta);
-        ta.select();
+        ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;';
+        document.body.appendChild(ta); ta.select();
         try { document.execCommand('copy'); showNotification('🔗 Link copied!'); }
-        catch (e) { showNotification('📋 Could not copy link.'); }
+        catch (e) { showNotification('📋 Could not copy.'); }
         document.body.removeChild(ta);
     }
 }
@@ -1155,34 +1232,34 @@ document.getElementById('shareFab').addEventListener('click', handleShare);
 document.getElementById('shareActionBtn').addEventListener('click', handleShare);
 
 /* ══════════════════════════════════════════
-   TAB SWITCHING (Home / Premium / Downloads / Settings)
+   TAB SWITCHING
 ══════════════════════════════════════════ */
 function showTab(tabName) {
     document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-    document.querySelector(`.nav-tab[data-tab="${tabName}"]`).classList.add('active');
+    const activeTab = document.querySelector(`.nav-tab[data-tab="${tabName}"]`);
+    if (activeTab) activeTab.classList.add('active');
+
+    // Hide all pages
+    scrollContent.style.display  = 'none';
+    downloadsPage.style.display  = 'none';
+    settingsPage.style.display   = 'none';
+    topHeader.style.display      = 'flex'; // default: show header
 
     if (tabName === 'home') {
         scrollContent.style.display = 'block';
-        downloadsPage.style.display = 'none';
-        topHeader.style.display     = 'flex';
 
     } else if (tabName === 'downloads') {
-        scrollContent.style.display = 'none';
         downloadsPage.style.display = 'flex';
-        topHeader.style.display     = 'none';
+        topHeader.style.display     = 'none'; // hide main header, search bar replaces it
         renderDownloadsPage(dlActiveFilter);
+
+    } else if (tabName === 'settings') {
+        settingsPage.style.display = 'flex';
+        topHeader.style.display    = 'none';
 
     } else if (tabName === 'premium') {
         scrollContent.style.display = 'block';
-        downloadsPage.style.display = 'none';
-        topHeader.style.display     = 'flex';
         showNotification('👑 Local Ad-Free plan coming soon!');
-
-    } else if (tabName === 'settings') {
-        scrollContent.style.display = 'block';
-        downloadsPage.style.display = 'none';
-        topHeader.style.display     = 'flex';
-        showNotification('⚙️ Settings coming soon!');
     }
 }
 
@@ -1205,8 +1282,8 @@ function renderDownloadsPage(filter) {
     const filtered = history.filter(item => {
         const type = getMediaType(item);
         if (filter !== 'all' && type !== filter) return false;
-
         if (dlSearchQuery) {
+            // Smart search: searches both current and renamed name
             const name = (item.name || '').toLowerCase();
             if (!name.includes(dlSearchQuery)) return false;
         }
@@ -1231,14 +1308,11 @@ function buildEmptyState() {
     const wrap = document.createElement('div');
     wrap.className = 'dl-empty';
     wrap.innerHTML = `
-        <div class="dl-empty-icon">
-            <i class="fa-solid fa-folder-open"></i>
-        </div>
+        <div class="dl-empty-icon"><i class="fa-solid fa-folder-open"></i></div>
         <div class="dl-empty-label">No history</div>
         <button class="dl-how-btn" onclick="showHowToDownload()">
             <i class="fa-solid fa-circle-play"></i>&nbsp; How to Download
-        </button>
-    `;
+        </button>`;
     return wrap;
 }
 
@@ -1246,7 +1320,9 @@ function showHowToDownload() {
     showNotification('💡 Copy a Reel/FB video link → Paste → Tap Download Video!', 3500);
 }
 
-/** Build a single download history card */
+/* ══════════════════════════════════════════
+   BUILD DOWNLOAD CARD
+══════════════════════════════════════════ */
 function buildDlCard(item) {
     const card = document.createElement('div');
     card.className = 'dl-card';
@@ -1255,7 +1331,7 @@ function buildDlCard(item) {
     const platIconClass = isIG ? 'fa-brands fa-instagram' : 'fa-brands fa-facebook-f';
     const platIconColor = isIG ? '#e91e8c' : '#1877f2';
 
-    // ── Thumbnail (covers full card) ──
+    // Thumbnail
     const fallbackEl = document.createElement('div');
     fallbackEl.className = 'dl-card-thumb-fallback';
     fallbackEl.innerHTML = '<i class="fa-solid fa-film"></i>';
@@ -1264,10 +1340,7 @@ function buildDlCard(item) {
         const img = document.createElement('img');
         img.className = 'dl-card-thumb';
         img.alt = item.name || 'Thumbnail';
-        img.onerror = function () {
-            img.style.display = 'none';
-            fallbackEl.style.display = 'flex';
-        };
+        img.onerror = function () { img.style.display = 'none'; fallbackEl.style.display = 'flex'; };
         img.src = `https://wsrv.nl/?url=${encodeURIComponent(item.img)}&n=-1&w=300&output=jpg`;
         card.appendChild(img);
         fallbackEl.style.display = 'none';
@@ -1276,73 +1349,75 @@ function buildDlCard(item) {
     }
     card.appendChild(fallbackEl);
 
-    // ── Platform badge (top-left) ──
+    // Platform badge
     const platBadge = document.createElement('div');
     platBadge.className = 'dl-card-platform';
     platBadge.innerHTML = `<i class="${platIconClass}" style="color:${platIconColor};"></i>`;
     card.appendChild(platBadge);
 
-    // ── Media type badge (top-right, left of 3-dot menu) ──
+    // Media type badge
     const mediaType = getMediaType(item);
-    const typeIconMap = {
-        video: 'fa-solid fa-clapperboard',
-        photo: 'fa-solid fa-image',
-        music: 'fa-solid fa-music'
-    };
+    const typeIconMap = { video:'fa-solid fa-clapperboard', photo:'fa-solid fa-image', music:'fa-solid fa-music' };
     const typeBadge = document.createElement('div');
     typeBadge.className = 'dl-card-type';
     typeBadge.innerHTML = `<i class="${typeIconMap[mediaType]}"></i>`;
     card.appendChild(typeBadge);
 
-    // ── Three-dots menu button ──
+    // Three-dots menu button
     const menuBtn = document.createElement('button');
     menuBtn.className = 'dl-card-menu';
     menuBtn.innerHTML = '<i class="fa-solid fa-ellipsis-vertical"></i>';
     menuBtn.setAttribute('aria-label', 'Options');
     card.appendChild(menuBtn);
 
-    // ── Context menu (Share, Rename, Download Again, Delete-last) ──
+    // Context menu — "Share Link" → "Share" | "Download Again" → "Re-download"
     const ctxMenu = document.createElement('div');
     ctxMenu.className = 'dl-context-menu';
     ctxMenu.innerHTML = `
         <button class="dl-ctx-item" data-action="share">
-            <i class="fa-solid fa-share-nodes"></i> Share Link
+            <i class="fa-solid fa-share-nodes"></i> Share
         </button>
         <button class="dl-ctx-item" data-action="rename">
             <i class="fa-solid fa-pen"></i> Rename
         </button>
         <button class="dl-ctx-item" data-action="redownload">
-            <i class="fa-solid fa-arrows-rotate"></i> Download Again
+            <i class="fa-solid fa-arrows-rotate"></i> Re-download
         </button>
         <button class="dl-ctx-item danger" data-action="delete">
             <i class="fa-solid fa-trash"></i> Delete
-        </button>
-    `;
+        </button>`;
     card.appendChild(ctxMenu);
 
-    // ── Bottom title bar ──
+    // Bottom title bar
     const bottom = document.createElement('div');
     bottom.className = 'dl-card-bottom';
     bottom.innerHTML = `<div class="dl-card-title">${item.name || 'Video'}</div>`;
     card.appendChild(bottom);
 
-    // ── Card click → open media viewer ──
+    // Card click → open Reels-style viewer
     card.addEventListener('click', function (e) {
         if (e.target.closest('.dl-card-menu') || e.target.closest('.dl-context-menu')) return;
-        openMediaViewer(item);
+        // Get all currently shown items for swipe navigation
+        const history = JSON.parse(localStorage.getItem('downloader_history') || '[]');
+        const filtered = history.filter(i => {
+            const type = getMediaType(i);
+            if (dlActiveFilter !== 'all' && type !== dlActiveFilter) return false;
+            if (dlSearchQuery && !(i.name || '').toLowerCase().includes(dlSearchQuery)) return false;
+            return true;
+        });
+        const startIndex = filtered.findIndex(i => i.url === item.url);
+        openReelsViewer(filtered, startIndex < 0 ? 0 : startIndex);
     });
 
-    // ── Three-dots toggle ──
+    // Three-dots toggle
     menuBtn.addEventListener('click', function (e) {
         e.stopPropagation();
-        if (openContextCard && openContextCard !== ctxMenu) {
-            openContextCard.classList.remove('open');
-        }
+        if (openContextCard && openContextCard !== ctxMenu) openContextCard.classList.remove('open');
         ctxMenu.classList.toggle('open');
         openContextCard = ctxMenu.classList.contains('open') ? ctxMenu : null;
     });
 
-    // ── Context menu actions ──
+    // Context menu actions
     ctxMenu.querySelectorAll('.dl-ctx-item').forEach(btn => {
         btn.addEventListener('click', function (e) {
             e.stopPropagation();
@@ -1351,12 +1426,12 @@ function buildDlCard(item) {
             const action = btn.dataset.action;
 
             if (action === 'share') {
-                const urlToShare = item.url;
+                /* Share the FILE (not just the link) via Web Share API */
                 if (typeof navigator.share === 'function') {
-                    navigator.share({ title: item.name || 'Video', url: urlToShare })
-                        .catch(() => copyToClipboard(urlToShare));
+                    navigator.share({ title: item.name || 'Video', url: item.url })
+                        .catch(() => copyToClipboard(item.url));
                 } else {
-                    copyToClipboard(urlToShare);
+                    copyToClipboard(item.url);
                 }
             } else if (action === 'rename') {
                 showRenameDialog(item);
@@ -1378,50 +1453,139 @@ function buildDlCard(item) {
 }
 
 /* ══════════════════════════════════════════
-   MEDIA VIEWER (click-to-play / view / listen)
+   REELS-STYLE MEDIA VIEWER
+   Vertical scroll-snap, autoplay video,
+   counter badge, swipe hint, close button.
 ══════════════════════════════════════════ */
-function openMediaViewer(item) {
-    const overlay = document.getElementById('mediaViewerOverlay');
-    const content = document.getElementById('mvContent');
-    const type = getMediaType(item);
+let mvCurrentItems = [];
+let mvObserver     = null;
 
-    content.innerHTML = '';
+function openReelsViewer(items, startIndex) {
+    mvCurrentItems = items;
 
-    if (type === 'video') {
-        const video = document.createElement('video');
-        video.src = item.url;
-        video.controls = true;
-        video.autoplay = true;
-        video.playsInline = true;
-        content.appendChild(video);
-    } else if (type === 'photo') {
-        const img = document.createElement('img');
-        img.src = item.url;
-        img.alt = item.name || 'Photo';
-        content.appendChild(img);
-    } else if (type === 'music') {
-        const box = document.createElement('div');
-        box.className = 'mv-audio-box';
-        box.innerHTML = `
-            <i class="fa-solid fa-music"></i>
-            <div>${item.name || 'Audio'}</div>
-            <audio src="${item.url}" controls autoplay></audio>
-        `;
-        content.appendChild(box);
+    const overlay    = document.getElementById('mediaViewerOverlay');
+    const reelStrip  = document.getElementById('mvReelStrip');
+    const counter    = document.getElementById('mvCounter');
+
+    // Clear previous content
+    reelStrip.innerHTML = '';
+    if (mvObserver) { mvObserver.disconnect(); mvObserver = null; }
+
+    // Build one slide per item
+    items.forEach((item, idx) => {
+        const slide = document.createElement('div');
+        slide.className = 'mv-slide';
+        slide.dataset.index = idx;
+
+        const type = getMediaType(item);
+
+        if (type === 'video') {
+            const vid = document.createElement('video');
+            vid.src         = item.url;
+            vid.controls    = true;
+            vid.playsInline = true;
+            vid.loop        = true;
+            vid.setAttribute('playsinline', '');
+            vid.setAttribute('webkit-playsinline', '');
+            slide.appendChild(vid);
+
+        } else if (type === 'photo') {
+            const img = document.createElement('img');
+            img.className = 'mv-photo';
+            img.src = item.url;
+            img.alt = item.name || 'Photo';
+            slide.appendChild(img);
+
+        } else if (type === 'music') {
+            const box = document.createElement('div');
+            box.className = 'mv-audio-box';
+            box.innerHTML = `
+                <div class="mv-music-icon"><i class="fa-solid fa-music"></i></div>
+                <div class="mv-music-name">${item.name || 'Audio'}</div>
+                <audio src="${item.url}" controls autoplay loop></audio>`;
+            slide.appendChild(box);
+        }
+
+        // Name strip at bottom
+        if (item.name) {
+            const info = document.createElement('div');
+            info.className = 'mv-slide-info';
+            info.innerHTML = `<div class="mv-slide-name">${item.name}</div>`;
+            slide.appendChild(info);
+        }
+
+        reelStrip.appendChild(slide);
+    });
+
+    // Add swipe hint on first open
+    const hint = document.createElement('div');
+    hint.className = 'mv-swipe-hint';
+    hint.innerHTML = `<i class="fa-solid fa-chevron-up"></i><span>Swipe up</span>`;
+    overlay.appendChild(hint);
+    setTimeout(() => hint.remove(), 3000);
+
+    // Open overlay
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Scroll to starting slide instantly
+    const slides = reelStrip.querySelectorAll('.mv-slide');
+    if (slides[startIndex]) {
+        slides[startIndex].scrollIntoView({ behavior: 'instant' });
     }
 
-    overlay.classList.add('open');
+    // Update counter
+    counter.textContent = `${startIndex + 1} / ${items.length}`;
+
+    // IntersectionObserver: play/pause video as slide enters/exits view
+    mvObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const idx = parseInt(entry.target.dataset.index);
+            const video = entry.target.querySelector('video');
+            const audio = entry.target.querySelector('audio');
+
+            if (entry.isIntersecting) {
+                // Update counter
+                counter.textContent = `${idx + 1} / ${items.length}`;
+                // Autoplay video
+                if (video) video.play().catch(() => {});
+                if (audio) audio.play().catch(() => {});
+            } else {
+                // Pause when slide leaves view
+                if (video) video.pause();
+                if (audio) audio.pause();
+            }
+        });
+    }, { root: reelStrip, threshold: 0.6 });
+
+    slides.forEach(slide => mvObserver.observe(slide));
 }
 
-function closeMediaViewer() {
-    const overlay = document.getElementById('mediaViewerOverlay');
-    const content = document.getElementById('mvContent');
-    content.querySelectorAll('video, audio').forEach(el => el.pause());
+function closeReelsViewer() {
+    const overlay   = document.getElementById('mediaViewerOverlay');
+    const reelStrip = document.getElementById('mvReelStrip');
+
+    // Stop all media
+    reelStrip.querySelectorAll('video, audio').forEach(el => { el.pause(); el.src = ''; });
+
+    if (mvObserver) { mvObserver.disconnect(); mvObserver = null; }
+
     overlay.classList.remove('open');
-    content.innerHTML = '';
+    document.body.style.overflow = '';
+    reelStrip.innerHTML = '';
+
+    // Remove stray hints
+    document.querySelectorAll('.mv-swipe-hint').forEach(e => e.remove());
 }
 
-document.getElementById('mvCloseBtn').addEventListener('click', closeMediaViewer);
+document.getElementById('mvCloseBtn').addEventListener('click', closeReelsViewer);
+
+// Also close on pressing back (Android back gesture)
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('mediaViewerOverlay').classList.contains('open')) {
+        closeReelsViewer();
+    }
+});
 
 /* ══════════════════════════════════════════
    CONFIRM / RENAME DIALOGS
@@ -1431,15 +1595,14 @@ function showDeleteConfirm(item) {
     overlay.className = 'confirm-overlay';
     overlay.innerHTML = `
         <div class="confirm-box">
-            <p class="confirm-text">क्या आप इसे सच में डिलीट करना चाहते हैं?</p>
+            <p class="confirm-text">क्या आप इसे सच में डिलीट करना चाहते हैं?<br>
+            <span style="font-size:12px;color:#94a3b8;">Delete this item?</span></p>
             <div class="confirm-actions">
                 <button class="confirm-btn cancel">Cancel</button>
                 <button class="confirm-btn delete">Delete</button>
             </div>
-        </div>
-    `;
+        </div>`;
     document.body.appendChild(overlay);
-
     overlay.querySelector('.cancel').addEventListener('click', () => overlay.remove());
     overlay.querySelector('.delete').addEventListener('click', () => {
         deleteHistoryItem(item.url);
@@ -1460,13 +1623,11 @@ function showRenameDialog(item) {
                 <button class="confirm-btn cancel">Cancel</button>
                 <button class="confirm-btn save">Save</button>
             </div>
-        </div>
-    `;
+        </div>`;
     document.body.appendChild(overlay);
 
     const input = overlay.querySelector('.rename-input');
-    input.focus();
-    input.select();
+    input.focus(); input.select();
 
     overlay.querySelector('.cancel').addEventListener('click', () => overlay.remove());
     overlay.querySelector('.save').addEventListener('click', () => {
@@ -1480,16 +1641,13 @@ function showRenameDialog(item) {
     });
 }
 
-/* Close any open 3-dot context menu on outside tap */
+/* Close context menus on outside tap */
 document.addEventListener('click', function () {
-    if (openContextCard) {
-        openContextCard.classList.remove('open');
-        openContextCard = null;
-    }
+    if (openContextCard) { openContextCard.classList.remove('open'); openContextCard = null; }
 });
 
 /* ══════════════════════════════════════════
-   SEARCH BAR (Downloads page)
+   SEARCH BAR
 ══════════════════════════════════════════ */
 dlSearchInput.addEventListener('input', function () {
     dlSearchQuery = dlSearchInput.value.trim().toLowerCase();
@@ -1497,7 +1655,7 @@ dlSearchInput.addEventListener('input', function () {
 });
 
 /* ══════════════════════════════════════════
-   FILTER BAR (Downloads page)
+   FILTER BAR
 ══════════════════════════════════════════ */
 document.querySelectorAll('.dl-filter-btn').forEach(btn => {
     btn.addEventListener('click', () => renderDownloadsPage(btn.dataset.filter));
