@@ -1039,12 +1039,12 @@ async function downloadVideo() {
         progressLabel.textContent = 'Fetching video...';
 
         const ctrl = new AbortController();
-const tid  = setTimeout(() => ctrl.abort(), 90000);
-const resp = await fetch(fetchedVideoUrl, {
-    signal: ctrl.signal,
-    headers: { 'Accept': 'video/mp4,video/*,*/*,image/*,audio/*' },
-    cache: 'no-store'   // cache se bypass karke fresh download
-});
+        const tid  = setTimeout(() => ctrl.abort(), 90000);
+        const resp = await fetch(fetchedVideoUrl, {
+            signal: ctrl.signal,
+            headers: { 'Accept': 'video/mp4,video/*,*/*,image/*,audio/*' },
+            cache: 'no-store'
+        });
         clearTimeout(tid);
 
         if (!resp.ok) throw new Error('HTTP_' + resp.status);
@@ -1058,25 +1058,22 @@ const resp = await fetch(fetchedVideoUrl, {
         let blob;
 
         if (contentLength) {
-    const total  = parseInt(contentLength);
-    const reader = resp.body.getReader();
-    // Pre-allocate buffer ek hi baar mein — faster than pushing chunks
-    const buffer = new Uint8Array(total);
-    let received = 0;
-    while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer.set(value, received);
-        received += value.length;
-        const pct = 40 + Math.round((received / total) * 45);
-        progressBar.style.width   = pct + '%';
-        // Speed bhi dikhao
-        progressLabel.textContent = `${(received/1024/1024).toFixed(1)} / ${(total/1024/1024).toFixed(1)} MB`;
-    }
-    blob = new Blob([buffer], { type: resp.headers.get('Content-Type') || 'video/mp4' });
-} else {
-    // Content-Length nahi mila — stream directly
-    blob = await resp.blob();
+            const total  = parseInt(contentLength);
+            const reader = resp.body.getReader();
+            const buffer = new Uint8Array(total);
+            let received = 0;
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                buffer.set(value, received);
+                received += value.length;
+                const pct = 40 + Math.round((received / total) * 45);
+                progressBar.style.width   = pct + '%';
+                progressLabel.textContent = `${(received/1024/1024).toFixed(1)} / ${(total/1024/1024).toFixed(1)} MB`;
+            }
+            blob = new Blob([buffer], { type: resp.headers.get('Content-Type') || 'video/mp4' });
+        } else {
+            blob = await resp.blob();
         }
 
         if (blob.size < 5000) throw new Error('BLOB_TOO_SMALL');
@@ -1184,62 +1181,34 @@ function renameHistoryItem(url, newName) {
 /* ══════════════════════════════════════════
    MEDIA TYPE DETECTION
 ══════════════════════════════════════════ */
-/**
- * ENHANCED type detection — 4-layer priority chain:
- * 1. Saved 'type' field (most reliable — set at download time from real MIME)
- * 2. MIME string check (content-type header)
- * 3. URL/filename extension regex
- * 4. Default to 'video' (Instagram/Facebook default)
- */
 function getMediaType(item) {
-    if (item.type === 'photo' || item.type === 'music' || item.type === 'video') {
-        return item.type;
-    }
+    if (item.type === 'photo' || item.type === 'music' || item.type === 'video') return item.type;
     return guessTypeFromUrl(item.url, item.name);
 }
 
 function detectTypeFromMime(mimeType) {
     if (!mimeType) return 'video';
-    const m = mimeType.toLowerCase().split(';')[0].trim(); // strip charset/params
-
-    // Explicit audio MIME types — catches m4a, ogg, opus, mp3, aac etc.
+    const m = mimeType.toLowerCase().split(';')[0].trim();
     if (m === 'audio/mpeg' || m === 'audio/mp3' || m === 'audio/mp4' ||
         m === 'audio/m4a'  || m === 'audio/ogg' || m === 'audio/opus' ||
         m === 'audio/wav'  || m === 'audio/webm' || m === 'audio/aac' ||
         m.startsWith('audio/')) return 'music';
-
-    // Explicit image MIME types
     if (m === 'image/jpeg' || m === 'image/png' || m === 'image/webp' ||
         m === 'image/gif'  || m === 'image/bmp' || m === 'image/svg+xml' ||
         m.startsWith('image/')) return 'photo';
-
-    // video/mp4 with audio-only content: check via URL as fallback
-    // (some audio APIs return video/mp4 MIME for audio — handle via URL guess)
-    if (m.startsWith('video/')) {
-        return 'video'; // confirmed video MIME
-    }
-
-    return 'video'; // safe default
+    if (m.startsWith('video/')) return 'video';
+    return 'video';
 }
 
 function guessTypeFromUrl(url, name) {
     const combined = ((url || '') + '|' + (name || '')).toLowerCase();
-
-    // Audio extensions — must check before video (m4a can be in video too)
     if (/\.(mp3|m4a|aac|ogg|opus|wav|flac|wma)(\?|#|$)/.test(combined)) return 'music';
-
-    // Image extensions
     if (/\.(jpg|jpeg|png|webp|gif|bmp|svg|heic|heif)(\?|#|$)/.test(combined)) return 'photo';
-
-    // Video extensions
     if (/\.(mp4|mov|webm|mkv|3gp|avi|flv|wmv|ts|m3u8)(\?|#|$)/.test(combined)) return 'video';
-
-    // Content hint in URL path (Instagram CDN patterns)
     if (/\/audio\/|soundcloud|podcast|music/i.test(combined)) return 'music';
-    if (/\/image\/|photo|picture|thumbnail/i.test(combined))  return 'photo';
-
-    return 'video'; // Instagram/Facebook default — almost always video
-    }
+    if (/\/image\/|photo|picture|thumbnail/i.test(combined)) return 'photo';
+    return 'video';
+}
 
 /* ══════════════════════════════════════════
    SHARE HELPER
@@ -1323,10 +1292,20 @@ function renderDownloadsPage(filter) {
     const filtered = history.filter(item => {
         const type = getMediaType(item);
         if (filter !== 'all' && type !== filter) return false;
+
         if (dlSearchQuery) {
-            // Smart search: searches both current and renamed name
-            const name = (item.name || '').toLowerCase();
-            if (!name.includes(dlSearchQuery)) return false;
+            const q        = dlSearchQuery;
+            const name     = (item.name     || '').toLowerCase();
+            const url      = (item.url      || '').toLowerCase();
+            const platform = (item.platform || '').toLowerCase();
+            const date     = (item.date     || '').toLowerCase();
+
+            const matchesName     = name.includes(q);
+            const matchesUrl      = url.includes(q);
+            const matchesPlatform = platform.includes(q);
+            const matchesDate     = date.includes(q);
+
+            if (!matchesName && !matchesUrl && !matchesPlatform && !matchesDate) return false;
         }
         return true;
     });
